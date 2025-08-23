@@ -49,13 +49,6 @@ namespace WebsiteGym.Web.Controllers
             return View();
         }
 
-
-        public ActionResult Contact()
-        {
-            return View();
-        }
-
-
         public ActionResult Membership()
         {
                var memberships = _membership.GetAllMemberships();
