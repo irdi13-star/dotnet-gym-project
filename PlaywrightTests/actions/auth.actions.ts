@@ -95,12 +95,11 @@ export default class AuthActions extends CommonActions {
     await expect(button).toHaveText(strings.auth.registerButton);
   }
 
- async verifyHaveAccSubtext() {
-  const text = this.auth.haveAccSubtext;
-  await expect(text).toBeVisible();
-  await expect(text).toContainText(strings.auth.alreadyHaveAccText);
-}
-
+  async verifyHaveAccSubtext() {
+    const text = this.auth.haveAccSubtext;
+    await expect(text).toBeVisible();
+    await expect(text).toContainText(strings.auth.alreadyHaveAccText);
+  }
 
   async verifyLoginLink() {
     const link = this.auth.loginLink;
@@ -178,14 +177,11 @@ export default class AuthActions extends CommonActions {
     await expect(button).toBeVisible();
   }
 
-
-
-
   async verifyRegisterNowSubtext() {
-  const locator = this.auth.registerNowSubtext;
-  await expect(locator).toBeVisible();
-  await expect(locator).toContainText(strings.auth.dontHaveAccText);
- }
+    const locator = this.auth.registerNowSubtext;
+    await expect(locator).toBeVisible();
+    await expect(locator).toContainText(strings.auth.dontHaveAccText);
+  }
 
   async verifyRegisterLink() {
     const link = this.auth.registerLink;
@@ -200,18 +196,15 @@ export default class AuthActions extends CommonActions {
   }
 
   async verifyForgotPasswordLink() {
-
     const link = this.auth.forgotPasswordLink;
     await expect(link).toBeVisible();
     await expect(link).toContainText(strings.auth.resetPasswordLink);
   }
 
-  
-
   async loginAsUserTemplate(username: string, password: string) {
     await this.auth.usernameInput.fill(username);
     await this.auth.passwordInput.fill(password);
-    await this.auth.loginButton.click();
+    await this.auth.loginSubmitBtn.click();
     await this.page.waitForLoadState("load", { timeout: 10000 });
     await expect(this.commonPage.userDashButtonDesktop).toBeVisible({
       timeout: 10000,
@@ -221,7 +214,7 @@ export default class AuthActions extends CommonActions {
   async loginAsAdminTemplate(username: string, password: string) {
     await this.auth.usernameInput.fill(username);
     await this.auth.passwordInput.fill(password);
-    await this.auth.loginButton.click();
+    await this.auth.loginSubmitBtn.click();
     await this.page.waitForLoadState("load", { timeout: 10000 });
     await expect(this.commonPage.adminDashboardButtonDesktop).toBeVisible({
       timeout: 10000,
@@ -242,8 +235,40 @@ export default class AuthActions extends CommonActions {
     await this.loginAsAdminTemplate(username, password);
   }
 
+  async loginWithWrongUser() {
+    await this.auth.loginUserName.fill(strings.loginWrongCredentials.wrongUser);
+    await this.auth.loginPassword.fill(
+      strings.loginWrongCredentials.wrongPassword
+    );
+    await this.auth.loginSubmitBtn.click();
+    await this.page.waitForLoadState("load");
+  }
 
+  async registerWithValidUser() {
+    await this.auth.registerUsernameField.fill(
+      strings.registerCredentials.registerUsername
+    );
+    await this.auth.registerEmailField.fill(
+      strings.registerCredentials.registerEmail
+    );
+    await this.auth.registerPasswordField.fill(
+      strings.registerCredentials.registerPassword
+    );
+    await this.auth.registerSubmitBtn.click();
+    await this.page.waitForLoadState("load");
+  }
 
-
-
+  async registerWithWrongUser() {
+    await this.auth.registerUsernameField.fill(
+      strings.registerWrongCredentials.registerUsername
+    );
+    await this.auth.registerEmailField.fill(
+      strings.registerWrongCredentials.registerEmail
+    );
+    await this.auth.registerPasswordField.fill(
+      strings.registerWrongCredentials.registerPassword
+    );
+    await this.auth.registerSubmitBtn.click();
+    await this.page.waitForLoadState("load");
+  }
 }

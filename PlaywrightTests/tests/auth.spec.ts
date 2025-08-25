@@ -179,11 +179,69 @@ test.describe(
 test.describe(
   "Credentials for Login",
   { tag: ["@regression", "@auth"] },
-  async () => {}
+  async () => {
+    test("Login with valid user credentials", async ({ app }) => {
+      And("the user fills in the valid username and password");
+      await test.step("Fill username and password fields", async () => {
+        await app.auth.loginAsUser();
+      });
+    });
+
+    test("Login with wrong username", async ({ app }) => {
+      And("the user fills in a wrong username and correct password");
+      await test.step("Fill login fields with wrong username", async () => {
+        await app.auth.loginWithWrongUser();
+      });
+
+
+      // And("the user should see an error message");
+      // await test.step("Verify error message is visible", async () => {
+      //   await expect(app.page.locator(".error-message")).toBeVisible();
+      // });
+    });
+
+    test("Login with wrong password", async ({ app }) => {
+      And("the user fills in wrong credentials");
+      await test.step("Fill login fields with wrong password", async () => {
+        await app.auth.loginWithWrongUser();
+      });
+
+      // And("the user should see an error message");
+      // await test.step("Verify error message is visible", async () => {
+      //   await expect(app.page.locator(".error-message")).toBeVisible();
+      // });
+    });
+  }
 );
 
 test.describe(
   "Credentials for Register",
   { tag: ["@regression", "@auth"] },
-  async () => {}
+  async () => {
+    test("Register with valid credentials", async ({ app }) => {
+      And("the user fills in valid registration details");
+      await test.step("Fill registration form", async () => {
+        await app.auth.registerWithValidUser();
+      });
+
+
+      // And("the user should see a success message");
+      // await test.step("Verify success message is visible", async () => {
+      //   await expect(app.page.locator(".success-message")).toBeVisible();
+      // });
+    });
+
+    test("Register with invalid credentials", async ({ app }) => {
+      And("the user fills in invalid registration details");
+      await test.step("Fill registration form with wrong credentials", async () => {
+        await app.auth.registerWithWrongUser();
+      });
+
+      // And("the user should see an error message");
+      // await test.step("Verify error message is visible", async () => {
+      //   await expect(app.page.locator(".error-message")).toBeVisible();
+      // });
+    });
+  }
 );
+
