@@ -53,6 +53,7 @@
   "footer": "© 2025 MadGym. All Rights Reserved.",
 
   "aboutPage": {
+    "aboutPageTabTitle": "Gym Management - About Us",
     "aboutUsTitle": "About Us",
     "aboutUsParagraph": "Welcome to GymMaster, your all-in-one fitness membership platform designed to simplify and energize your journey to better health. Founded on the belief that staying motivated shouldn't be hard work, GymMaster brings together cutting-edge features and a supportive community so you can focus on what matters most: your workout.",
     "ourMissionTitle": "Our Mission",
@@ -86,6 +87,27 @@
     "adminUsername": "Admin1234",
     "adminPassword": "Admin1234"
   },
+
+  "loginWrongCredentials":{
+  "wrongUser": "userInexistent",
+    "wrongPassword": "gresit123"
+  },
+
+  "registerCredentials" :{
+    "registerUsername":"userTest",
+    "registerEmail":"userTest@gmail.com",
+    "registerPassword":"userTest123"
+  },
+
+  "registerWrongCredentials" :{
+    "registerUsername":"test",
+    "registerEmail":"test",
+    "registerPassword":"test"
+  },
+
+
+
+
 
   "userProfile": {
     "editProfile": "Edit Profile",
@@ -198,5 +220,51 @@
       "contactText": "Ready to take control of your diet?",
       "contactButton": "Book Your Consultation"
     }
+  },
+
+  "auth": {
+    "authTabTitle": "Gym Login",
+    "madGymTitle": "MAD GYM",
+    "unlockSubtext": "Unlock your potential with us!",
+
+    "joinUsTitle": "Join Us",
+    "createAccText": "Create an account",
+    "registerUsernamePlaceholder": "Username",
+    "registerUsernameTitle": "Please enter your username",
+    "registerEmailPlaceholder": "E-mail",
+    "registerEmailTitle": "Please enter your email 'example@gmail.com'",
+    "registerPasswordPlaceholder": "Password",
+    "registerPasswordTitle": "Please enter your password",
+    "registerButton": "REGISTER",
+    "alreadyHaveAccText": "Already have an account?",
+    "loginLinkText": "Login",
+
+    "welcomeTitle": "Welcome",
+    "loginSubtext": "Login with Username",
+    "loginUsernamePlaceholder": "Username",
+    "loginUsernameTitle": "Please enter your username",
+    "loginPasswordPlaceholder": "Password",
+    "loginPasswordTitle": "Please enter your password",
+    "loginButton": "LOGIN",
+
+    "orText": "OR",
+    "dontHaveAccText": "Don't have an account?",
+    "registerNowLink": "Register Now",
+    "forgotPasswordText": "Forgot password?",
+    "resetPasswordLink": "Reset Password"
+  },
+
+  "authErrors": {
+ "invalidCredentials" :"Invalid username or password",
+    
+ "blankFields": {
+      "username": "Username is required",
+      "email": "Email is required",
+      "password": "Password is required"
+    },
+
+    "invalidEmail": "Please enter your email 'example@gmail.com'",
+    "invalidPassword": "Password is not valid",
+    "invalidUsername": "Username is not valid"
   }
 }

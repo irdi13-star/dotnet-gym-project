@@ -15,6 +15,7 @@ test.beforeEach(async ({ app }) => {
     await test.step("Navigate to About page", async () => {
       await app.base.navigateTo(routes.allPages.aboutPage);
       await app.navigation.pageUrlAsExpected(routes.allPages.aboutPage);
+      await app.common.browserTabTitleAsExpected(strings.aboutPage.aboutPageTabTitle)
     });
 
 });

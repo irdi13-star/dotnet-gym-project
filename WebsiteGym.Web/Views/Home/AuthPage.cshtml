@@ -38,22 +38,30 @@
           <div class="row shadow-lg bg-white rounded overflow-hidden position-relative" style="max-width: 900px; width: 100%; height: 500px">
 
                <!-- Left Side - Image and Text -->
-               <div class="col-md-6 d-none d-md-block position-relative p-5 text-white text-center left-section transition-container">
+               <div id="madGymImageContainter" class="col-md-6 d-none d-md-block position-relative p-5 text-white text-center left-section transition-container">
                     <div class="overlay"></div>
                     <div class="position-relative z-index-1">
-                         <h1 class="fw-bold">MAD GYM</h1>
-                         <p>Unlock your potential with us!</p>
+                         <h1 id="madGymText" class="fw-bold">MAD GYM</h1>
+                         <p id="unlockSubtext" > Unlock your potential with us!</p>
                     </div>
                </div>
 
                <!-- Left Side - Register Form (Hidden Initially) -->
                <div class="col-md-6 p-5 text-center form-container d-none" id="registerFormContainer">
-                   <h2 class="fw-bold">Join Us</h2>
-                   <p class="text-muted">Create an account</p>
+                   <h2 id="joinUsText" class="fw-bold">Join Us</h2>
+                   <p id="createAccText" class="text-muted">Create an account</p>
                    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
                    {
                        @Html.AntiForgeryToken()
-                       @Html.ValidationSummary(true)
+
+                       <div id="registerErrorContainer" class="validation-summary-errors">
+                           <div>@Html.ValidationMessageFor(m => m.Register.UserName, "", new { @id = "registerUsernameError", @class = "text-danger" })</div>
+                           <div>@Html.ValidationMessageFor(m => m.Register.Email, "", new { @id = "registerEmailError", @class = "text-danger" })</div>
+                           <div>@Html.ValidationMessageFor(m => m.Register.Password, "", new { @id = "registerPasswordError", @class = "text-danger" })</div>
+                       </div>
+
+
+
                        <div class="mb-3">
                            @Html.TextBoxFor(m => m.Register.UserName, new
                            {
@@ -61,7 +69,7 @@
                                title = "Please enter your username",
                                type = "text",
                                value = "",
-                               id = "RegisterUserName",
+                               id = "registerUsernameField",
                                @class = "form-control",
                            })
                        </div>
@@ -73,7 +81,7 @@
                                title = "Please enter your email 'example@gmail.com'",
                                Type = "email",
                                value = "",
-                               id = "RegisterEmail",
+                               id = "registerEmailField",
                                @class = "form-control",
                            })
                        </div>
@@ -85,64 +93,76 @@
                                Type = "password",
                                title = "Please enter your password",
                                value = "",
-                               id = "RegisterPassword",
+                               id = "registerPasswordField",
                                @class = "form-control",
                            })
                        </div>
-                       <button type="submit" class="btn btn-primary w-100" id="RegisterSubmitBtn">REGISTER</button>
+                       <button type="submit" class="btn btn-primary w-100" id="registerSubmitBtn">REGISTER</button>
                    }
 
-                   <p class="mt-3 text-muted">
-                       Already have an account? <a href="#" class="text-primary" id="loginLink">Login</a>
+                   <p id="haveAccSubtext" class="mt-3 text-muted">
+                       Already have an account?
+                       <a href="#" class="text-primary" id="loginLink">Login</a>
                    </p>
                </div>
 
                <!-- Right Side - Login Form -->
                <div class="col-md-6 p-5 text-center form-container" id="loginFormContainer">
-                   <h2 class="fw-bold">Welcome</h2>
-                   <p class="text-muted">Login with Username</p>
+                   <h2 id="welcomeText" class="fw-bold">Welcome</h2>
+                   <p id="loginSubtext" class="text-muted">Login with Username</p>
                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
                    {
                        @Html.AntiForgeryToken()
-                       <div class="mb-3">
+
+                       <div id="loginErrorContainer" class="validation-summary-errors">
+                           @Html.ValidationMessageFor(m => m.Login.UserName, "", new { @id = "loginUserNameError", @class = "text-danger" })
+                           @Html.ValidationMessageFor(m => m.Login.Password, "", new { @id = "loginPasswordError", @class = "text-danger" })
+                           @Html.ValidationSummary(false, "", new { @id = "loginErrorMessage", @class = "text-danger" })
+                       </div>
+
+
+
+                       <div id="usernameField" class="mb-3">
                            @Html.TextBoxFor(m => m.Login.UserName, new
                            {
                                placeholder = "Username",
                                title = "Please enter your username",
                                type = "text",
                                value = "",
-                               id = "LoginUserName",
+                               id = "loginUserName",
                                @class = "form-control",
                            })
                        </div>
 
-                       <div class="mb-3">
+                       <div id="passwordField" class="mb-3">
                            @Html.TextBoxFor(m => m.Login.Password, new
                            {
                                placeholder = "Password",
                                Type = "password",
                                title = "Please enter your password",
                                value = "",
-                               id = "LoginPassword",
+                               id = "loginPassword",
                                @class = "form-control",
                            })
                        </div>
-                       <button type="submit" class="btn btn-primary w-100" id="LoginSubmitBtn">LOGIN</button>
+                       <button type="submit" class="btn btn-primary w-100" id="loginSubmitBtn">LOGIN</button>
                    }
 
 
-                   <p class="mt-3 text-muted">OR</p>
+                   <p id="orSubtext" class="mt-3 text-muted">OR</p>
                    <div class="d-flex justify-content-center gap-2">
-                       <button class="btn btn-outline-secondary"><i class="fab fa-google"></i></button>
-                       <button class="btn btn-outline-secondary"><i class="fab fa-facebook"></i></button>
-                       <button class="btn btn-outline-secondary"><i class="fab fa-apple"></i></button>
+                       <button id="googleBtn" class="btn btn-outline-secondary"><i class="fab fa-google"></i></button>
+                       <button id="facebookBtn" class="btn btn-outline-secondary"><i class="fab fa-facebook"></i></button>
+                       <button id="appleBtn" class="btn btn-outline-secondary"><i class="fab fa-apple"></i></button>
                    </div>
 
-                   <p class="mt-3 text-muted">
-                       Don't have an account? <a href="#" class="text-primary" id="registerLink">Register Now</a>
+                   <p id="registerNowSubtext" class="mt-3 text-muted">
+                       Don't have an account?
+                       <a href="#" class="text-primary" id="registerLink">Register Now</a>
                    </p>
-                   <p class="mt-3 text-muted">
-                       Forgot password? <a class="text-primary" href="@Url.Action("ForgotPassword", "Account")">Reset Password</a>
+                   <p id="forgotPasswordSubtext" class="mt-3 text-muted">
+                       Forgot password?
+                       <a id="forgotPasswordLink" class="text-primary" href="@Url.Action("ForgotPassword", "Account")">Reset Password</a>
                    </p>
                </div>
 

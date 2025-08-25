@@ -40,5 +40,9 @@
         "manageUsersPage":"https://localhost:44336/Admin/ListOfUsers",
         "contactPage":"https://localhost:44336/Feedback/Contact",
         "resetPasswordPage":"https://localhost:44336/Account/ResetPassword"
+    },
+
+    "authLinks": {
+        "forgotPasswordHref":"/Account/ForgotPassword"
     }
 }

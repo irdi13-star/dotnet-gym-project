@@ -7,8 +7,9 @@ import NavbarFooterPage from "../pages/navbarFooter.page";
 import CommonActions from "./common.actions";
 import ServicesPage from "../pages/services.page";
 import ServicesActions from "./services.action";
+import AuthActions from "./auth.actions";
 
-export default class navbarFooterActions extends ServicesActions {
+export default class navbarFooterActions extends AuthActions {
   navbarFooter: NavbarFooterPage;
   home: HomePage;
   services: ServicesPage;
@@ -17,7 +18,7 @@ export default class navbarFooterActions extends ServicesActions {
     super(page, context);
     this.navbarFooter = new NavbarFooterPage(page, context);
     this.home = new HomePage(page, context);
-    this.services = new ServicesPage(page, context)
+    this.services = new ServicesPage(page, context);
   }
 
   /// general TESTS FOR NAV BAR and FOOTER
@@ -147,24 +148,24 @@ export default class navbarFooterActions extends ServicesActions {
 
   // 3 SERVICES Pages
 
-  // async clickPersonalTrainingCard() {
-  //   await this.navbarFooter.personalTrainingCard.click();
-  //   await expect(this.page).toHaveURL(
-  //     routes.allPages.servicePersonalTrainingPage
-  //   );
-  // }
+  async clickPersonalTrainingCard() {
+    await this.navbarFooter.personalTrainingCard.click();
+    await expect(this.page).toHaveURL(
+      routes.allPages.servicePersonalTrainingPage
+    );
+  }
 
-  // async clickGroupProgramsCard() {
-  //   await this.navbarFooter.groupProgramsCard.click();
-  //   await expect(this.page).toHaveURL(routes.allPages.serviceGroupProgramsPage);
-  // }
+  async clickGroupProgramsCard() {
+    await this.navbarFooter.groupProgramsCard.click();
+    await expect(this.page).toHaveURL(routes.allPages.serviceGroupProgramsPage);
+  }
 
-  // async clickNutritionCoachingCard() {
-  //   await this.navbarFooter.nutritionCoachingCard.click();
-  //   await expect(this.page).toHaveURL(
-  //     routes.allPages.serviceNutritionCoachingPage
-  //   );
-  // }
+  async clickNutritionCoachingCard() {
+    await this.navbarFooter.nutritionCoachingCard.click();
+    await expect(this.page).toHaveURL(
+      routes.allPages.serviceNutritionCoachingPage
+    );
+  }
 
   async verifyPersonalTrainingFlow() {
     await this.navigateToPageByLinkText(
@@ -366,6 +367,7 @@ export default class navbarFooterActions extends ServicesActions {
     await this.goBackMultiple(2);
   }
 
+  //de schimbat 
   async fillCheckoutFormAndPlaceOrder() {
     const checkout = strings.checkout;
 

@@ -12,7 +12,7 @@ test.beforeEach(async ({ app }) => {
   });
 });
 
-test.describe("Home page tests", { tag: ["@smoke", "@home"] }, async () => {
+test.describe("Home page tests", { tag: ["@regression", "@home"] }, async () => {
   test("Hero section", async ({ app }) => {
     And("the user sees hero carousel images");
     await test.step("Verify hero carousel images are visible", async () => {

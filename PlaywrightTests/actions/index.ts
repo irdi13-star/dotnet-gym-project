@@ -6,6 +6,7 @@ import CommonActions from "./common.actions";
 import navbarFooterActions from "./navbarFooter.actions";
 import AboutActions from "./about.action";
 import ServicesActions from "./services.action";
+import AuthActions from "./auth.actions";
 
 export default class App {
   base: BaseActions;
@@ -15,6 +16,7 @@ export default class App {
   navbarFooter: navbarFooterActions;
   about: AboutActions;
   services: ServicesActions;
+  auth: AuthActions;
 
   constructor(page: Page, context: BrowserContext) {
     this.base = new BaseActions(page, context);
@@ -24,5 +26,6 @@ export default class App {
     this.navbarFooter = new navbarFooterActions(page, context);
     this.about = new AboutActions(page, context);
     this.services = new ServicesActions(page, context);
+    this.auth = new AuthActions(page, context);
   }
 }
