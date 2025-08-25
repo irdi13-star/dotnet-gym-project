@@ -54,18 +54,6 @@ export default class CommonPage extends BasePage {
 
 
 
-  //-------- Auth
-  get usernameInput() {
-    return this.page.locator('input[name="Login.UserName"]');
-  }
-
-  get passwordInput() {
-    return this.page.locator('input[name="Login.Password"]');
-  }
-
-  get loginButton() {
-    return this.page.locator("#LoginSubmitBtn");
-  }
 
   //-------- User Dashboard
   userProfileLink(username: string) {

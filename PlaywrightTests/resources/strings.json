@@ -88,6 +88,27 @@
     "adminPassword": "Admin1234"
   },
 
+  "loginWrongCredentials":{
+  "wrongUser": "userInexistent",
+    "wrongPassword": "gresit123"
+  },
+
+  "registerCredentials" :{
+    "registerUsername":"userTest",
+    "registerEmail":"userTest@gmail.com",
+    "registerPassword":"userTest123"
+  },
+
+  "registerWrongCredentials" :{
+    "registerUsername":"test",
+    "registerEmail":"test",
+    "registerPassword":"test"
+  },
+
+
+
+
+
   "userProfile": {
     "editProfile": "Edit Profile",
     "changePassword": "Change Password",

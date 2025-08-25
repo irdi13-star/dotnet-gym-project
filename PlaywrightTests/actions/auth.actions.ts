@@ -205,4 +205,45 @@ export default class AuthActions extends CommonActions {
     await expect(link).toBeVisible();
     await expect(link).toContainText(strings.auth.resetPasswordLink);
   }
+
+  
+
+  async loginAsUserTemplate(username: string, password: string) {
+    await this.auth.usernameInput.fill(username);
+    await this.auth.passwordInput.fill(password);
+    await this.auth.loginButton.click();
+    await this.page.waitForLoadState("load", { timeout: 10000 });
+    await expect(this.commonPage.userDashButtonDesktop).toBeVisible({
+      timeout: 10000,
+    });
+  }
+
+  async loginAsAdminTemplate(username: string, password: string) {
+    await this.auth.usernameInput.fill(username);
+    await this.auth.passwordInput.fill(password);
+    await this.auth.loginButton.click();
+    await this.page.waitForLoadState("load", { timeout: 10000 });
+    await expect(this.commonPage.adminDashboardButtonDesktop).toBeVisible({
+      timeout: 10000,
+    });
+  }
+
+  async loginAsUser() {
+    const username = strings.loginCredentials.username;
+    const password = strings.loginCredentials.password;
+
+    await this.loginAsUserTemplate(username, password);
+  }
+
+  async loginAsAdmin() {
+    const username = strings.loginCredentials.adminUsername;
+    const password = strings.loginCredentials.adminPassword;
+
+    await this.loginAsAdminTemplate(username, password);
+  }
+
+
+
+
+
 }

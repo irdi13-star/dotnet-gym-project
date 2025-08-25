@@ -118,4 +118,19 @@ export default class AuthPage extends BasePage {
     return this.page.locator("#forgotPasswordLink");
   }
   
+
+    //-------- Auth
+  get usernameInput() {
+    return this.page.locator('input[name="Login.UserName"]');
+  }
+
+  get passwordInput() {
+    return this.page.locator('input[name="Login.Password"]');
+  }
+
+  get loginButton() {
+    return this.page.locator("#LoginSubmitBtn");
+  }
+
+  
 }
