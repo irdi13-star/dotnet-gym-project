@@ -252,5 +252,18 @@
     "registerNowLink": "Register Now",
     "forgotPasswordText": "Forgot password?",
     "resetPasswordLink": "Reset Password"
+  },
+
+  "authErrors": {
+
+    "blankFields": {
+      "username": "Username is required",
+      "email": "Email is required",
+      "password": "Password is required"
+    },
+
+    "invalidEmail": "Please enter your email 'example@gmail.com'",
+    "invalidPassword": "Password is not valid",
+    "invalidUsername": "Username is not valid"
   }
 }

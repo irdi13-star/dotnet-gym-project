@@ -55,8 +55,12 @@
                        @Html.AntiForgeryToken()
 
                        <div id="registerErrorContainer" class="validation-summary-errors">
-                           @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                           <div>@Html.ValidationMessageFor(m => m.Register.UserName, "", new { @id = "registerUsernameError", @class = "text-danger" })</div>
+                           <div>@Html.ValidationMessageFor(m => m.Register.Email, "", new { @id = "registerEmailError", @class = "text-danger" })</div>
+                           <div>@Html.ValidationMessageFor(m => m.Register.Password, "", new { @id = "registerPasswordError", @class = "text-danger" })</div>
                        </div>
+
+
 
                        <div class="mb-3">
                            @Html.TextBoxFor(m => m.Register.UserName, new
@@ -111,8 +115,12 @@
                        @Html.AntiForgeryToken()
 
                        <div id="loginErrorContainer" class="validation-summary-errors">
-                           @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                           @Html.ValidationMessageFor(m => m.Login.UserName, "", new { @id = "loginUserNameError", @class = "text-danger" })
+                           @Html.ValidationMessageFor(m => m.Login.Password, "", new { @id = "loginPasswordError", @class = "text-danger" })
+                           @Html.ValidationSummary(false, "", new { @id = "loginErrorMessage", @class = "text-danger" })
                        </div>
+
+
 
                        <div id="usernameField" class="mb-3">
                            @Html.TextBoxFor(m => m.Login.UserName, new
