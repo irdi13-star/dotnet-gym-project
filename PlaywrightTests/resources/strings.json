@@ -255,8 +255,9 @@
   },
 
   "authErrors": {
-
-    "blankFields": {
+ "invalidCredentials" :"Invalid username or password",
+    
+ "blankFields": {
       "username": "Username is required",
       "email": "Email is required",
       "password": "Password is required"

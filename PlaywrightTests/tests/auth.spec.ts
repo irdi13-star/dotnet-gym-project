@@ -23,7 +23,7 @@ test.beforeEach(async ({ app }) => {
 });
 
 test.describe(
-  "Auth page tests",
+  "Auth page general tests",
   { tag: ["@regression", "@auth"] },
   async () => {
     test("Login form section", async ({ app }) => {
@@ -187,29 +187,18 @@ test.describe(
       });
     });
 
-    test("Login with wrong username", async ({ app }) => {
-      And("the user fills in a wrong username and correct password");
+    test("Login with wrong credentials", async ({ app }) => {
+      And("the user fills in a wrong username and sees error message");
       await test.step("Fill login fields with wrong username", async () => {
         await app.auth.loginWithWrongUser();
       });
-
-
-      // And("the user should see an error message");
-      // await test.step("Verify error message is visible", async () => {
-      //   await expect(app.page.locator(".error-message")).toBeVisible();
-      // });
     });
 
-    test("Login with wrong password", async ({ app }) => {
-      And("the user fills in wrong credentials");
-      await test.step("Fill login fields with wrong password", async () => {
-        await app.auth.loginWithWrongUser();
+    test("Login with blank fields", async ({ app }) => {
+      And("the user submits the login form without filling fields");
+      await test.step("Submit empty login form and check errors", async () => {
+        await app.auth.loginWithBlankFields();
       });
-
-      // And("the user should see an error message");
-      // await test.step("Verify error message is visible", async () => {
-      //   await expect(app.page.locator(".error-message")).toBeVisible();
-      // });
     });
   }
 );
@@ -221,27 +210,27 @@ test.describe(
     test("Register with valid credentials", async ({ app }) => {
       And("the user fills in valid registration details");
       await test.step("Fill registration form", async () => {
+        await app.auth.verifyRegisterFormContainer();
         await app.auth.registerWithValidUser();
       });
-
-
-      // And("the user should see a success message");
-      // await test.step("Verify success message is visible", async () => {
-      //   await expect(app.page.locator(".success-message")).toBeVisible();
-      // });
     });
 
     test("Register with invalid credentials", async ({ app }) => {
-      And("the user fills in invalid registration details");
+      And(
+        "the user fills in invalid registration details and sees error message"
+      );
       await test.step("Fill registration form with wrong credentials", async () => {
+        await app.auth.verifyRegisterFormContainer();
         await app.auth.registerWithWrongUser();
       });
+    });
 
-      // And("the user should see an error message");
-      // await test.step("Verify error message is visible", async () => {
-      //   await expect(app.page.locator(".error-message")).toBeVisible();
-      // });
+    test("Register with blank fields", async ({ app }) => {
+      And("the user submits the registration form without filling fields");
+      await test.step("Submit empty registration form and check errors", async () => {
+        await app.auth.verifyRegisterFormContainer();
+        await app.auth.registerWithBlankFields();
+      });
     });
   }
 );
-

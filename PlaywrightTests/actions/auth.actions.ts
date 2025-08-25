@@ -51,7 +51,7 @@ export default class AuthActions extends CommonActions {
   }
 
   async verifyRegisterUserName() {
-    const input = this.auth.registerUserName;
+    const input = this.auth.registerUsernameField;
     await expect(input).toBeVisible();
     await expect(input).toHaveAttribute(
       "placeholder",
@@ -242,33 +242,81 @@ export default class AuthActions extends CommonActions {
     );
     await this.auth.loginSubmitBtn.click();
     await this.page.waitForLoadState("load");
+
+  
+    await expect(this.auth.loginErrorMessage).toHaveText(
+      strings.authErrors.invalidCredentials
+    );
   }
 
   async registerWithValidUser() {
-    await this.auth.registerUsernameField.fill(
+    await this.auth.registerUsernameInput.fill(
       strings.registerCredentials.registerUsername
     );
-    await this.auth.registerEmailField.fill(
+    await this.auth.registerEmailInput.fill(
       strings.registerCredentials.registerEmail
     );
-    await this.auth.registerPasswordField.fill(
+    await this.auth.registerPasswordInput.fill(
       strings.registerCredentials.registerPassword
     );
     await this.auth.registerSubmitBtn.click();
     await this.page.waitForLoadState("load");
-  }
+}
 
-  async registerWithWrongUser() {
-    await this.auth.registerUsernameField.fill(
+async registerWithWrongUser() {
+    await this.auth.registerUsernameInput.fill(
       strings.registerWrongCredentials.registerUsername
     );
-    await this.auth.registerEmailField.fill(
+    await this.auth.registerEmailInput.fill(
       strings.registerWrongCredentials.registerEmail
     );
-    await this.auth.registerPasswordField.fill(
+    await this.auth.registerPasswordInput.fill(
       strings.registerWrongCredentials.registerPassword
     );
     await this.auth.registerSubmitBtn.click();
     await this.page.waitForLoadState("load");
+
+    await expect(this.auth.registerUsernameError).toHaveText(
+      strings.authErrors.invalidUsername
+    );
+    await expect(this.auth.registerEmailError).toHaveText(
+      strings.authErrors.invalidEmail
+    );
+    await expect(this.auth.registerPasswordError).toHaveText(
+      strings.authErrors.invalidPassword
+    );
+}
+
+async registerWithBlankFields() {
+    await this.auth.registerUsernameInput.fill("");
+    await this.auth.registerEmailInput.fill("");
+    await this.auth.registerPasswordInput.fill("");
+    await this.auth.registerSubmitBtn.click();
+    await this.page.waitForLoadState("load");
+
+    await expect(this.auth.registerUsernameError).toHaveText(
+      strings.authErrors.blankFields.username
+    );
+    await expect(this.auth.registerEmailError).toHaveText(
+      strings.authErrors.blankFields.email
+    );
+    await expect(this.auth.registerPasswordError).toHaveText(
+      strings.authErrors.blankFields.password
+    );
+}
+
+
+  async loginWithBlankFields() {
+    await this.auth.loginUserName.fill("");
+    await this.auth.loginPassword.fill("");
+    await this.auth.loginSubmitBtn.click();
+    await this.page.waitForLoadState("load");
+
+    await expect(this.auth.loginUserNameError).toHaveText(
+      strings.authErrors.blankFields.username
+    );
+    await expect(this.auth.loginPasswordError).toHaveText(
+      strings.authErrors.blankFields.password
+    );
   }
 }
