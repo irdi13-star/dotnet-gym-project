@@ -226,6 +226,7 @@ export default class AuthActions extends CommonActions {
     const password = strings.loginCredentials.password;
 
     await this.loginAsUserTemplate(username, password);
+    await expect(this.page).toHaveURL("https://localhost:44336/");
   }
 
   async loginAsAdmin() {
@@ -233,6 +234,7 @@ export default class AuthActions extends CommonActions {
     const password = strings.loginCredentials.adminPassword;
 
     await this.loginAsAdminTemplate(username, password);
+    await expect(this.page).toHaveURL("https://localhost:44336/");
   }
 
   async loginWithWrongUser() {
@@ -243,7 +245,6 @@ export default class AuthActions extends CommonActions {
     await this.auth.loginSubmitBtn.click();
     await this.page.waitForLoadState("load");
 
-  
     await expect(this.auth.loginErrorMessage).toHaveText(
       strings.authErrors.invalidCredentials
     );
@@ -261,9 +262,11 @@ export default class AuthActions extends CommonActions {
     );
     await this.auth.registerSubmitBtn.click();
     await this.page.waitForLoadState("load");
-}
 
-async registerWithWrongUser() {
+    await expect(this.auth.loginFormContainer).toBeVisible();
+  }
+
+  async registerWithWrongUser() {
     await this.auth.registerUsernameInput.fill(
       strings.registerWrongCredentials.registerUsername
     );
@@ -285,9 +288,9 @@ async registerWithWrongUser() {
     await expect(this.auth.registerPasswordError).toHaveText(
       strings.authErrors.invalidPassword
     );
-}
+  }
 
-async registerWithBlankFields() {
+  async registerWithBlankFields() {
     await this.auth.registerUsernameInput.fill("");
     await this.auth.registerEmailInput.fill("");
     await this.auth.registerPasswordInput.fill("");
@@ -303,8 +306,7 @@ async registerWithBlankFields() {
     await expect(this.auth.registerPasswordError).toHaveText(
       strings.authErrors.blankFields.password
     );
-}
-
+  }
 
   async loginWithBlankFields() {
     await this.auth.loginUserName.fill("");

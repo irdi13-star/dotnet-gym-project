@@ -38,18 +38,17 @@ export default class AuthPage extends BasePage {
     return this.page.locator("#registerPasswordField");
   }
 
-get registerUsernameInput() {
+  get registerUsernameInput() {
     return this.page.locator('input[name="Register.UserName"]');
-}
+  }
 
-get registerEmailInput() {
+  get registerEmailInput() {
     return this.page.locator('input[name="Register.Email"]');
-}
+  }
 
-get registerPasswordInput() {
+  get registerPasswordInput() {
     return this.page.locator('input[name="Register.Password"]');
-}
-
+  }
 
   get registerSubmitBtn() {
     return this.page.locator("#registerSubmitBtn");
@@ -126,9 +125,8 @@ get registerPasswordInput() {
   get forgotPasswordLink() {
     return this.page.locator("#forgotPasswordLink");
   }
-  
 
-    //-------- Auth
+  //-------- Auth
   get usernameInput() {
     return this.page.locator('input[name="Login.UserName"]');
   }
@@ -136,8 +134,8 @@ get registerPasswordInput() {
   get passwordInput() {
     return this.page.locator('input[name="Login.Password"]');
   }
-  
-   // ------------------ Register Error Messages 
+
+  // ------------------ Register Error Messages
   get registerUsernameError() {
     return this.page.locator("#registerUsernameError");
   }
@@ -150,7 +148,7 @@ get registerPasswordInput() {
     return this.page.locator("#registerPasswordError");
   }
 
-  // -------------Login Error Messages 
+  // -------------Login Error Messages
   get loginUserNameError() {
     return this.page.locator("#loginUserNameError");
   }
@@ -159,8 +157,7 @@ get registerPasswordInput() {
     return this.page.locator("#loginPasswordError");
   }
 
-   get loginErrorMessage() {
+  get loginErrorMessage() {
     return this.page.locator("#loginErrorMessage");
   }
-
 }
