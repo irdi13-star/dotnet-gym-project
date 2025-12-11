@@ -64,7 +64,12 @@ namespace eUseControl.BusinessLogic.Core
                var hashedPassword = helper.PasswordHash(user.Password);
                using (var context = new UserContext())
                {
-                    var UserExists = context.Users.FirstOrDefault(u => u.Name == user.Name && u.Password == hashedPassword);
+                    var UserExists = context.Users.AsEnumerable() // Adu datele în memorie
+                         .FirstOrDefault(u =>
+                              string.Equals(u.Name, user.Name, StringComparison.OrdinalIgnoreCase) &&
+                              u.Password == hashedPassword
+                         );
+
                     if (UserExists != null)
                     {
                          return UserExists;

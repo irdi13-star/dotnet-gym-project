@@ -7,7 +7,7 @@ on:
     branches: [ main, master ]
 
 jobs:
-  test:
+  launchLocalhostAndRunTests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     
@@ -31,70 +31,6 @@ jobs:
     - name: Build .NET application
       run: dotnet build --configuration Release --no-restore
     
-    - name: Create SQLite database
-      working-directory: WebsiteGym.Web
-      run: |
-        sqlite3 eUseControl.db << 'SQL'
-        CREATE TABLE Users (
-            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            Name TEXT NOT NULL,
-            Email TEXT NOT NULL,
-            Password TEXT NOT NULL,
-            UserMembershipID INTEGER,
-            MembershipStatus INTEGER NOT NULL DEFAULT 0,
-            ReggisterDateTime TEXT NOT NULL,
-            Role INTEGER NOT NULL,
-            FullName TEXT,
-            PhoneNumber TEXT,
-            ProfilePicture BLOB
-        );
-        CREATE TABLE UserMemberships (
-            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            MembershipType TEXT NOT NULL,
-            MembershipExperationDate TEXT NOT NULL,
-            MembershipPurchaseDate TEXT NOT NULL,
-            QrCodeImage BLOB
-        );
-        CREATE TABLE Memberships (
-            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            MembershipName TEXT NOT NULL,
-            Price REAL NOT NULL,
-            Details TEXT NOT NULL
-        );
-        CREATE TABLE Coaches (
-            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            Name TEXT NOT NULL,
-            Surname TEXT NOT NULL,
-            Birthdate TEXT NOT NULL,
-            Speciality TEXT NOT NULL
-        );
-        CREATE TABLE Orders (
-            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            UserId INTEGER NOT NULL,
-            UserName TEXT NOT NULL,
-            MembershipName TEXT NOT NULL,
-            OrderDate TEXT NOT NULL,
-            TotalPrice REAL NOT NULL
-        );
-        CREATE TABLE Events (
-            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            UserName TEXT NOT NULL,
-            Action TEXT NOT NULL,
-            EventTime TEXT NOT NULL
-        );
-        CREATE TABLE DiscountCodes (
-            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            DiscountCode TEXT NOT NULL,
-            DiscountPercentage REAL NOT NULL
-        );
-        CREATE TABLE Feedbacks (
-            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            UserName TEXT NOT NULL,
-            Email TEXT NOT NULL,
-            FeedbackMessage TEXT NOT NULL
-        );
-        SQL
-    
     - name: Start .NET application
       working-directory: WebsiteGym.Web
       run: |
@@ -116,7 +52,7 @@ jobs:
     - name: Install Playwright dependencies
       working-directory: PlaywrightTests
       run: |
-        npm ci
+        npm install
         npx playwright install --with-deps
     
     - name: Run Playwright tests

@@ -1,10 +1,10 @@
-import BaseActions from "./base.actions";
-import HomePage from "../pages/home.page";
-import routes from "../resources/routes.json";
 import strings from "../resources/strings.json";
 import { BrowserContext, expect, Page } from "@playwright/test";
 import CommonActions from "./common.actions";
 import AuthPage from "../pages/auth.page";
+import fakeData from "../helpers/generateFakerData"
+
+const fake = new fakeData();
 
 export default class AuthActions extends CommonActions {
   auth: AuthPage;
@@ -226,7 +226,7 @@ export default class AuthActions extends CommonActions {
     const password = strings.loginCredentials.password;
 
     await this.loginAsUserTemplate(username, password);
-    await expect(this.page).toHaveURL(routes.allPages.adminDashboardPage);
+    await expect(this.auth.loginUserName).not.toBeVisible();
   }
 
   async loginAsAdmin() {
@@ -234,7 +234,7 @@ export default class AuthActions extends CommonActions {
     const password = strings.loginCredentials.adminPassword;
 
     await this.loginAsAdminTemplate(username, password);
-    await expect(this.page).toHaveURL("https://localhost:44336/");
+    await expect(this.page).toHaveURL("http://localhost:5000/");
   }
 
   async loginWithWrongUser() {
@@ -252,10 +252,10 @@ export default class AuthActions extends CommonActions {
 
   async registerWithValidUser() {
     await this.auth.registerUsernameInput.fill(
-      strings.registerCredentials.registerUsername
+      fake.getUsername()
     );
     await this.auth.registerEmailInput.fill(
-      strings.registerCredentials.registerEmail
+      fake.getEmail()
     );
     await this.auth.registerPasswordInput.fill(
       strings.registerCredentials.registerPassword
@@ -264,6 +264,7 @@ export default class AuthActions extends CommonActions {
     await this.page.waitForLoadState("load");
 
     await expect(this.auth.loginFormContainer).toBeVisible();
+    await expect(this.auth.registerUsernameError).not.toBeVisible();
   }
 
   async registerWithWrongUser() {

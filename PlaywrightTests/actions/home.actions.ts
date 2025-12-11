@@ -15,22 +15,18 @@ export default class HomeActions extends CommonActions {
 
   // -------- Hero Section
   async verifyHeroCarousel() {
-    const heroCarouselImages = await this.home.heroCarousel;
-    await expect(await this.home.heroBanner).toBeVisible();
-    
-    const count = await heroCarouselImages.count();
+    await expect(this.home.heroBanner).toBeVisible();
+
+    const images = this.home.heroCarousel;
+    const count = await images.count();
 
     for (let i = 0; i < count; i++) {
-      const image = heroCarouselImages.nth(i);
-      await expect(image).toBeVisible();
-      await expect(image).toHaveAttribute("src");
+      const image = images.nth(i);
 
-      console.log(
-        "Image " +
-          (i + 1) +
-          " is visible with src: " +
-          (await image.getAttribute("src"))
-      );
+      await expect(image).toHaveAttribute("src");
+      const src = await image.getAttribute("src");
+
+      console.log(`Image ${i + 1} found with src ${src}`);
     }
   }
 

@@ -40,7 +40,7 @@
   },
 
   "navBar": {
-    "logoSrc": "/Content/img/Logo.png",
+    "logoSrc": "/images/Logo.png",
     "logoImageTitle": "Gym Logo",
     "logoTextTitle": "MADGYM",
     "about": "About",
@@ -82,10 +82,10 @@
   },
 
   "loginCredentials": {
-    "username": "userTest",
-    "password": "userTest123",
-    "adminUsername": "Admin1234",
-    "adminPassword": "Admin1234"
+    "username": "donaldinio",
+    "password": "123456789",
+    "adminUsername": "adminultop",
+    "adminPassword": "Test1234"
   },
 
   "loginWrongCredentials":{
@@ -104,10 +104,6 @@
     "registerEmail":"test",
     "registerPassword":"test"
   },
-
-
-
-
 
   "userProfile": {
     "editProfile": "Edit Profile",
@@ -163,9 +159,9 @@
     "signUpForASession": "Sign up for a session!",
     "nutritionCoachingCard": "Nutrition Coaching",
     "createYourDiet": "Create your diet!",
-    "groupProgramsSrc": "/Content/img/group-workouts-1-1-1024x536.jpg",
-    "personalTrainingSrc": "/Content/img/Best-Personal-Trainers-in-Edgewater-MD.png",
-    "nutritionCoachingSrc": "/Content/img/f710044bf79a4b1f5d8b085e5e5d9711_M.jpg",
+    "groupProgramsSrc": "/images/group-workouts-1-1-1024x536.jpg",
+    "personalTrainingSrc": "/images/Best-Personal-Trainers-in-Edgewater-MD.png",
+    "nutritionCoachingSrc": "/images/f710044bf79a4b1f5d8b085e5e5d9711_M.jpg",
 
     "personalTrainingPage": {
       "pageTitle": "Services - Personal Training",

@@ -57,6 +57,7 @@ test.describe("Home page tests", { tag: ["@regression", "@home"] }, async () => 
       await app.home.verifySeeServicesButton();
     });
   });
+  
 
   test("Our Memberships section", async ({ app }) => {
     And("the user sees Our Memberships cards and main title");
