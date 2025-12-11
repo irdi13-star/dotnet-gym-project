@@ -89,10 +89,11 @@ namespace WebsiteGym.Web.Controllers
 
           // POST: CheckoutMembership
           [HttpPost]
-        
-        public ActionResult CheckoutMembership(OrderViewModel model)
-        {
-         var membership = _membership.GetAllMemberships().FirstOrDefault(m => m.MembershipName == model.MembershipName);
+
+          [HttpPost]
+          public ActionResult CheckoutMembership(OrderViewModel model)
+          {
+               var membership = _membership.GetAllMemberships().FirstOrDefault(m => m.MembershipName == model.MembershipName);
 
                if (membership == null)
                {
@@ -139,33 +140,33 @@ namespace WebsiteGym.Web.Controllers
                     return View(model);
                }
 
-               if (!int.TryParse(Session["UserId"]?.ToString(), out int userId))
+               // DECLARAȚIE ÎN AFARA if-ului pentru scope corect
+               int userId;
+               if (!int.TryParse(Session["UserId"]?.ToString(), out userId))
                {
                     return RedirectToAction("AuthPage", "Home");
                }
 
                var newOrder = new ODbTable
-            {
-                UserId = userId,
-                MembershipName = model.MembershipName,
-                UserName = Session["UserName"]?.ToString(),
-                OrderDate = DateTime.Now,
-                TotalPrice = (decimal)model.TotalPrice
-            };
+               {
+                    UserId = userId,
+                    MembershipName = model.MembershipName,
+                    UserName = Session["UserName"]?.ToString(),
+                    OrderDate = DateTime.Now,
+                    TotalPrice = (decimal)model.TotalPrice
+               };
 
+               bool created = _order.CreateOrder(newOrder);
 
-              
-            bool created = _order.CreateOrder(newOrder);
-
-            if (!created)
-            {
+               if (!created)
+               {
                     ModelState.AddModelError("", "Could not create order.");
                     model.AvailableMemberships = _membership.GetAllMemberships();
                     model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
                     return View(model);
-             }
+               }
                else
-             {
+               {
                     var purchaseEvent = new EventTable
                     {
                          UserName = (string)Session["UserName"],
@@ -174,38 +175,35 @@ namespace WebsiteGym.Web.Controllers
                     };
                     _eventService.CreateEvent(purchaseEvent);
 
-                    // int? userId = (int?)Session["UserId"];
                     var newUserMembership = new UserMembership
                     {
                          MembershipType = model.MembershipName,
                          MembershipExperationDate = DateTime.Now.AddMonths(model.MembershipDuration),
                          MembershipPurchaseDate = DateTime.Now,
                     };
+
                     string qrText = $"User:{userId}|Membership:{model.MembershipName}|Expires:{DateTime.Now.AddMonths(model.MembershipDuration):yyyy-MM-dd}";
                     byte[] qrCode = _userServices.GenerateQrCode(qrText);
                     newUserMembership.QrCodeImage = qrCode;
 
                     var newMembershipId = _userServices.SaveUserMembership(newUserMembership);
 
-                    if (userId != null && newMembershipId != null)
+                    if (newMembershipId != null)
                     {
                          _userServices.UpdateUserMembership(newMembershipId, userId);
                     }
                     else
                     {
-                         ModelState.AddModelError("", "User not found.");
-                         model.AvailableMemberships = _membership.GetAllMemberships();
+                         ModelState.AddModelError("", "Failed to create membership.");
                          model.AvailableMemberships = _membership.GetAllMemberships();
                          return View(model);
                     }
 
                     return RedirectToAction("OrderSuccess");
-             }
+               }
+          }
 
-                   
-        }
-
-        public ActionResult OrderSuccess()
+          public ActionResult OrderSuccess()
         {
                if (Session["UserRole"]?.ToString() != "User")
                {
