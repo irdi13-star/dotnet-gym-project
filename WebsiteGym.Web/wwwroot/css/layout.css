@@ -1,0 +1,152 @@
+﻿
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out; /* Smooth hide/show effect */
+}
+
+    /* Navbar Login Button */
+    .navbar .btn-primary {
+        background-color: #212529; /* Change to your color */
+        padding: 8px 20px;
+        font-size: 1rem;
+        transition: 0.3s ease-in-out;
+    }
+
+        .navbar .btn-primary:hover {
+            background-color: white;
+            color: #212529;
+        }
+
+/* Fix Brand Logo Position */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between logo and text */
+}
+
+.brand-logo {
+    width: 60px; /* Adjust size as needed */
+    height: 60px;
+    border-radius: 50%; /* Ensures circular shape */
+    object-fit: cover; /* Prevents distortion */
+}
+
+.brand-text {
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+
+/* Hide brand when sidebar is open */
+.offcanvas.show ~ .navbar .brand-logo {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+/* Hide the menu button when the sidebar is open */
+.offcanvas.show ~ .navbar .btn-outline-light {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Sidebar Styling */
+.offcanvas {
+    background-color: #212529 !important; /* Dark background */
+    color: white;
+}
+
+/* Sidebar Header */
+.offcanvas-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Sidebar Title */
+.offcanvas-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Sidebar Links */
+.offcanvas-body ul {
+    padding: 0;
+    margin-top: 20px;
+}
+
+    .offcanvas-body ul li {
+        list-style: none;
+        margin: 10px 0;
+    }
+
+        .offcanvas-body ul li a {
+            display: block;
+            padding: 10px 15px;
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: background 0.3s ease-in-out;
+        }
+
+            /* Sidebar Hover Effect */
+            .offcanvas-body ul li a:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+                border-radius: 5px;
+            }
+
+/* Close Button Styling */
+.btn-close {
+    filter: invert(1); /* Makes the close button white */
+}
+
+/* Sidebar Styling - Solid Gray Background */
+.offcanvas {
+    background-color: #212529 !important; /* Change to desired gray shade */
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .service-card {
+        height: auto; /* Adjust for smaller screens */
+    }
+}
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #hero {
+        height: 100vh; /* Increases height to cover full mobile view */
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar .brand-logo img {
+        height: 60px; /* Smaller logo for mobile */
+        top: -10px;
+    }
+}
+
+/* Fix Sidebar Display on Mobile */
+@media (min-width: 992px) {
+    .offcanvas {
+        display: none !important; /* Ensures it does not interfere on desktop */
+    }
+}
+
+@media (max-width: 991px) {
+    .offcanvas {
+        display: block !important;
+        visibility: visible;
+    }
+}
+
+.btn-lg i {
+    transition: transform 0.3s ease-in-out;
+}
+
+.btn-lg:hover i {
+    transform: translateY(3px); /* Moves arrow slightly down when hovered */
+}

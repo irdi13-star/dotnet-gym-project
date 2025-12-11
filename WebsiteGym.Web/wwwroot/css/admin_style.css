@@ -1,0 +1,72 @@
+﻿.admin-card {
+     transition: transform 0.3s;
+     margin-bottom: 20px;
+}
+
+.admin-card:hover {
+     transform: translateY(-5px);
+}
+
+.stat-card {
+     border-radius: 10px;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     padding: 20px;
+     height: 100%;
+}
+
+.stat-icon {
+     font-size: 2.5rem;
+     margin-bottom: 15px;
+}
+
+.stat-value {
+     font-size: 1.8rem;
+     font-weight: bold;
+}
+
+.stat-label {
+     font-size: 1rem;
+     color: white;
+}
+
+.admin-section {
+     margin-bottom: 30px;
+}
+
+.admin-section-title {
+     margin-bottom: 20px;
+     padding-bottom: 10px;
+     border-bottom: 1px solid #dee2e6;
+}
+
+.action-card {
+     border-radius: 10px;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     padding: 20px;
+     height: 100%;
+     text-align: center;
+}
+
+.action-icon {
+     font-size: 2rem;
+     margin-bottom: 15px;
+}
+
+.website-mgmt-btn {
+     margin-bottom: 15px;
+     padding: 12px 20px;
+     border-radius: 8px;
+     font-weight: 500;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     transition: all 0.3s;
+}
+
+     .website-mgmt-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+     }
+
+     .website-mgmt-btn i {
+          margin-right: 10px;
+     }
+

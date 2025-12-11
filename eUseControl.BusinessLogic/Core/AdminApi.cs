@@ -105,7 +105,7 @@ namespace eUseControl.BusinessLogic.Core
         {
             using (var context = new MembershipContext())
             {
-                return context.Memberships.OrderBy(m => m.Price).ToList() ;
+                return context.Memberships.AsEnumerable().OrderBy(m => m.Price).ToList() ;
             }
         }
 

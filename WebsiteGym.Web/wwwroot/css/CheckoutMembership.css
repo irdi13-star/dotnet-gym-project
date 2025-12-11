@@ -1,0 +1,99 @@
+﻿.checkoutBody {
+    background-color: #f8f9fa;
+    color: #343a40;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 100px;
+}
+
+.checkoutContainer {
+    max-width: 1200px;
+    margin-top: 0px;
+}
+
+.checkoutMembershipCardHeader {
+    background-color: #007bff; 
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.orderSummaryCardHeader {
+    background-color: #6c757d;
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.checkoutMembershipCardHeader, .orderSummaryCardHeader {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px;
+    text-align: center;
+    width: 100%;
+}
+
+.checkoutMembershipCardBody, .orderSummaryCardBody {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.checkoutButton {
+    background-color: #007bff;
+    border-color: #007bff ;
+    color: #ffffff ;
+}
+
+    .checkoutButton:hover {
+        background-color: #0056b3 ;
+        border-color: #0056b3;
+    }
+
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+    .input-group input {
+        border-right: none;
+    }
+
+    .input-group button {
+        border-left: none;
+    }
+
+.card-footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .checkoutContainer {
+        max-width: 100%;
+    }
+
+    .col-md-6, .col-md-4 {
+        margin-bottom: 20px;
+    }
+}
+
+.place-order-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.25rem;
+    border: none;
+    border-radius: 5px;
+    width: 100%; 
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}

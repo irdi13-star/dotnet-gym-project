@@ -1,0 +1,116 @@
+﻿
+.personal-training-header {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 50px 0;
+}
+
+    .personal-training-header h1 {
+        margin: 0;
+        font-size: 3rem;
+    }
+
+    .personal-training-header p {
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+
+.personal-training-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    margin-top: 30px;
+}
+
+    .personal-training-info .personal-training-image img {
+        width: 70%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        margin-left: 15%;
+    }
+
+    .personal-training-info .personal-training-description {
+        width: 45%;
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+        .personal-training-info .personal-training-description h2 {
+            font-size: 2rem;
+            color: #222;
+        }
+
+        .personal-training-info .personal-training-description p {
+            line-height: 1.6;
+        }
+
+.personal-training-benefits {
+    background-color: transparent;
+    padding: 40px 20px;
+    margin-top: 40px;
+}
+
+    .personal-training-benefits h2 {
+        text-align: center;
+        font-size: 2rem;
+        color: #222;
+    }
+
+    .personal-training-benefits ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+        list-style-type: none;
+    }
+
+        .personal-training-benefits ul li {
+            background-color: #222;
+            color: white;
+            font-size: 1.1rem;
+            padding: 25px 30px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .personal-training-benefits ul li h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+
+.personal-training-cta {
+    background-color: #222;
+    padding: 30px 20px;
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+}
+
+    .personal-training-cta p {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .personal-training-cta .btn-cta {
+        padding: 15px 40px;
+        background-color: #222;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        transition: background-color 0.3s;
+    }
+
+        .personal-training-cta .btn-cta:hover {
+            background-color: #2c3e50;
+        }

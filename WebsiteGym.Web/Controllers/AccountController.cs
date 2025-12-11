@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Mvc;
 using eUseControl.BusinessLogic.Interface;
 using WebsiteGym.Web.Models;
 using eUseControl.BusinessLogic.Core;
@@ -11,7 +12,7 @@ using System.IO;
 using System.Web;
 namespace WebsiteGym.Web.Controllers
 {
-     public class AccountController : Controller
+     public class AccountController : BaseController
      {
           private readonly IUserServices _userServices;
           private readonly IEvent _eventServices;
@@ -272,7 +273,7 @@ namespace WebsiteGym.Web.Controllers
           }
 
           [HttpPost]
-          public ActionResult EditUserProfile(EditUserProfileDTO model, HttpPostedFileBase ProfilePicture)
+          public ActionResult EditUserProfile(EditUserProfileDTO model, IFormFile ProfilePicture)
           {
                if (Session == null)
                {
@@ -291,11 +292,11 @@ namespace WebsiteGym.Web.Controllers
                          user.PhoneNumber = model.PhoneNumber;
                          user.Email = model.Email;
                          user.FullName = model.FullName;
-                         if (ProfilePicture != null && ProfilePicture.ContentLength > 0)
+                         if (ProfilePicture != null && ProfilePicture.Length > 0)
                          {
-                              using (var binaryReader = new BinaryReader(ProfilePicture.InputStream))
+                              using (var binaryReader = new BinaryReader(ProfilePicture.OpenReadStream()))
                               {
-                                   user.ProfilePicture = binaryReader.ReadBytes(ProfilePicture.ContentLength);
+                                   user.ProfilePicture = binaryReader.ReadBytes((int)ProfilePicture.Length);
                               }
                          }
                               bool result = _userServices.UpdateUser(user);

@@ -1,15 +1,142 @@
 name: Playwright Tests
+
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        node-version: lts/*
+        dotnet-version: '9.0.x'
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'lts/*'
+    
+    - name: Restore .NET dependencies
+      run: dotnet restore
+    
+    - name: Build .NET application
+      run: dotnet build --configuration Release --no-restore
+    
+    - name: Create SQLite database
+      working-directory: WebsiteGym.Web
+      run: |
+        sqlite3 eUseControl.db << 'SQL'
+        CREATE TABLE Users (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name TEXT NOT NULL,
+            Email TEXT NOT NULL,
+            Password TEXT NOT NULL,
+            UserMembershipID INTEGER,
+            MembershipStatus INTEGER NOT NULL DEFAULT 0,
+            ReggisterDateTime TEXT NOT NULL,
+            Role INTEGER NOT NULL,
+            FullName TEXT,
+            PhoneNumber TEXT,
+            ProfilePicture BLOB
+        );
+        CREATE TABLE UserMemberships (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            MembershipType TEXT NOT NULL,
+            MembershipExperationDate TEXT NOT NULL,
+            MembershipPurchaseDate TEXT NOT NULL,
+            QrCodeImage BLOB
+        );
+        CREATE TABLE Memberships (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            MembershipName TEXT NOT NULL,
+            Price REAL NOT NULL,
+            Details TEXT NOT NULL
+        );
+        CREATE TABLE Coaches (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name TEXT NOT NULL,
+            Surname TEXT NOT NULL,
+            Birthdate TEXT NOT NULL,
+            Speciality TEXT NOT NULL
+        );
+        CREATE TABLE Orders (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            UserId INTEGER NOT NULL,
+            UserName TEXT NOT NULL,
+            MembershipName TEXT NOT NULL,
+            OrderDate TEXT NOT NULL,
+            TotalPrice REAL NOT NULL
+        );
+        CREATE TABLE Events (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            UserName TEXT NOT NULL,
+            Action TEXT NOT NULL,
+            EventTime TEXT NOT NULL
+        );
+        CREATE TABLE DiscountCodes (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            DiscountCode TEXT NOT NULL,
+            DiscountPercentage REAL NOT NULL
+        );
+        CREATE TABLE Feedbacks (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            UserName TEXT NOT NULL,
+            Email TEXT NOT NULL,
+            FeedbackMessage TEXT NOT NULL
+        );
+        SQL
+    
+    - name: Start .NET application
+      working-directory: WebsiteGym.Web
+      run: |
+        dotnet run &
+        echo $! > app.pid
+        sleep 10
+    
+    - name: Wait for application to be ready
+      run: |
+        for i in {1..30}; do
+          if curl -s http://localhost:5000 > /dev/null; then
+            echo "Application is ready!"
+            break
+          fi
+          echo "Waiting for application... ($i/30)"
+          sleep 2
+        done
+    
+    - name: Install Playwright dependencies
+      working-directory: PlaywrightTests
+      run: |
+        npm ci
+        npx playwright install --with-deps
+    
+    - name: Run Playwright tests
+      working-directory: PlaywrightTests
+      run: npx playwright test
+      env:
+        BASE_URL: http://localhost:5000
+    
+    - name: Stop .NET application
+      if: always()
+      working-directory: WebsiteGym.Web
+      run: |
+        if [ -f app.pid ]; then
+          kill $(cat app.pid) || true
+        fi
+    
+    - name: Upload Playwright report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report
+        path: PlaywrightTests/playwright-report/
+        retention-days: 30

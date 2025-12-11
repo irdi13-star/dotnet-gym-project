@@ -1,0 +1,71 @@
+﻿ body {
+            background-color: #111;
+            color: white;
+        }
+        .services-heading {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            padding-top:30px;
+        }
+        .service-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+        .service-card {
+            position: relative;
+            text-align: center;
+            width: 30%;
+            min-width: 300px;
+            height: 450px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 15px;
+        }
+        .service-card img {
+            width: 100%;
+            height: 75%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+        /* Overlay Effect */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7); /* White semi-transparent */
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .service-card:hover .overlay {
+            opacity: 1;
+        }
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            position:relative;
+            padding-bottom:40px;
+        }

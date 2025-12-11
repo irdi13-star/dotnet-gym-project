@@ -12,7 +12,7 @@
      <link rel="stylesheet"
            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
      <!-- Custom CSS -->
-     <link rel="stylesheet" href="@Url.Content("/Content/service_style.css")">
+     <link rel="stylesheet" href="@Url.Content("/service_style.css")">
 </head>
 <body>
      <h1 class="services-heading" id="ourServicesTitle" style="position:relative;">Our Services</h1>
@@ -20,21 +20,21 @@
          <div class="service-container">
              <!-- Personal Training -->
              <div class="service-card" id="personalTrainingCard" onclick="location.href='@Url.Action("PersonalTraining", "Services")';">
-                 <img src="@Url.Content("~/Content/img/Best-Personal-Trainers-in-Edgewater-MD.png")" alt="Personal Training">
+                 <img src="@Url.Content("~/images/Best-Personal-Trainers-in-Edgewater-MD.png")" alt="Personal Training">
                  <div class="overlay" id="meetOurTeam" >Meet our team!</div>
                  <div class="service-title" id="personalTrainingTitle" >Personal Training</div>
              </div>
 
              <!-- Group Programs -->
              <div class="service-card" id="groupProgramsCard" onclick="location.href='@Url.Action("GroupPrograms", "Services")';">
-                 <img src="@Url.Content("~/Content/img/group-workouts-1-1-1024x536.jpg")" alt="Group Programs">
+                 <img src="@Url.Content("~/images/group-workouts-1-1-1024x536.jpg")" alt="Group Programs">
                  <div class="overlay" id="signUpForFree" >Sign up for a session!</div>
                  <div class="service-title" id="groupProgramsTitle" >Group Programs</div>
              </div>
 
              <!-- NutritionCoaching -->
              <div class="service-card" id="nutritionCoachingCard" onclick="location.href='@Url.Action("NutritionCoaching", "Services")';">
-                 <img src="@Url.Content("~/Content/img/f710044bf79a4b1f5d8b085e5e5d9711_M.jpg")" alt="Nutrition coaching">
+                 <img src="@Url.Content("~/images/f710044bf79a4b1f5d8b085e5e5d9711_M.jpg")" alt="Nutrition coaching">
                  <div class="overlay" id="createYourDiet" >Create your diet!</div>
                  <div class="service-title" id="nutritionCoachingTitle" >Nutrition Coaching</div>
              </div>
@@ -44,7 +44,7 @@
 
      <!-- Bootstrap JS Bundle -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-     <script src="@Url.Content("~/Scripts/home_script.js")"></script>
+     <script src="@Url.Content("~/js/home_script.js")"></script>
 
 </body>
 </html>

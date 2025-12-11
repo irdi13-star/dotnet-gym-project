@@ -5,13 +5,13 @@ using eUseControl.Domain.Entities.EventTable;
 using eUseControl.Domain.Entities;
 using System;
 using System.Linq;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using WebsiteGym.Web.Models;
-using System.Web.Security;
+using Microsoft.AspNetCore.Authentication;
 
 namespace WebsiteGym.Web.Controllers
 {
-     public class CheckoutController : Controller
+     public class CheckoutController : BaseController
      {
           private readonly IUserServices _userServices;
           private readonly IOrderApi _order;

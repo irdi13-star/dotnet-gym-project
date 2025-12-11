@@ -4,14 +4,14 @@ using System.Linq;
 using System.Web;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities.EventTable;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.Domain.Entities;
 using WebsiteGym.Web.Models;
 
 namespace WebsiteGym.Web.Controllers
 {
-     public class FeedbackController : Controller
+     public class FeedbackController : BaseController
      {
 
           private readonly IFeedback _feedbackApi;

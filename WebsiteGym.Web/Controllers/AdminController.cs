@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq;
-using System.Web.Mvc;
-using System.Web.Security;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.BusinessLogic.Interface;
 using eUseControl.Domain.Entities;
 using eUseControl.Domain.Entities.Discount;
 using eUseControl.Domain.Entities.Membership;
-using Microsoft.Ajax.Utilities;
 using WebsiteGym.Web.Models;
 
 
 namespace WebsiteGym.Web.Controllers
 {
-     public class AdminController : Controller
+     public class AdminController : BaseController
      {
 
           private readonly IOrderApi _order;
@@ -152,7 +151,7 @@ namespace WebsiteGym.Web.Controllers
                var discountCode = _discount.GetDiscountCodeById(id);
                if (discountCode == null)
                {
-                    return HttpNotFound();
+                    return NotFound();
                }
 
                var model = new DiscountViewModel
@@ -248,7 +247,7 @@ namespace WebsiteGym.Web.Controllers
                var existing = _membership.GetMembershipById(id);
 
                if (existing == null)
-                    return HttpNotFound();
+                    return NotFound();
 
                var model = new MembershipViewModel
                {

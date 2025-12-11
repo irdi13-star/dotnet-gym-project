@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="@Url.Content("~/Content/layout.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/layout.css")">
 </head>
 <body>
     <!--Navigation Bar-->
@@ -11,7 +11,7 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="@Url.Action("index", "Home")">
-                <img src="@Url.Content("~/Content/img/Logo.png")" alt="Gym Logo" class="brand-logo">
+                <img src="@Url.Content("~/images/Logo.png")" alt="Gym Logo" class="brand-logo">
                 <span class="brand-text">MADGYM</span>
             </a>
 
@@ -54,7 +54,7 @@
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2025 MadGym. All Rights Reserved.</p>
     </footer>
-    <script src="~/Scripts/home_script.js"></script>
+    <script src="~/js/home_script.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

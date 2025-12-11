@@ -226,7 +226,7 @@ export default class AuthActions extends CommonActions {
     const password = strings.loginCredentials.password;
 
     await this.loginAsUserTemplate(username, password);
-    await expect(this.page).toHaveURL("https://localhost:44336/");
+    await expect(this.page).toHaveURL(routes.allPages.adminDashboardPage);
   }
 
   async loginAsAdmin() {

@@ -1,18 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using eUseControl.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace eUseControl.BusinessLogic.DBModel
 {
     public class FeedbackContext : DbContext
     {
-        public FeedbackContext() : base("name=eUseControl")
+        public FeedbackContext()
         {
         }
-        public virtual DbSet<FeedbackDbTable> Feedbacks { get; set; }
+        
+        public FeedbackContext(DbContextOptions<FeedbackContext> options) : base(options)
+        {
+        }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=eUseControl.db");
+            }
+        }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FeedbackDbTable>().ToTable("Feedbacks");
+        }
+        
+        public DbSet<FeedbackDbTable> Feedbacks { get; set; }
     }
 }

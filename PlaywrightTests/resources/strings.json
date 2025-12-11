@@ -82,8 +82,8 @@
   },
 
   "loginCredentials": {
-    "username": "otiliamadalina",
-    "password": "otiliamadalina",
+    "username": "userTest",
+    "password": "userTest123",
     "adminUsername": "Admin1234",
     "adminPassword": "Admin1234"
   },
@@ -94,7 +94,7 @@
   },
 
   "registerCredentials" :{
-    "registerUsername":"userTest",
+    "registerUsername":"userTest1",
     "registerEmail":"userTest@gmail.com",
     "registerPassword":"userTest123"
   },

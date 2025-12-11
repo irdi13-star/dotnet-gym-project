@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.BusinessLogic.Interface;
 using WebsiteGym.Web.Models;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace WebsiteGym.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
           private readonly IMembershipApi _membership;
           public HomeController()

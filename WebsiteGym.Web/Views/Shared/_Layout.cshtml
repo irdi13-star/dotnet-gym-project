@@ -1,18 +1,19 @@
+@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html lang="en">
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="@Url.Content("~/Content/layout.css")">
+     <link rel="stylesheet" href="@Url.Content("~/css/layout.css")">
 </head>
 <body>
-     @if (Session["UserRole"]?.ToString() == "Admin")
+     @if (Context.Session.GetString("UserRole")?.ToString() == "Admin")
      {
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                <div class="container-fluid">
                     <!-- Logo -->
                     <a class="navbar-brand" href="@Url.Action("index", "Home")">
-                         <img src="@Url.Content("~/Content/img/Logo.png")" alt="Gym Logo" class="brand-logo">
+                         <img src="@Url.Content("~/images/Logo.png")" alt="Gym Logo" class="brand-logo">
                          <span class="brand-text">MADGYM</span>
                     </a>
 
@@ -51,13 +52,13 @@
                </div>
           </div>
      }
-     else if (Session["UserRole"]?.ToString() == "User")
+     else if (Context.Session.GetString("UserRole")?.ToString() == "User")
      {
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                <div class="container-fluid">
                     <!-- Logo -->
                     <a class="navbar-brand" href="@Url.Action("index", "Home")">
-                         <img src="@Url.Content("~/Content/img/Logo.png")" alt="Gym Logo" class="brand-logo">
+                         <img src="@Url.Content("~/images/Logo.png")" alt="Gym Logo" class="brand-logo">
                          <span class="brand-text">MADGYM</span>
                     </a>
 
@@ -73,7 +74,7 @@
                             <li class="nav-item"><a class="nav-link" id="servicesLinkDesktop" href="@Url.Action("Services", "Home")">Services</a></li>
                             <li class="nav-item"><a class="nav-link" id="membershipLinkDesktop" href="@Url.Action("Membership", "Home")">Membership</a></li>
                             <li class="nav-item"><a class="nav-link" id="contactLinkDesktop" href="@Url.Action("Contact", "Feedback")">Contact</a></li>
-                            <li class="nav-item"><a id="userDashboardButtonDesktop" class="btn btn-outline-light rounded-pill px-4" href="@Url.Action("UserDashboard", "Account")">@Session["UserName"]</a></li>
+                            <li class="nav-item"><a id="userDashboardButtonDesktop" class="btn btn-outline-light rounded-pill px-4" href="@Url.Action("UserDashboard", "Account")">@Context.Session.GetString("Username")</a></li>
                         </ul>
                     </div>
                </div>
@@ -91,7 +92,7 @@
                        <li class="nav-item"><a class="nav-link" id="servicesLinkMobile" href="@Url.Action("Services", "Home")">Services</a></li>
                        <li class="nav-item"><a class="nav-link" id="membershipLinkMobile" href="@Url.Action("Membership", "Home")">Membership</a></li>
                        <li class="nav-item"><a class="nav-link" id="contactLinkMobile" href="@Url.Action("Contact", "Feedback")">Contact</a></li>
-                       <li class="nav-item"><a id="userDashboardButtonMobile" class="btn btn-outline-light rounded-pill px-4" href="@Url.Action("UserDashboard", "Account")">@Session["UserName"]</a></li>
+                       <li class="nav-item"><a id="userDashboardButtonMobile" class="btn btn-outline-light rounded-pill px-4" href="@Url.Action("UserDashboard", "Account")">@Context.Session.GetString("Username")</a></li>
                    </ul>
                </div>
           </div>
@@ -103,7 +104,7 @@
           <div class="container-fluid">
                <!-- Logo -->
                <a class="navbar-brand" href="@Url.Action("index", "Home")">
-                    <img src="@Url.Content("~/Content/img/Logo.png")" alt="Gym Logo" class="brand-logo">
+                    <img src="@Url.Content("~/images/Logo.png")" alt="Gym Logo" class="brand-logo">
                     <span class="brand-text">MADGYM</span>
                </a>
 
@@ -149,7 +150,7 @@
      <footer class="bg-dark text-white text-center py-3">
           <p>&copy; 2025 MadGym. All Rights Reserved.</p>
      </footer>
-     <script src="~/Scripts/home_script.js"></script>
+     <script src="~/js/home_script.js"></script>
      @RenderSection("Scripts", required: false)
 </body>
 </html>

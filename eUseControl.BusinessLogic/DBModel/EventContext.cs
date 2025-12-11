@@ -1,19 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using eUseControl.Domain.Entities.EventTable;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace eUseControl.BusinessLogic.DBModel
 {
-     public class EventContext : DbContext
-     {
-
-          public EventContext() : base("name=eUseControl")
-          {
-          }
-          public virtual DbSet<EventTable> Events { get; set; }
-     }
+    public class EventContext : DbContext
+    {
+        public EventContext()
+        {
+        }
+        
+        public EventContext(DbContextOptions<EventContext> options) : base(options)
+        {
+        }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=eUseControl.db");
+            }
+        }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EventTable>().ToTable("Events");
+        }
+        
+        public virtual DbSet<EventTable> Events { get; set; }
+    }
 }

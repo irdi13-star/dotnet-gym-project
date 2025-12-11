@@ -1,20 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
+using Microsoft.EntityFrameworkCore;
 using eUseControl.Domain.Entities;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace eUseControl.BusinessLogic.DBModel
 {
     public class CoachContext : DbContext
     {
-        public CoachContext() : base("name=eUseControl")
+        public CoachContext()
         {
         }
-        public virtual DbSet<Coach> Coaches { get; set; }
 
+        public CoachContext(DbContextOptions<CoachContext> options) : base(options)
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=eUseControl.db");
+            }
+        }
+
+        public virtual DbSet<Coach> Coaches { get; set; }
     }
 }

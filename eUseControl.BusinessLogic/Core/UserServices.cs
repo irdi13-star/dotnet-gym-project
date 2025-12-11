@@ -10,7 +10,6 @@ using eUseControl.Helper.AssistingLogic;
 using Microsoft.Win32;
 using eUseControl.Domain.Entities;
 using eUseControl.Domain.Entities.Order;
-using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace eUseControl.BusinessLogic.Core
 {

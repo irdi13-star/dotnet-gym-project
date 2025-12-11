@@ -1,0 +1,118 @@
+﻿.group-programs-header {
+    background-color: #222; 
+    color: white;
+    text-align: center;
+    padding: 50px 0;
+}
+
+    .group-programs-header h1 {
+        margin: 0;
+        font-size: 3rem;
+    }
+
+    .group-programs-header p {
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+
+.group-programs-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    margin-top: 30px;
+}
+
+    .group-programs-info .group-programs-image img {
+        width: 70%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        margin-left: 15%;
+    }
+
+    .group-programs-info .group-programs-description {
+        width: 45%;
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+        .group-programs-info .group-programs-description h2 {
+            font-size: 2rem;
+            color: #222; 
+        }
+
+        .group-programs-info .group-programs-description p {
+            line-height: 1.6;
+        }
+
+.group-programs-benefits {
+    background-color: transparent; 
+    padding: 40px 20px;
+    margin-top: 40px;
+}
+
+    .group-programs-benefits h2 {
+        text-align: center;
+        font-size: 2rem;
+        color: #222;
+    }
+
+    .group-programs-benefits ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+        list-style-type: none;
+    }
+
+        .group-programs-benefits ul li {
+            background-color: #222;
+            color: white;
+            font-size: 1.1rem;
+            padding: 25px 30px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .group-programs-benefits ul li h3 {
+            font-size: 1.3rem; 
+            margin-bottom: 10px; 
+        }
+
+.group-programs-cta {
+    background-color: #222; 
+    padding: 30px 20px;
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+}
+
+    .group-programs-cta p {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .group-programs-cta .btn-cta {
+        padding: 15px 40px;
+        background-color: #222;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        transition: background-color 0.3s;
+    }
+
+        .group-programs-cta .btn-cta:hover {
+            background-color: #2c3e50;
+        }
+
+.group-programs-benefits {
+    margin-bottom: 20px; 
+}
