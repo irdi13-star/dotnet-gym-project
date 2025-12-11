@@ -28,9 +28,6 @@ namespace eUseControl.Domain.Entities
         [Required]
         [Display(Name = "Total Price")]
         public decimal TotalPrice { get; set; }
-
-        
-        
     }
 }
 

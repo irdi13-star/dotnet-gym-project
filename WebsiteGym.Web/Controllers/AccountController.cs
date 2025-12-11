@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Http;
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using eUseControl.BusinessLogic.Interface;
 using WebsiteGym.Web.Models;
 using eUseControl.BusinessLogic.Core;
@@ -32,10 +32,15 @@ namespace WebsiteGym.Web.Controllers
                }
                else if (Session["UserRole"]?.ToString() == "User")
                {
-                    int userId = (int)Session["UserId"];
-     
+                    // FIX: Convertește corect Session["UserId"] din string în int
+                    if (Session["UserId"] == null || !int.TryParse(Session["UserId"].ToString(), out int userId))
+                    {
+                         return RedirectToAction("AuthPage", "Home");
+                    }
+
                     var user = _userServices.GetUserById(userId);
                     UserMembership userMembership = null;
+
                     if (user != null)
                     {
                          if (user.UserMembershipID != null && user.MembershipStatus)
@@ -49,6 +54,7 @@ namespace WebsiteGym.Web.Controllers
                                    userMembership = null;
                               }
                          }
+
                          var model = new UserDashDto
                          {
                               UserName = user.Name,
@@ -76,6 +82,7 @@ namespace WebsiteGym.Web.Controllers
                     return RedirectToAction("AuthPage", "Home");
                }
           }
+
           [HttpPost]
           public ActionResult Register(AuthPageModel model)
           {
@@ -107,7 +114,7 @@ namespace WebsiteGym.Web.Controllers
                               UserName = user.Name,
                               Action = "User Registered",
                               EventTime = DateTime.Now,
-                              
+
                          };
                          _eventServices.CreateEvent(registerEvent);
                          return RedirectToAction("AuthPage", "Home");
@@ -139,17 +146,17 @@ namespace WebsiteGym.Web.Controllers
                     if (foundUser != null)
                     {
                          if ((int)foundUser.Role != 1)
-                         { 
+                         {
                               var loginEvent = new EventTable
-                            {
-                              UserName = foundUser.Name,
-                              Action = "User Logged In",
-                              EventTime = DateTime.Now,
-                            };
+                              {
+                                   UserName = foundUser.Name,
+                                   Action = "User Logged In",
+                                   EventTime = DateTime.Now,
+                              };
                               _eventServices.CreateEvent(loginEvent);
 
                          }
-                        
+
                          Session["UserId"] = foundUser.Id;
                          Session["UserName"] = foundUser.Name;
                          Session["UserRole"] = foundUser.Role;
@@ -180,7 +187,7 @@ namespace WebsiteGym.Web.Controllers
           [HttpPost]
           public ActionResult ForgotPassword(string email)
           {
-              var user = _userServices.GetUserByEmail(email);
+               var user = _userServices.GetUserByEmail(email);
                if (user != null)
                {
                     return RedirectToAction("ResetPassword", new { email });
@@ -200,7 +207,7 @@ namespace WebsiteGym.Web.Controllers
           [HttpPost]
           public ActionResult ResetPassword(string email, string newPassword)
           {
-              var user = _userServices.GetUserByEmail(email);
+               var user = _userServices.GetUserByEmail(email);
                if (user != null)
                {
                     var passwordReseted = _userServices.UpdateUserPassword(user, newPassword);
@@ -208,23 +215,27 @@ namespace WebsiteGym.Web.Controllers
                     {
                          if ((int)user.Role != 1)
                          {
-                            var resetEvent = new EventTable
-                               {
-                                UserName = user.Name,
-                                Action = "User Password Reset",
-                                EventTime = DateTime.Now,
-                            }; 
-                           _eventServices.CreateEvent(resetEvent);
+                              var resetEvent = new EventTable
+                              {
+                                   UserName = user.Name,
+                                   Action = "User Password Reset",
+                                   EventTime = DateTime.Now,
+                              };
+                              _eventServices.CreateEvent(resetEvent);
                          }
-                         
+
                          if (Session == null)
                          {
                               return RedirectToAction("Login");
-                         } else { 
+                         }
+                         else
+                         {
                               return RedirectToAction("UserDashboard");
                          }
 
-                    } else {
+                    }
+                    else
+                    {
                          ModelState.AddModelError("", "Password reset failed");
                          return View();
                     }
@@ -240,16 +251,26 @@ namespace WebsiteGym.Web.Controllers
           [HttpGet]
           public ActionResult EditUserProfile()
           {
-               if (Session == null) {
+               if (Session == null)
+               {
 
                     return RedirectToAction("AuthPage", "Home");
 
-               } else if (Session["UserRole"]?.ToString() == "Admin"){
+               }
+               else if (Session["UserRole"]?.ToString() == "Admin")
+               {
 
                     return RedirectToAction("AdminDashboard", "Admin");
 
-               } else {  
-                    var user = _userServices.GetUserById((int)Session["UserId"]);
+               }
+               else
+               {
+                    if (!int.TryParse(Session["UserId"]?.ToString(), out int userId))
+                    {
+                         return RedirectToAction("AuthPage", "Home");
+                    }
+
+                    var user = _userServices.GetUserById(userId);
                     if (user != null)
                     {
                          var model = new EditUserProfileDTO
@@ -269,9 +290,10 @@ namespace WebsiteGym.Web.Controllers
                     }
                }
 
-                   
+
           }
 
+          [HttpPost]
           [HttpPost]
           public ActionResult EditUserProfile(EditUserProfileDTO model, IFormFile ProfilePicture)
           {
@@ -285,13 +307,20 @@ namespace WebsiteGym.Web.Controllers
                }
                else
                {
-                    var user = _userServices.GetUserById((int)Session["UserId"]);
+                    // FIX: Convertește corect Session["UserId"]
+                    if (!int.TryParse(Session["UserId"]?.ToString(), out int userId))
+                    {
+                         return RedirectToAction("AuthPage", "Home");
+                    }
+
+                    var user = _userServices.GetUserById(userId);
                     if (user != null)
                     {
                          user.Name = model.UserName;
                          user.PhoneNumber = model.PhoneNumber;
                          user.Email = model.Email;
                          user.FullName = model.FullName;
+
                          if (ProfilePicture != null && ProfilePicture.Length > 0)
                          {
                               using (var binaryReader = new BinaryReader(ProfilePicture.OpenReadStream()))
@@ -299,7 +328,8 @@ namespace WebsiteGym.Web.Controllers
                                    user.ProfilePicture = binaryReader.ReadBytes((int)ProfilePicture.Length);
                               }
                          }
-                              bool result = _userServices.UpdateUser(user);
+
+                         bool result = _userServices.UpdateUser(user);
                          if (result)
                          {
                               return RedirectToAction("UserDashboard");
@@ -320,14 +350,22 @@ namespace WebsiteGym.Web.Controllers
 
           public ActionResult PaymentHistory()
           {
-               if (Session["UserRole"]?.ToString() != null) { 
-                    var UserOrders = _userServices.GetUserPaymentHistory((int)Session["UserId"]);
+               if (Session["UserRole"]?.ToString() != null)
+               {
+                    if (!int.TryParse(Session["UserId"]?.ToString(), out int userId))
+                    {
+                         return RedirectToAction("AuthPage", "Home");
+                    }
+
+                    var UserOrders = _userServices.GetUserPaymentHistory(userId);
                     ViewBag.UserOrders = UserOrders;
-               return View();
-               } else
+                    return View();
+               }
+               else
                {
                     return RedirectToAction("AuthPage", "Home");
                }
           }
+
      }
 }

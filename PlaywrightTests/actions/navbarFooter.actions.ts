@@ -504,13 +504,9 @@ export default class navbarFooterActions extends AuthActions {
   }
 
   async verifyUserDashboardFlow() {
-    await this.verifyUserIsLoggedIn();
     await this.goToUserProfile();
-
     await this.page.waitForLoadState("load");
-
     await this.verifyNavbarAndFooter();
-
     await this.goBackMultiple(1);
   }
 

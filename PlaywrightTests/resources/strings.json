@@ -82,10 +82,10 @@
   },
 
   "loginCredentials": {
-    "username": "userTest",
-    "password": "userTest123",
-    "adminUsername": "Admin1234",
-    "adminPassword": "Admin1234"
+    "username": "donaldinio",
+    "password": "123456789",
+    "adminUsername": "adminultop",
+    "adminPassword": "Test1234"
   },
 
   "loginWrongCredentials":{
@@ -104,10 +104,6 @@
     "registerEmail":"test",
     "registerPassword":"test"
   },
-
-
-
-
 
   "userProfile": {
     "editProfile": "Edit Profile",

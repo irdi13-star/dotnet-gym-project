@@ -87,8 +87,9 @@ namespace WebsiteGym.Web.Controllers
         }
 
 
-        // POST: CheckoutMembership
-        [HttpPost]
+          // POST: CheckoutMembership
+          [HttpPost]
+        
         public ActionResult CheckoutMembership(OrderViewModel model)
         {
          var membership = _membership.GetAllMemberships().FirstOrDefault(m => m.MembershipName == model.MembershipName);
@@ -123,8 +124,8 @@ namespace WebsiteGym.Web.Controllers
 
                model.TotalPrice = total;
 
-            if (!ModelState.IsValid)
-            {
+               if (!ModelState.IsValid)
+               {
                     foreach (var entry in ModelState)
                     {
                          foreach (var error in entry.Value.Errors)
@@ -136,11 +137,16 @@ namespace WebsiteGym.Web.Controllers
                     model.AvailableMemberships = _membership.GetAllMemberships();
                     model.AvailableDiscountCodes = _discountCodeService.GetAllDiscountCodes();
                     return View(model);
-            }
-              
+               }
+
+               if (!int.TryParse(Session["UserId"]?.ToString(), out int userId))
+               {
+                    return RedirectToAction("AuthPage", "Home");
+               }
+
                var newOrder = new ODbTable
             {
-                UserId = (int)Session["UserId"],
+                UserId = userId,
                 MembershipName = model.MembershipName,
                 UserName = Session["UserName"]?.ToString(),
                 OrderDate = DateTime.Now,
@@ -168,7 +174,7 @@ namespace WebsiteGym.Web.Controllers
                     };
                     _eventService.CreateEvent(purchaseEvent);
 
-                    int? userId = (int?)Session["UserId"];
+                    // int? userId = (int?)Session["UserId"];
                     var newUserMembership = new UserMembership
                     {
                          MembershipType = model.MembershipName,

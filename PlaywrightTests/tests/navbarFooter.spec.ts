@@ -79,7 +79,7 @@ test.describe(
       And("the user verifies Navbar and Footer on Services - Personal Training page");
       await test.step("Verify Navbar and Footer on Services page - Personal Training page", async () => {
         await app.navbarFooter.verifyPersonalTrainingFlow(
-    );
+        );
       });
 
       And("the user verifies Navbar and Footer on Services - Group Programs page");
