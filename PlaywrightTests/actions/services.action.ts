@@ -1,5 +1,3 @@
-import BaseActions from "./base.actions";
-import HomePage from "../pages/home.page";
 import routes from "../resources/routes.json";
 import strings from "../resources/strings.json";
 import { BrowserContext, expect, Locator, Page } from "@playwright/test";
@@ -7,16 +5,7 @@ import CommonActions from "./common.actions";
 import ServicesPage from "../pages/services.page";
 
 export default class ServicesActions extends CommonActions {
-  personalTrainingInfo(
-    personalTrainingInfo: any,
-    personalTrainingWhatTitle: any,
-    whatIsTitle: any,
-    personalTrainingWhatText: any,
-    imageSrc: any,
-    whatIsText: any
-  ) {
-    throw new Error("Method not implemented.");
-  }
+  
   services: ServicesPage;
 
   constructor(page: Page, context: BrowserContext) {

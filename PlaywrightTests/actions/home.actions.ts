@@ -1,4 +1,3 @@
-import BaseActions from "./base.actions";
 import HomePage from "../pages/home.page";
 import routes from "../resources/routes.json";
 import strings from "../resources/strings.json";

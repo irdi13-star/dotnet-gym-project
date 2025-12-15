@@ -1,6 +1,6 @@
 import routes from "../resources/routes.json";
 import strings from "../resources/strings.json";
-import { And, Given, Then } from "../utils/annotations";
+import { And, Given } from "../utils/annotations";
 import test from "./test";
 
 test.beforeEach(async ({ app }) => {
