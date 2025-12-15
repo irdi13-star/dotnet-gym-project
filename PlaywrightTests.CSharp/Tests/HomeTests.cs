@@ -1,0 +1,49 @@
+namespace PlaywrightTests.CSharp.Tests;
+
+using PlaywrightTests.CSharp.Resources;
+
+[TestFixture]
+[Category("regression")]
+[Category("home")]
+public class HomeTests : BaseTest
+{
+    [SetUp]
+    public async Task SetUp()
+    {
+        // Given: the user accesses the MADGYM Home page
+        await Test.Step("Navigate to MADGYM Home page", async () =>
+        {
+            await App.Base.NavigateTo(Routes.HomeLinks.Home);
+            await App.Navigation.PageUrlAsExpected(Routes.HomeLinks.Home);
+            await App.Common.BrowserTabTitleAsExpected(Strings.Home.HomeTitle);
+        });
+    }
+
+    [Test]
+    public async Task HeroSection()
+    {
+        // And: the user sees hero carousel images
+        await Test.Step("Verify hero carousel images are visible", async () =>
+        {
+            await App.Home.VerifyHeroCarousel();
+        });
+
+        // And: the user sees hero title
+        await Test.Step("Verify hero title is visible", async () =>
+        {
+            await App.Home.VerifyHeroTitle();
+        });
+
+        // And: the user sees hero description
+        await Test.Step("Verify hero description is visible", async () =>
+        {
+            await App.Home.VerifyHeroDescription();
+        });
+
+        // And: the user sees and clicks on Join Now button
+        await Test.Step("Verify Join Now button is visible and clickable", async () =>
+        {
+            await App.Home.VerifyJoinNowButton();
+        });
+    }
+}
