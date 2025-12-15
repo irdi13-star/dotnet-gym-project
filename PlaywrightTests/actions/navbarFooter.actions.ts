@@ -1,12 +1,9 @@
-import BaseActions from "./base.actions";
 import HomePage from "../pages/home.page";
 import routes from "../resources/routes.json";
 import strings from "../resources/strings.json";
 import { BrowserContext, expect, Locator, Page } from "@playwright/test";
 import NavbarFooterPage from "../pages/navbarFooter.page";
-import CommonActions from "./common.actions";
 import ServicesPage from "../pages/services.page";
-import ServicesActions from "./services.action";
 import AuthActions from "./auth.actions";
 
 export default class navbarFooterActions extends AuthActions {
