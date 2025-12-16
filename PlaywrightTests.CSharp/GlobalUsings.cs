@@ -7,3 +7,4 @@ global using PlaywrightTests.CSharp.Actions;
 global using PlaywrightTests.CSharp.Resources;
 global using PlaywrightTests.CSharp.Helpers;
 global using PlaywrightTests.CSharp.Utils;
+using NUnit.Allure.Core;
