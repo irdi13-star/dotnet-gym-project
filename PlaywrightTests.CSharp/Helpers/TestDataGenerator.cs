@@ -6,7 +6,7 @@ public static class TestDataGenerator
 {
     private static readonly Faker _faker = new();
 
-    public static string GenerateUsername(int minLength = 5)
+    public static string GenerateUsername(int minLength = 8)
     {
         return _faker.Internet.UserName().PadRight(minLength, 'x');
     }

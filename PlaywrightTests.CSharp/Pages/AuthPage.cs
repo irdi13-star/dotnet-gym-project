@@ -6,12 +6,18 @@ public class AuthPage
 
     // Selectori
     public string RegisterLink => "#registerLink";
-    public string LoginLink => "#loginLink";
-    public string UsernameInput => "#username";
+    public string RegisterUsernameInput => "#registerUsernameField";
+    public string RegisterEmailInput => "#registerEmailField";
+    public string RegisterPasswordInput => "#registerPasswordField";
+    public string RegisterButton => "#registerSubmitBtn";
+    public string LoginFormContainer => "#loginFormContainer";
+    public string LoginLink => "#authPageLinkDesktop";
+    public string UsernameInput => "input[name='Login.UserName']";
     public string EmailInput => "#email";
-    public string PasswordInput => "#password";
-    public string RegisterButton => "button[type='submit']:text('Register')";
+    public string PasswordInput => "input[name='Login.Password']";
     public string LoginButton => "button[type='submit']:text('Login')";
+    public string RegisterUsernameError => "#registerUsernameError";
+  
 
     public AuthPage(IPage page)
     {

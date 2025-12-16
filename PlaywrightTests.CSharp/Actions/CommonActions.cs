@@ -1,31 +1,46 @@
 namespace PlaywrightTests.CSharp.Actions;
 
+// using Microsoft.Playwright.Assertions;
+using PlaywrightTests.CSharp.Pages;
+
 public class CommonActions
 {
-    private readonly IPage _page;
+    private readonly CommonPage _commonPage;
 
-    public CommonActions(IPage page, IBrowserContext context)
+    public CommonActions(CommonPage commonPage)
     {
-        _page = page;
+        _commonPage = commonPage;
     }
 
     public async Task BrowserTabTitleAsExpected(string expectedTitle)
     {
-        await Assertions.Expect(_page).ToHaveTitleAsync(expectedTitle);
+        await Assertions.Expect(_commonPage.Page)
+            .ToHaveTitleAsync(expectedTitle);
     }
 
-    public async Task<bool> IsElementVisible(string selector)
+    public async Task HeaderIsVisible(string headerText)
     {
-        return await _page.Locator(selector).IsVisibleAsync();
+        await Assertions.Expect(
+            _commonPage.HeaderByName(headerText)
+        ).ToBeVisibleAsync();
     }
 
-    public async Task ClickElement(string selector)
+    public async Task ParagraphIsVisible(string text)
     {
-        await _page.Locator(selector).ClickAsync();
+        await Assertions.Expect(
+            _commonPage.ParagraphByText(text)
+        ).ToBeVisibleAsync();
     }
 
-    public async Task FillInput(string selector, string text)
+    public async Task ButtonIsVisible(string buttonText)
     {
-        await _page.Locator(selector).FillAsync(text);
+        await Assertions.Expect(
+            _commonPage.ButtonByName(buttonText)
+        ).ToBeVisibleAsync();
+    }
+
+    public async Task ClickButtonByName(string buttonTitle)
+    {
+        await _commonPage.ButtonByName(buttonTitle).ClickAsync();
     }
 }

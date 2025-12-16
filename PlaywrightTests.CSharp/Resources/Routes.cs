@@ -11,7 +11,7 @@ public static class Routes
 
     public static class AuthLinks
     {
-        public const string Login = "http://localhost:5000/Account/Login";
+        public const string Login = "http://localhost:5000/Home/AuthPage";
         public const string Register = "http://localhost:5000/Account/Register";
     }
 }

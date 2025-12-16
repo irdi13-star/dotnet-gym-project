@@ -15,7 +15,8 @@ public class App
     {
         Base = new BaseActions(page, context);
         Navigation = new NavigationActions(page, context);
-        Common = new CommonActions(page, context);
+        var commonPage = new CommonPage(page);
+        Common = new CommonActions(commonPage);
         Home = new HomeActions(page, context);
         NavbarFooter = new NavbarFooterActions(page, context);
         About = new AboutActions(page, context);
