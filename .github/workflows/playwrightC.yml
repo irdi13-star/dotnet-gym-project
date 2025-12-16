@@ -41,7 +41,9 @@ jobs:
     
     - name: Run Playwright tests
       working-directory: PlaywrightTests.CSharp
-      run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx"
+      env:
+          PWTRACE: on
+      run: dotnet test --no-build --logger "trx;LogFileName=TestResults.trx" --results-directory TestResults
 
     - name: Upload Screenshots
       uses: actions/upload-artifact@v4
@@ -49,8 +51,9 @@ jobs:
         name: screenshots
         path: PlaywrightTests.CSharp/Screenshots/
 
-    - name: Upload Traces
+    - name: Upload Playwright traces
       uses: actions/upload-artifact@v4
+      if: always()
       with:
-        name: traces
+        name: playwright-traces
         path: PlaywrightTests.CSharp/playwright-traces/
