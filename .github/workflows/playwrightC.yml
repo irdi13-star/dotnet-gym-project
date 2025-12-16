@@ -41,38 +41,16 @@ jobs:
     
     - name: Run Playwright tests
       working-directory: PlaywrightTests.CSharp
-      env:
-          PWTRACE: on
-      run: dotnet test --no-build --logger "trx;LogFileName=TestResults.trx" --results-directory TestResults
+      run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx"
 
-    - name: Install Allure CLI
-      run: |
-          sudo apt-add-repository ppa:qameta/allure
-          sudo apt-get update
-          sudo apt-get install allure
-
-    - name: Generate Allure Report
-      working-directory: PlaywrightTests.CSharp
-      run: |
-          allure generate TestResults -o TestResults/allure-report --clean
-
-    - name: Upload test results TRX
+    - name: Upload Screenshots
       uses: actions/upload-artifact@v4
-      if: always()
       with:
-        name: test-results
-        path: PlaywrightTests.CSharp/TestResults/*.trx
+        name: screenshots
+        path: PlaywrightTests.CSharp/Screenshots/
 
-    - name: Upload Allure HTML
+    - name: Upload Traces
       uses: actions/upload-artifact@v4
-      if: always()
       with:
-        name: allure-report
-        path: PlaywrightTests.CSharp/TestResults/allure-report
-
-    - name: Upload Playwright traces
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: playwright-traces
+        name: traces
         path: PlaywrightTests.CSharp/playwright-traces/

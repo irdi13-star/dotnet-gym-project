@@ -1,45 +1,90 @@
 using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
+using NUnit.Framework;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using PlaywrightTests.CSharp.Actions;
 
-namespace PlaywrightTests.CSharp.Tests;
-
-/// <summary>
-/// Base test class care oferă App fixture pentru toate testele
-/// </summary>
-public class BaseTest : PageTest
+namespace PlaywrightTests.CSharp.Tests
 {
-    protected App App { get; private set; } = null!;
-
-    [SetUp]
-    public async Task BaseSetUp()
+    public class BaseTest
     {
-        // Inițializează App cu Page și Context
-        App = new App(Page, Context);
+        protected IPlaywright _playwright;
+        protected IBrowser _browser;
+        protected IPage _page;
+        protected IBrowserContext _context;
+        protected App App;
 
-        // Optional: Start tracing pentru debugging
-        await Context.Tracing.StartAsync(new()
+        [SetUp]
+        public async Task SetUp()
         {
-            Screenshots = true,
-            Snapshots = true,
-            Sources = true
-        });
-    }
+            // Initialize Playwright
+            _playwright = await Playwright.CreateAsync();
+            _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+            {
+                Headless = true
+            });
+            _context = await _browser.NewContextAsync();
+            _page = await _context.NewPageAsync();
 
-    [TearDown]
-    public async Task BaseTearDown()
-    {
-        var tracePath = Path.Combine(
-            TestContext.CurrentContext.WorkDirectory,
-            "playwright-traces",
-            $"{TestContext.CurrentContext.Test.ClassName}.{TestContext.CurrentContext.Test.Name}.zip"
-        );
+            // Initialize App with page + context
+            App = new App(_page, _context);
 
-        Directory.CreateDirectory(Path.GetDirectoryName(tracePath)!);
+            // Ensure folders exist
+            Directory.CreateDirectory("Screenshots");
+            Directory.CreateDirectory("playwright-traces");
 
-        await Context.Tracing.StopAsync(new()
+            // Start tracing
+            await _context.Tracing.StartAsync(new TracingStartOptions
+            {
+                Screenshots = true,
+                Snapshots = true,
+                Sources = true
+            });
+        }
+
+        [TearDown]
+        public async Task TearDown()
         {
-            Path = tracePath
-        });
+            var outcome = TestContext.CurrentContext.Result.Outcome.Status;
+            var testName = TestContext.CurrentContext.Test.Name;
+
+            if (outcome == NUnit.Framework.Interfaces.TestStatus.Failed)
+            {
+                // Screenshot
+                var screenshotPath = Path.Combine("Screenshots", $"{testName}.png");
+                await _page.ScreenshotAsync(new PageScreenshotOptions { Path = screenshotPath });
+                Console.WriteLine($"Screenshot saved: {screenshotPath}");
+            }
+
+            // Stop tracing
+            var tracePath = Path.Combine("playwright-traces", $"{testName}-{DateTime.Now:yyyyMMdd_HHmmss}.zip");
+            await _context.Tracing.StopAsync(new TracingStopOptions
+            {
+                Path = tracePath
+            });
+            Console.WriteLine($"Trace saved: {tracePath}");
+
+            await _browser.CloseAsync();
+            _playwright.Dispose();
+        }
+
+        /// <summary>
+        /// Wraps a test step with logging
+        /// </summary>
+        protected async Task StepAsync(string stepName, Func<Task> action)
+        {
+            Console.WriteLine($"STEP START: {stepName}");
+            try
+            {
+                await action();
+                Console.WriteLine($"STEP PASS: {stepName}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"STEP FAIL: {stepName} - {ex.Message}");
+                throw;
+            }
+        }
     }
 }
