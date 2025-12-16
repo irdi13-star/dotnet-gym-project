@@ -19,6 +19,7 @@ namespace PlaywrightTests.CSharp.Tests
                 await App.Navigation.PageUrlAsExpected(Routes.HomeLinks.Home);
                 await App.Common.BrowserTabTitleAsExpected(Strings.Home.HomeBrowserTitle);
             });
+            
             await StepAsync("Verify hero carousel images are visible", async () =>
             {
                 await App.Home.VerifyHeroCarousel();
