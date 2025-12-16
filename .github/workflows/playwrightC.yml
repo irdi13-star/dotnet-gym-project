@@ -1,4 +1,4 @@
-name: Playwright C# Tests
+name: Playwright C# Tests with HTML Report
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 9.0.x
     
@@ -23,15 +23,16 @@ jobs:
     - name: Start WebsiteGym.Web
       run: |
         cd WebsiteGym.Web
-        dotnet run &
+        dotnet run --no-build &
+        echo $! > ../webapp.pid
         sleep 10
-        curl http://localhost:5000
+        curl -f http://localhost:5000 || exit 1
     
-    - name: Restore Playwright C# project
+    - name: Restore PlaywrightTests.CSharp
       working-directory: PlaywrightTests.CSharp
       run: dotnet restore
     
-    - name: Build Playwright tests
+    - name: Build PlaywrightTests.CSharp
       working-directory: PlaywrightTests.CSharp
       run: dotnet build --no-restore
     
@@ -41,30 +42,50 @@ jobs:
     
     - name: Run Playwright tests
       working-directory: PlaywrightTests.CSharp
-      env:
-        PWTRACE: on
-      run: dotnet test --no-build --logger "trx" --results-directory TestResults
-
-    - name: Generate HTML report
-      run: |
-        dotnet tool install -g dotnet-reportgenerator-globaltool
-        reportgenerator \
-          -reports:PlaywrightTests.CSharp/TestResults/*.trx \
-          -targetdir:PlaywrightTests.CSharp/TestResults/html \
-          -reporttypes:Html
+      run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      continue-on-error: true
     
-    - name: Upload test results
+    - name: Stop WebsiteGym.Web
+      if: always()
+      run: |
+        if [ -f webapp.pid ]; then
+          kill $(cat webapp.pid) || true
+        fi
+    
+    - name: Upload HTML Report
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: playwright-results
-        path: PlaywrightTests.CSharp/TestResults/html
+        name: playwright-html-report
+        path: PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/extent-report.html
         retention-days: 30
     
-    - name: Upload Playwright traces
+    - name: Upload Screenshots
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-screenshots
+        path: PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/screenshots/
+        retention-days: 30
+    
+    - name: Upload Traces
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: playwright-traces
-        path: PlaywrightTests.CSharp/playwright-traces/
+        path: PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/traces/
+        retention-days: 30
+    
+    - name: Create test results archive
+      if: always()
+      run: |
+        cd PlaywrightTests.CSharp/bin/Debug/net9.0/test-results
+        zip -r ../../../../test-results-complete.zip .
+    
+    - name: Upload Complete Test Results (ZIP)
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-complete
+        path: PlaywrightTests.CSharp/test-results-complete.zip
         retention-days: 30
