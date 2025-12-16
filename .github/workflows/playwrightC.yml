@@ -44,13 +44,21 @@ jobs:
       env:
         PWTRACE: on
       run: dotnet test --no-build --logger "trx" --results-directory TestResults
+
+    - name: Generate HTML report
+      run: |
+        dotnet tool install -g dotnet-reportgenerator-globaltool
+        reportgenerator \
+          -reports:PlaywrightTests.CSharp/TestResults/*.trx \
+          -targetdir:PlaywrightTests.CSharp/TestResults/html \
+          -reporttypes:Html
     
     - name: Upload test results
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: playwright-results
-        path: PlaywrightTests.CSharp/TestResults/
+        path: PlaywrightTests.CSharp/TestResults/html
         retention-days: 30
     
     - name: Upload Playwright traces
