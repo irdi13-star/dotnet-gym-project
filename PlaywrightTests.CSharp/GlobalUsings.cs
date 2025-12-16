@@ -1,0 +1,9 @@
+global using NUnit.Framework;
+global using Microsoft.Playwright;
+global using Microsoft.Playwright.NUnit;
+global using System.Text.RegularExpressions;
+global using PlaywrightTests.CSharp.Pages;
+global using PlaywrightTests.CSharp.Actions;
+global using PlaywrightTests.CSharp.Resources;
+global using PlaywrightTests.CSharp.Helpers;
+global using PlaywrightTests.CSharp.Utils;
