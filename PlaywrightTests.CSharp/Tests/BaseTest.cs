@@ -18,7 +18,6 @@ namespace PlaywrightTests.CSharp.Tests
         [SetUp]
         public async Task SetUp()
         {
-            // Initialize Playwright
             _playwright = await Playwright.CreateAsync();
             _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
@@ -27,14 +26,11 @@ namespace PlaywrightTests.CSharp.Tests
             _context = await _browser.NewContextAsync();
             _page = await _context.NewPageAsync();
 
-            // Initialize App with page + context
             App = new App(_page, _context);
 
-            // Ensure folders exist
             Directory.CreateDirectory("Screenshots");
             Directory.CreateDirectory("playwright-traces");
 
-            // Start tracing
             await _context.Tracing.StartAsync(new TracingStartOptions
             {
                 Screenshots = true,
@@ -51,13 +47,11 @@ namespace PlaywrightTests.CSharp.Tests
 
             if (outcome == NUnit.Framework.Interfaces.TestStatus.Failed)
             {
-                // Screenshot
                 var screenshotPath = Path.Combine("Screenshots", $"{testName}.png");
                 await _page.ScreenshotAsync(new PageScreenshotOptions { Path = screenshotPath });
                 Console.WriteLine($"Screenshot saved: {screenshotPath}");
             }
 
-            // Stop tracing
             var tracePath = Path.Combine("playwright-traces", $"{testName}-{DateTime.Now:yyyyMMdd_HHmmss}.zip");
             await _context.Tracing.StopAsync(new TracingStopOptions
             {
@@ -69,9 +63,6 @@ namespace PlaywrightTests.CSharp.Tests
             _playwright.Dispose();
         }
 
-        /// <summary>
-        /// Wraps a test step with logging
-        /// </summary>
         protected async Task StepAsync(string stepName, Func<Task> action)
         {
             Console.WriteLine($"STEP START: {stepName}");
