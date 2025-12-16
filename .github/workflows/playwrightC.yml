@@ -41,7 +41,9 @@ jobs:
     
     - name: Run Playwright tests
       working-directory: PlaywrightTests.CSharp
-      run: dotnet test --no-build --verbosity normal
+      env:
+        PWTRACE: on
+      run: dotnet test --no-build --logger "trx" --results-directory TestResults
     
     - name: Upload test results
       uses: actions/upload-artifact@v4
