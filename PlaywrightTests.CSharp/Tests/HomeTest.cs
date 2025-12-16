@@ -1,44 +1,41 @@
+namespace PlaywrightTests.CSharp.Tests;
+
 using NUnit.Framework;
 using PlaywrightTests.CSharp.Resources;
-using System;
-using System.Threading.Tasks;
 
-namespace PlaywrightTests.CSharp.Tests
+[TestFixture]
+[Category("regression")]
+[Category("home")]
+public class HomeTestsWithReporting : BaseTest
 {
-    [TestFixture]
-    [Category("regression")]
-    [Category("home")]
-    public class HomeTests : BaseTest
+    [SetUp]
+    public async Task SetUp()
     {
-        [Test]
-        public async Task HeroSection()
-        {
-            await StepAsync("Navigate to MADGYM Home page", async () =>
-            {
-                await App.Base.NavigateTo(Routes.HomeLinks.Home);
-                await App.Navigation.PageUrlAsExpected(Routes.HomeLinks.Home);
-                await App.Common.BrowserTabTitleAsExpected(Strings.Home.HomeBrowserTitle);
-            });
-            
-            await StepAsync("Verify hero carousel images are visible", async () =>
-            {
-                await App.Home.VerifyHeroCarousel();
-            });
+        LogInfo("Navigating to MADGYM Home page");
+        await App.Base.NavigateTo(Routes.HomeLinks.Home);
+        await App.Navigation.PageUrlAsExpected(Routes.HomeLinks.Home);
+        await App.Common.BrowserTabTitleAsExpected(Strings.Home.HomeBrowserTitle);
+        LogPass("Successfully navigated to home page");
+    }
 
-            await StepAsync("Verify hero title is visible", async () =>
-            {
-                await App.Common.HeaderIsVisible(Strings.Home.HeroTitle);
-            });
+    [Test]
+    public async Task HeroSection_ShouldDisplayCorrectly()
+    {
+        LogInfo("Verifying hero carousel");
+        await App.Home.VerifyHeroCarousel();
+        LogPass("Hero carousel is visible");
 
-            await StepAsync("Verify hero description is visible", async () =>
-            {
-                await App.Common.ParagraphIsVisible(Strings.Home.HeroDescription);
-            });
+        LogInfo("Verifying hero title");
+        await App.Common.HeaderIsVisible(Strings.Home.HeroTitle);
+        LogPass("Hero title is visible");
 
-            await StepAsync("Verify Join Now button is visible and clickable", async () =>
-            {
-                await App.Home.VerifyJoinNowButton();
-            });
-        }
+        LogInfo("Verifying hero description");
+        await App.Common.ParagraphIsVisible(Strings.Home.HeroDescription);
+        LogPass("Hero description is visible");
+
+        LogInfo("Verifying Join Now button");
+        await App.Home.VerifyJoinNowButton();
+        LogPass("Join Now button is visible and enabled");
     }
 }
+

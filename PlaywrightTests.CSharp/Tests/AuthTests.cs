@@ -3,6 +3,7 @@ namespace PlaywrightTests.CSharp.Tests;
 using PlaywrightTests.CSharp.Resources;
 using PlaywrightTests.CSharp.Helpers;
 using PlaywrightTests.CSharp.Utils;
+using AventStack.ExtentReports;
 
 [TestFixture]
 [Category("regression")]
@@ -12,41 +13,31 @@ public class AuthTests : BaseTest
     [Test]
     public async Task UserCanARegister()
     {
-        // Arrange
         var (username, email, password) = TestDataGenerator.GenerateUserCredentials();
 
-        // Act
-        await Test.Step("Navigate to home page", async () =>
-        {
-            await App.Base.NavigateTo(Routes.AuthLinks.Login);
-        });
+        LogInfo("Navigate to home page");
+        await App.Base.NavigateTo(Routes.AuthLinks.Login);
+        LogPass("Navigation to home succeeded");
 
-        await Test.Step($"Register with username: {username}", async () =>
-        {
-            await App.Auth.Register(username, email, password);
-        });
+        LogInfo($"Register with username: {username}");
+        await App.Auth.Register(username, email, password);
+        LogPass("Registration succeeded");
 
-        // Assert
-        await Test.Step("Verify redirect to login page", async () =>
-        {
-            await App.Navigation.PageUrlContains("AuthPage");
-        });
+        LogInfo("Verify redirect to login page");
+        await App.Navigation.PageUrlContains("AuthPage");
+        LogPass("Navigation to home succeeded");
     }
 
     [Test]
     public async Task UserCanLogin()
     {
-        // Act - Now login
-        await Test.Step($"Login with username: {Strings.Auth.ValidUsername}", async () =>
-        {
-            await App.Base.NavigateTo(Routes.HomeLinks.Home);
-            await App.Auth.Login(Strings.Auth.ValidUsername, Strings.Auth.ValidPassword);
-        });
+        LogInfo($"Login with username: {Strings.Auth.ValidUsername}");
+        await App.Base.NavigateTo(Routes.HomeLinks.Home);
+        await App.Auth.Login(Strings.Auth.ValidUsername, Strings.Auth.ValidPassword);
+        LogPass("Login succeeded");
 
-        // Assert
-        await Test.Step("Verify successful login", async () =>
-        {
-            await App.Navigation.PageUrlAsExpected(Routes.HomeLinks.Home);
-        });
+        LogInfo("Verify successful login");
+        await App.Navigation.PageUrlAsExpected(Routes.HomeLinks.Home);
+        LogPass("Login succeeded");
     }
 }
