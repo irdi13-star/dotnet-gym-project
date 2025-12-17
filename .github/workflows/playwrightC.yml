@@ -4,9 +4,14 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     
     steps:
@@ -50,6 +55,157 @@ jobs:
         if [ -f webapp.pid ]; then
           kill $(cat webapp.pid) || true
         fi
+
+
+    - name: Checkout gh-pages branch
+      if: always()
+      uses: actions/checkout@v4
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Setup report directory
+      if: always()
+      run: |
+        TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+        RUN_NUMBER="${{ github.run_number }}"
+        REPORT_DIR="gh-pages/reports/${TIMESTAMP}_run-${RUN_NUMBER}"
+        
+        mkdir -p "${REPORT_DIR}"
+        mkdir -p "${REPORT_DIR}/screenshots"
+        mkdir -p "${REPORT_DIR}/traces"
+        
+        echo "REPORT_DIR=${REPORT_DIR}" >> $GITHUB_ENV
+        echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+        echo "RUN_NUMBER=${RUN_NUMBER}" >> $GITHUB_ENV
+
+    - name: Copy test results to gh-pages
+      if: always()
+      run: |
+        # Copy HTML report
+        cp PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/extent-report.html \
+           "${REPORT_DIR}/index.html"
+        
+        # Copy screenshots
+        if [ -d "PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/screenshots" ]; then
+          cp -r PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/screenshots/* \
+             "${REPORT_DIR}/screenshots/" || true
+        fi
+        
+        # Copy traces
+        if [ -d "PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/traces" ]; then
+          cp -r PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/traces/* \
+             "${REPORT_DIR}/traces/" || true
+        fi     
+
+    - name: Extract test statistics
+      if: always()
+      run: |
+        # Parse extent report for statistics (basic extraction)
+        REPORT_HTML="${REPORT_DIR}/index.html"
+        
+        # Default values
+        TOTAL=0
+        PASSED=0
+        FAILED=0
+        SKIPPED=0
+        
+        if [ -f "$REPORT_HTML" ]; then
+          # Try to extract from HTML (this is basic, might need adjustment)
+          TOTAL=$(grep -oP 'Total.*?<div class="number">\K\d+' "$REPORT_HTML" | head -1 || echo "0")
+          PASSED=$(grep -oP 'Passed.*?<div class="number">\K\d+' "$REPORT_HTML" | head -1 || echo "0")
+          FAILED=$(grep -oP 'Failed.*?<div class="number">\K\d+' "$REPORT_HTML" | head -1 || echo "0")
+          SKIPPED=$(grep -oP 'Skipped.*?<div class="number">\K\d+' "$REPORT_HTML" | head -1 || echo "0")
+        fi
+        
+        # Calculate pass rate
+        if [ "$TOTAL" -gt 0 ]; then
+          PASS_RATE=$(echo "scale=1; ($PASSED * 100) / $TOTAL" | bc)
+        else
+          PASS_RATE="0.0"
+        fi
+        
+        # Save metadata
+        cat > "${REPORT_DIR}/metadata.json" << EOF
+        {
+          "timestamp": "${TIMESTAMP}",
+          "runNumber": ${RUN_NUMBER},
+          "commit": "${{ github.sha }}",
+          "branch": "${{ github.ref_name }}",
+          "actor": "${{ github.actor }}",
+          "total": ${TOTAL},
+          "passed": ${PASSED},
+          "failed": ${FAILED},
+          "skipped": ${SKIPPED},
+          "passRate": ${PASS_RATE}
+        }
+        EOF
+    
+    - name: Clean old reports
+      if: always()
+      run: |
+        cd gh-pages/reports
+        
+        # Find reports older than 14 days and delete
+        find . -maxdepth 1 -type d -mtime +14 -exec rm -rf {} \; || true
+        
+        echo "Cleaned old reports (older than 14 days)"
+    
+    - name: Update reports index
+      if: always()
+      run: |
+        cd gh-pages
+        
+        # Create reports list JSON
+        cat > reports/index.json << 'EOF'
+        []
+        EOF
+        
+        # Build reports array
+        python3 << 'PYTHON'
+        import os
+        import json
+        from datetime import datetime
+        
+        reports_dir = "reports"
+        reports = []
+        
+        # Scan all report directories
+        for report_name in os.listdir(reports_dir):
+            report_path = os.path.join(reports_dir, report_name)
+            metadata_path = os.path.join(report_path, "metadata.json")
+            
+            if os.path.isdir(report_path) and os.path.exists(metadata_path):
+                with open(metadata_path, 'r') as f:
+                    metadata = json.load(f)
+                    metadata['path'] = report_name
+                    reports.append(metadata)
+        
+        # Sort by timestamp (newest first)
+        reports.sort(key=lambda x: x['timestamp'], reverse=True)
+        
+        # Save to index.json
+        with open(os.path.join(reports_dir, 'index.json'), 'w') as f:
+            json.dump(reports, f, indent=2)
+        
+        print(f"Updated index with {len(reports)} reports")
+        PYTHON
+    
+    - name: Deploy to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./gh-pages
+        publish_branch: gh-pages
+        keep_files: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: 'Add test report for run #${{ github.run_number }}'
+    
+
+
+
     
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4
@@ -58,28 +214,6 @@ jobs:
         name: playwright-html-report
         path: PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/extent-report.html
         retention-days: 30
-    
-    - name: Upload Screenshots
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: test-screenshots
-        path: PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/screenshots/
-        retention-days: 30
-    
-    - name: Upload Traces
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: playwright-traces
-        path: PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/traces/
-        retention-days: 30
-    
-    - name: Create test results archive
-      if: always()
-      run: |
-        cd PlaywrightTests.CSharp/bin/Debug/net9.0/test-results
-        zip -r ../../../../test-results-complete.zip .
     
     - name: Upload Complete Test Results (ZIP)
       uses: actions/upload-artifact@v4
