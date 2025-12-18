@@ -1,14 +1,12 @@
 name: Playwright Tests
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  launchLocalhostAndRunTests:
-    timeout-minutes: 60
+  runTestsOnCI:
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     
     steps:
@@ -60,6 +58,15 @@ jobs:
       run: npx playwright test
       env:
         BASE_URL: http://localhost:5000
+
+    - name: Upload blob report to GitHub Actions Artifacts
+      if: always()
+      continue-on-error: true
+      uses: actions/upload-artifact@v4
+      with:
+        name: all-blob-reports
+        path: blob-report
+        retention-days: 14
     
     - name: Stop .NET application
       if: always()
@@ -69,10 +76,30 @@ jobs:
           kill $(cat app.pid) || true
         fi
     
-    - name: Upload Playwright report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: playwright-report
-        path: PlaywrightTests/playwright-report/
-        retention-days: 30
+  merge-e2e-reports:
+    name: Merge sharded e2e reports
+    if: github.actor != 'dependabot[bot]' && always() # To upload any failures
+    needs: [runTestsOnCI]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download blob reports from GitHub Actions Artifacts
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          path: all-blob-reports
+          pattern: blob-report-*
+          merge-multiple: true
+
+      - name: Merge into HTML Report
+        continue-on-error: true
+        run: npx playwright merge-reports --reporter html ./all-blob-reports
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        continue-on-error: true
+        with:
+          name: playwright-report-run-${{ github.run_attempt }}
+          path: playwright-report
+          retention-days: 1
