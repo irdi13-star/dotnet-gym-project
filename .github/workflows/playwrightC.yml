@@ -2,7 +2,7 @@ name: Playwright C# with Dashboard
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -14,262 +14,262 @@ jobs:
   test:
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 9.0.x
-    
-    - name: Build WebsiteGym.Web
-      run: dotnet build WebsiteGym.Web/WebsiteGym.Web.csproj
-    
-    - name: Start WebsiteGym.Web
-      run: |
-        cd WebsiteGym.Web
-        dotnet run &
-        sleep 10
-        curl http://localhost:5000
-    
-    - name: Restore PlaywrightTests.CSharp
-      working-directory: PlaywrightTests.CSharp
-      run: dotnet restore
-    
-    - name: Build PlaywrightTests.CSharp
-      working-directory: PlaywrightTests.CSharp
-      run: dotnet build --no-restore
-    
-    - name: Install Playwright browsers
-      working-directory: PlaywrightTests.CSharp
-      run: pwsh bin/Debug/net9.0/playwright.ps1 install --with-deps
-    
-    - name: Run Playwright tests
-      working-directory: PlaywrightTests.CSharp
-      run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
-      continue-on-error: true
-    
-    - name: Stop WebsiteGym.Web
-      if: always()
-      run: |
-        if [ -f webapp.pid ]; then
-          kill $(cat webapp.pid) || true
-        fi
+      - uses: actions/checkout@v4
 
-    - name: Checkout gh-pages branch
-      if: always()
-      uses: actions/checkout@v4
-      with:
-        ref: gh-pages
-        path: gh-pages
-        token: ${{ secrets.GITHUB_TOKEN }}
-    
-    # Create report directory structure
-    - name: Setup report directory
-      if: always()
-      run: |
-        TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-        RUN_NUMBER="${{ github.run_number }}"
-        REPORT_DIR="gh-pages/reports/${TIMESTAMP}_run-${RUN_NUMBER}"
-        
-        mkdir -p "${REPORT_DIR}"
-        mkdir -p "${REPORT_DIR}/screenshots"
-        mkdir -p "${REPORT_DIR}/traces"
-        
-        echo "REPORT_DIR=${REPORT_DIR}" >> $GITHUB_ENV
-        echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
-        echo "RUN_NUMBER=${RUN_NUMBER}" >> $GITHUB_ENV
-        echo "REPORT_NAME=${TIMESTAMP}_run-${RUN_NUMBER}" >> $GITHUB_ENV
-    
-    # Copy test results
-    - name: Copy test results to gh-pages
-      if: always()
-      run: |
-        # Copy HTML report
-        if [ -f "PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/extent-report.html" ]; then
-          cp PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/extent-report.html \
-             "${REPORT_DIR}/index.html"
-          echo "✅ Extent report copied"
-        else
-          echo "⚠️ Extent report not found"
-        fi
-        
-        # Copy screenshots
-        if [ -d "PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/screenshots" ]; then
-          cp -r PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/screenshots/* \
-             "${REPORT_DIR}/screenshots/" 2>/dev/null || true
-          echo "✅ Screenshots copied"
-        fi
-        
-        # Copy traces
-        if [ -d "PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/traces" ]; then
-          cp -r PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/traces/* \
-             "${REPORT_DIR}/traces/" 2>/dev/null || true
-          echo "✅ Traces copied"
-        fi
-    
-    # Extract test statistics from TRX file
-    - name: Extract test statistics
-      if: always()
-      run: |
-        REPORT_HTML="${REPORT_DIR}/index.html"
-        TRX_FILE="PlaywrightTests.CSharp/TestResults/test-results.trx"
-        
-        # Default values
-        TOTAL=0
-        PASSED=0
-        FAILED=0
-        SKIPPED=0
-        
-        # Try to extract from TRX file first
-        if [ -f "$TRX_FILE" ]; then
-          echo "📊 Parsing TRX file..."
-          TOTAL=$(grep -oP 'total="\K\d+' "$TRX_FILE" | head -1 || echo "0")
-          PASSED=$(grep -oP 'passed="\K\d+' "$TRX_FILE" | head -1 || echo "0")
-          FAILED=$(grep -oP 'failed="\K\d+' "$TRX_FILE" | head -1 || echo "0")
-          SKIPPED=$(grep -oP 'skipped="\K\d+' "$TRX_FILE" | head -1 || echo "0")
-          echo "Total: $TOTAL, Passed: $PASSED, Failed: $FAILED, Skipped: $SKIPPED"
-        fi
-        
-        # Fallback: try to parse HTML if TRX failed
-        if [ "$TOTAL" -eq 0 ] && [ -f "$REPORT_HTML" ]; then
-          echo "📊 Parsing HTML report..."
-          # This is a simple fallback - adjust regex based on your actual HTML
-          PASSED=$(grep -oP 'Passed.*?(\d+)' "$REPORT_HTML" | grep -oP '\d+' | head -1 || echo "0")
-          FAILED=$(grep -oP 'Failed.*?(\d+)' "$REPORT_HTML" | grep -oP '\d+' | head -1 || echo "0")
-          SKIPPED=$(grep -oP 'Skipped.*?(\d+)' "$REPORT_HTML" | grep -oP '\d+' | head -1 || echo "0")
-          TOTAL=$((PASSED + FAILED + SKIPPED))
-        fi
-        
-        # Calculate pass rate
-        if [ "$TOTAL" -gt 0 ]; then
-          PASS_RATE=$(awk "BEGIN {printf \"%.1f\", ($PASSED * 100) / $TOTAL}")
-        else
-          PASS_RATE="0.0"
-        fi
-        
-        echo "Final stats - Total: $TOTAL, Passed: $PASSED, Failed: $FAILED, Pass Rate: $PASS_RATE%"
-        
-        # Save metadata as valid JSON
-        cat > "${REPORT_DIR}/metadata.json" << EOF
-        {
-          "timestamp": "${TIMESTAMP}",
-          "runNumber": ${RUN_NUMBER},
-          "commit": "${{ github.sha }}",
-          "branch": "${{ github.ref_name }}",
-          "actor": "${{ github.actor }}",
-          "total": ${TOTAL},
-          "passed": ${PASSED},
-          "failed": ${FAILED},
-          "skipped": ${SKIPPED},
-          "passRate": ${PASS_RATE}
-        }
-        EOF
-          
-          echo "✅ Metadata saved"
-          cat "${REPORT_DIR}/metadata.json"
-      
-        - name: Clean old reports
-          if: always()
-          run: |
-            cd gh-pages/reports
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Build WebsiteGym.Web
+        run: dotnet build WebsiteGym.Web/WebsiteGym.Web.csproj
+
+      - name: Start WebsiteGym.Web
+        run: |
+          cd WebsiteGym.Web
+          dotnet run &
+          sleep 10
+          curl http://localhost:5000
+
+      - name: Restore PlaywrightTests.CSharp
+        working-directory: PlaywrightTests.CSharp
+        run: dotnet restore
+
+      - name: Build PlaywrightTests.CSharp
+        working-directory: PlaywrightTests.CSharp
+        run: dotnet build --no-restore
+
+      - name: Install Playwright browsers
+        working-directory: PlaywrightTests.CSharp
+        run: pwsh bin/Debug/net9.0/playwright.ps1 install --with-deps
+
+      - name: Run Playwright tests
+        working-directory: PlaywrightTests.CSharp
+        run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+        continue-on-error: true
+
+      - name: Stop WebsiteGym.Web
+        if: always()
+        run: |
+          if [ -f webapp.pid ]; then
+            kill $(cat webapp.pid) || true
+          fi
+
+      - name: Checkout gh-pages branch
+        if: always()
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Create report directory structure
+      - name: Setup report directory
+        if: always()
+        run: |
+          TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+          RUN_NUMBER="${{ github.run_number }}"
+          REPORT_DIR="gh-pages/reports/${TIMESTAMP}_run-${RUN_NUMBER}"
+
+          mkdir -p "${REPORT_DIR}"
+          mkdir -p "${REPORT_DIR}/screenshots"
+          mkdir -p "${REPORT_DIR}/traces"
+
+          echo "REPORT_DIR=${REPORT_DIR}" >> $GITHUB_ENV
+          echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+          echo "RUN_NUMBER=${RUN_NUMBER}" >> $GITHUB_ENV
+          echo "REPORT_NAME=${TIMESTAMP}_run-${RUN_NUMBER}" >> $GITHUB_ENV
+
+      # Copy test results
+      - name: Copy test results to gh-pages
+        if: always()
+        run: |
+          # Copy HTML report
+          if [ -f "PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/extent-report.html" ]; then
+            cp PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/extent-report.html \
+               "${REPORT_DIR}/index.html"
+            echo "✅ Extent report copied"
+          else
+            echo "⚠️ Extent report not found"
+          fi
+
+          # Copy screenshots
+          if [ -d "PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/screenshots" ]; then
+            cp -r PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/screenshots/* \
+               "${REPORT_DIR}/screenshots/" 2>/dev/null || true
+            echo "✅ Screenshots copied"
+          fi
+
+          # Copy traces
+          if [ -d "PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/traces" ]; then
+            cp -r PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/traces/* \
+               "${REPORT_DIR}/traces/" 2>/dev/null || true
+            echo "✅ Traces copied"
+          fi
+
+      # Extract test statistics from TRX file
+      - name: Extract test statistics
+        if: always()
+        run: |
+          REPORT_HTML="${REPORT_DIR}/index.html"
+          TRX_FILE="PlaywrightTests.CSharp/TestResults/test-results.trx"
+
+          # Default values
+          TOTAL=0
+          PASSED=0
+          FAILED=0
+          SKIPPED=0
+
+          # Try to extract from TRX file first
+          if [ -f "$TRX_FILE" ]; then
+            echo "📊 Parsing TRX file..."
+            TOTAL=$(grep -oP 'total="\K\d+' "$TRX_FILE" | head -1 || echo "0")
+            PASSED=$(grep -oP 'passed="\K\d+' "$TRX_FILE" | head -1 || echo "0")
+            FAILED=$(grep -oP 'failed="\K\d+' "$TRX_FILE" | head -1 || echo "0")
+            SKIPPED=$(grep -oP 'skipped="\K\d+' "$TRX_FILE" | head -1 || echo "0")
+            echo "Total: $TOTAL, Passed: $PASSED, Failed: $FAILED, Skipped: $SKIPPED"
+          fi
+
+          # Fallback: try to parse HTML if TRX failed
+          if [ "$TOTAL" -eq 0 ] && [ -f "$REPORT_HTML" ]; then
+            echo "📊 Parsing HTML report..."
+            # This is a simple fallback - adjust regex based on your actual HTML
+            PASSED=$(grep -oP 'Passed.*?(\d+)' "$REPORT_HTML" | grep -oP '\d+' | head -1 || echo "0")
+            FAILED=$(grep -oP 'Failed.*?(\d+)' "$REPORT_HTML" | grep -oP '\d+' | head -1 || echo "0")
+            SKIPPED=$(grep -oP 'Skipped.*?(\d+)' "$REPORT_HTML" | grep -oP '\d+' | head -1 || echo "0")
+            TOTAL=$((PASSED + FAILED + SKIPPED))
+          fi
+
+          # Calculate pass rate
+          if [ "$TOTAL" -gt 0 ]; then
+            PASS_RATE=$(awk "BEGIN {printf \"%.1f\", ($PASSED * 100) / $TOTAL}")
+          else
+            PASS_RATE="0.0"
+          fi
+
+          echo "Final stats - Total: $TOTAL, Passed: $PASSED, Failed: $FAILED, Pass Rate: $PASS_RATE%"
+
+          # Save metadata as valid JSON
+          cat > "${REPORT_DIR}/metadata.json" << EOF
+          {
+            "timestamp": "${TIMESTAMP}",
+            "runNumber": ${RUN_NUMBER},
+            "commit": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}",
+            "actor": "${{ github.actor }}",
+            "total": ${TOTAL},
+            "passed": ${PASSED},
+            "failed": ${FAILED},
+            "skipped": ${SKIPPED},
+            "passRate": ${PASS_RATE}
+          }
+          EOF
             
-            # Find and delete reports older than 14 days
-            echo "🗑️ Cleaning old reports..."
-            DELETED=0
-            for dir in */; do
-              if [ -d "$dir" ] && [ "$(find "$dir" -maxdepth 0 -mtime +14)" ]; then
-                echo "Deleting: $dir"
-                rm -rf "$dir"
-                DELETED=$((DELETED + 1))
-              fi
-            done
-            
-            echo "Deleted $DELETED old report(s)"
-        
-        # Update reports index
-        - name: Update reports index
-          if: always()
-          run: |
-            cd gh-pages/reports
-            
-            # Initialize index.json if doesn't exist
-            if [ ! -f index.json ]; then
-              echo "[]" > index.json
-            fi
-            
-            # Build reports array using Python
-            python3 << 'PYTHON_SCRIPT'
-            import os
-            import json
-            from pathlib import Path
+            echo "✅ Metadata saved"
+            cat "${REPORT_DIR}/metadata.json"
 
-        reports_dir = "."
-        reports = []
-
-        print("📂 Scanning reports directory...")
-
-        # Scan all report directories
-        for item in os.listdir(reports_dir):
-            report_path = os.path.join(reports_dir, item)
-            metadata_path = os.path.join(report_path, "metadata.json")
-            
-            if os.path.isdir(report_path) and os.path.exists(metadata_path):
-                try:
-                    with open(metadata_path, 'r') as f:
-                        metadata = json.load(f)
-                        metadata['path'] = item
-                        reports.append(metadata)
-                        print(f"✅ Added report: {item}")
-                except json.JSONDecodeError as e:
-                    print(f"⚠️  Skipping {item}: Invalid JSON - {e}")
-                except Exception as e:
-                    print(f"⚠️  Skipping {item}: {e}")
-
-        # Sort by runNumber (newest first)
-        reports.sort(key=lambda x: x.get('runNumber', 0), reverse=True)
-
-        # Save to index.json
-        with open('index.json', 'w') as f:
-            json.dump(reports, f, indent=2)
-
-        print(f"✅ Updated index with {len(reports)} reports")
-        PYTHON_SCRIPT
-                
-                echo "📄 Index contents:"
-                cat index.json
-            
-          # Configure git
-          - name: Configure git
+          - name: Clean old reports
             if: always()
             run: |
-              cd gh-pages
-              git config user.name "github-actions[bot]"
-              git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Commit and push to gh-pages
-          - name: Commit and push changes
-            if: always()
-            run: |
-              cd gh-pages
-              git add .
+              cd gh-pages/reports
               
-              if git diff --staged --quiet; then
-                echo "No changes to commit"
-              else
-                git commit -m "Add test report for run #${{ github.run_number }} - $(date +'%Y-%m-%d %H:%M:%S')"
-                git push origin gh-pages
-                echo "✅ Changes pushed to gh-pages"
-              fi
-          
-          # Upload artifacts for manual inspection
-          - name: Upload test results artifact
-            uses: actions/upload-artifact@v4
+              # Find and delete reports older than 14 days
+              echo "🗑️ Cleaning old reports..."
+              DELETED=0
+              for dir in */; do
+                if [ -d "$dir" ] && [ "$(find "$dir" -maxdepth 0 -mtime +14)" ]; then
+                  echo "Deleting: $dir"
+                  rm -rf "$dir"
+                  DELETED=$((DELETED + 1))
+                fi
+              done
+              
+              echo "Deleted $DELETED old report(s)"
+
+          # Update reports index
+          - name: Update reports index
             if: always()
-            with:
-              name: test-results-run-${{ github.run_number }}
-              path: |
-                PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/
-                PlaywrightTests.CSharp/TestResults/
-              retention-days: 7
+            run: |
+              cd gh-pages/reports
+              
+              # Initialize index.json if doesn't exist
+              if [ ! -f index.json ]; then
+                echo "[]" > index.json
+              fi
+              
+              # Build reports array using Python
+              python3 << 'PYTHON_SCRIPT'
+              import os
+              import json
+              from pathlib import Path
+
+          reports_dir = "."
+          reports = []
+
+          print("📂 Scanning reports directory...")
+
+          # Scan all report directories
+          for item in os.listdir(reports_dir):
+              report_path = os.path.join(reports_dir, item)
+              metadata_path = os.path.join(report_path, "metadata.json")
+              
+              if os.path.isdir(report_path) and os.path.exists(metadata_path):
+                  try:
+                      with open(metadata_path, 'r') as f:
+                          metadata = json.load(f)
+                          metadata['path'] = item
+                          reports.append(metadata)
+                          print(f"✅ Added report: {item}")
+                  except json.JSONDecodeError as e:
+                      print(f"⚠️  Skipping {item}: Invalid JSON - {e}")
+                  except Exception as e:
+                      print(f"⚠️  Skipping {item}: {e}")
+
+          # Sort by runNumber (newest first)
+          reports.sort(key=lambda x: x.get('runNumber', 0), reverse=True)
+
+          # Save to index.json
+          with open('index.json', 'w') as f:
+              json.dump(reports, f, indent=2)
+
+          print(f"✅ Updated index with {len(reports)} reports")
+          PYTHON_SCRIPT
+                  
+                  echo "📄 Index contents:"
+                  cat index.json
+              
+            # Configure git
+            - name: Configure git
+              if: always()
+              run: |
+                cd gh-pages
+                git config user.name "github-actions[bot]"
+                git config user.email "github-actions[bot]@users.noreply.github.com"
+            
+            # Commit and push to gh-pages
+            - name: Commit and push changes
+              if: always()
+              run: |
+                cd gh-pages
+                git add .
+                
+                if git diff --staged --quiet; then
+                  echo "No changes to commit"
+                else
+                  git commit -m "Add test report for run #${{ github.run_number }} - $(date +'%Y-%m-%d %H:%M:%S')"
+                  git push origin gh-pages
+                  echo "✅ Changes pushed to gh-pages"
+                fi
+            
+            # Upload artifacts for manual inspection
+            - name: Upload test results artifact
+              uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                name: test-results-run-${{ github.run_number }}
+                path: |
+                  PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/
+                  PlaywrightTests.CSharp/TestResults/
+                retention-days: 7
