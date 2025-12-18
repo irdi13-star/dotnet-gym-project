@@ -192,7 +192,6 @@ jobs:
           
           echo "Deleted $DELETED old report(s)"
 
-        
       - name: Update reports index
         if: always()
         run: |
@@ -244,7 +243,6 @@ jobs:
 
           echo "📄 Index contents:"
           cat index.json
-
 
       - name: Configure git
         if: always()
