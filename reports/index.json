@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "timestamp": "2025-12-18_13-22-50",
+    "runNumber": 20,
+    "commit": "3e5aae1a476d6349c5e31714a2c5f4b704d01984",
+    "branch": "6/merge",
+    "actor": "irdi13-star",
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "passRate": 100.0,
+    "path": "2025-12-18_13-22-50_run-20"
+  },
+  {
+    "timestamp": "2025-12-18_13-12-19",
+    "runNumber": 19,
+    "commit": "f9fd9e5c9055e6a725640ed270e8d73e1041be90",
+    "branch": "6/merge",
+    "actor": "irdi13-star",
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "passRate": 100.0,
+    "path": "2025-12-18_13-12-19_run-19"
+  }
+]
