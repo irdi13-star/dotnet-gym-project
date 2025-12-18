@@ -192,61 +192,59 @@ jobs:
           
           echo "Deleted $DELETED old report(s)"
 
+        
       - name: Update reports index
         if: always()
         run: |
           cd gh-pages/reports
-          
+
           # Initialize index.json if doesn't exist
           if [ ! -f index.json ]; then
             echo "[]" > index.json
           fi
-          
+
           echo "📂 Scanning reports directory..."
-          
-          # Build reports array using Python
+
           python3 << 'PYTHON_SCRIPT'
-              import os
-              import json
+          import os
+          import json
 
-              reports_dir = "."
-              reports = []
+          reports_dir = "."
+          reports = []
 
-              print("📂 Scanning reports directory...")
+          print("📂 Scanning reports directory...")
 
-              for item in os.listdir(reports_dir):
-                  report_path = os.path.join(reports_dir, item)
-                  metadata_path = os.path.join(report_path, "metadata.json")
-                  
-                  # Skip if not a directory or no metadata
-                  if not os.path.isdir(report_path) or not os.path.exists(metadata_path):
-                      continue
-                  
-                  try:
-                      with open(metadata_path, 'r') as f:
-                          content = f.read()
-                          metadata = json.loads(content)
-                          metadata['path'] = item
-                          reports.append(metadata)
-                          print(f"✅ Added report: {item}")
-                  except json.JSONDecodeError as e:
-                      print(f"⚠️  Skipping {item}: Invalid JSON - {e}")
-                      print(f"    Content preview: {content[:200] if 'content' in locals() else 'N/A'}")
-                  except Exception as e:
-                      print(f"⚠️  Skipping {item}: {e}")
+          for item in os.listdir(reports_dir):
+              report_path = os.path.join(reports_dir, item)
+              metadata_path = os.path.join(report_path, "metadata.json")
 
-              # Sort by runNumber (newest first)
-              reports.sort(key=lambda x: x.get('runNumber', 0), reverse=True)
+              if not os.path.isdir(report_path) or not os.path.exists(metadata_path):
+                  continue
 
-              # Save to index.json
-              with open('index.json', 'w') as f:
-                  json.dump(reports, f, indent=2)
+              try:
+                  with open(metadata_path, 'r') as f:
+                      content = f.read()
+                      metadata = json.loads(content)
+                      metadata['path'] = item
+                      reports.append(metadata)
+                      print(f"✅ Added report: {item}")
+              except json.JSONDecodeError as e:
+                  print(f"⚠️  Skipping {item}: Invalid JSON - {e}")
+                  print(f"    Content preview: {content[:200] if 'content' in locals() else 'N/A'}")
+              except Exception as e:
+                  print(f"⚠️  Skipping {item}: {e}")
 
-              print(f"✅ Updated index with {len(reports)} reports")
-              PYTHON_SCRIPT
+          reports.sort(key=lambda x: x.get('runNumber', 0), reverse=True)
 
-                        echo "📄 Index contents:"
-                        cat index.json
+          with open('index.json', 'w') as f:
+              json.dump(reports, f, indent=2)
+
+          print(f"✅ Updated index with {len(reports)} reports")
+          PYTHON_SCRIPT
+
+          echo "📄 Index contents:"
+          cat index.json
+
 
       - name: Configure git
         if: always()
