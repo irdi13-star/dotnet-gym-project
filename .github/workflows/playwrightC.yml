@@ -1,4 +1,4 @@
-name: Playwright C# Tests with Dashboard
+name: Playwright C# with Dashboard
 
 on:
   pull_request:
