@@ -8,67 +8,86 @@ jobs:
   runTestsOnCI:
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.0.x'
-    
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 'lts/*'
-    
+
     - name: Restore .NET dependencies
       run: dotnet restore
-    
-    - name: Build .NET application
-      run: dotnet build --configuration Release --no-restore
-    
+
+    - name: Build .NET application (CI only)
+      run: |
+        if [ "$ACT" != "true" ]; then
+          dotnet build --configuration Release --no-restore
+        else
+          echo "Skipping dotnet build (local run)"
+        fi
+
     - name: Start .NET application
       working-directory: WebsiteGym.Web
       run: |
         dotnet run &
         echo $! > app.pid
-        sleep 10
-    
+
     - name: Wait for application to be ready
       run: |
-        for i in {1..30}; do
+        for i in {1..20}; do
           if curl -s http://localhost:5000 > /dev/null; then
             echo "Application is ready!"
-            break
+            exit 0
           fi
-          echo "Waiting for application... ($i/30)"
-          sleep 2
+          echo "Waiting for application..."
+          sleep 1
         done
-    
+        echo "Application failed to start"
+        exit 1
+
     - name: Install Playwright dependencies
       working-directory: PlaywrightTests
       run: |
         npm install
-        npx playwright install --with-deps
-    
+
+        if [ "$ACT" != "true" ]; then
+          npx playwright install --with-deps
+        else
+          echo "Skipping playwright install (local run)"
+        fi
+
     - name: Run Playwright tests
       working-directory: PlaywrightTests
-      run: npx playwright test
+      run: |
+        if [ "$ACT" = "true" ]; then
+          echo "Running LOCAL Playwright tests"
+          npx playwright test --workers=1 --grep @smoke
+        else
+          echo "Running CI Playwright tests"
+          npx playwright test
+        fi
       env:
         BASE_URL: http://localhost:5000
 
     - name: Ensure playwright-report directory exists
       run: mkdir -p PlaywrightTests/playwright-report/
+
     - name: Upload HTML report as artifact
+      if: ${{ env.ACT != 'true' }}
       uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
       with:
-        name: playwright-report
-        path: ./PlaywrightTests/playwright-report/
-        retention-days: 30
-    
+       name: playwright-report
+       path: ./PlaywrightTests/playwright-report/
+       retention-days: 30
+
     - name: Stop .NET application
       if: always()
       working-directory: WebsiteGym.Web
@@ -76,5 +95,3 @@ jobs:
         if [ -f app.pid ]; then
           kill $(cat app.pid) || true
         fi
-    
-  

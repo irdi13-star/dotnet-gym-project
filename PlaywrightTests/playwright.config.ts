@@ -40,7 +40,10 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || 'http://localhost:5000',
     trace: "on-first-retry",
     ignoreHTTPSErrors: true,
-    screenshot: 'on'
+    screenshot: {
+      mode: "on",
+      fullPage: true,
+    },
   },
 
   /* Configure projects for major browsers */
