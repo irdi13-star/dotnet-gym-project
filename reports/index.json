@@ -1,5 +1,18 @@
 [
   {
+    "timestamp": "2025-12-19_07-47-53",
+    "runNumber": 25,
+    "commit": "3cfe486d70ad479381ee0e1b32f757d975026a85",
+    "branch": "7/merge",
+    "actor": "irdi13-star",
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "passRate": 0.0,
+    "path": "2025-12-19_07-47-53_run-25"
+  },
+  {
     "timestamp": "2025-12-19_07-43-41",
     "runNumber": 24,
     "commit": "3fd84a7c87f5c5af16b9faef581d2f5dc51df47d",
