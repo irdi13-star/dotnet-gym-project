@@ -55,7 +55,7 @@ jobs:
     
     - name: Run Playwright tests
       working-directory: PlaywrightTests
-      run: npx playwright test --verbose
+      run: npx playwright test
       env:
         BASE_URL: http://localhost:5000
 
