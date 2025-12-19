@@ -55,7 +55,7 @@ jobs:
     
     - name: Run Playwright tests
       working-directory: PlaywrightTests
-      run: npx playwright test
+      run: npx playwright test --verbose
       env:
         BASE_URL: http://localhost:5000
 
@@ -64,7 +64,7 @@ jobs:
       continue-on-error: true
       uses: actions/upload-artifact@v4
       with:
-        name: all-blob-reports
+        name: blob-report
         path: blob-report
         retention-days: 14
     
@@ -88,13 +88,13 @@ jobs:
         uses: actions/download-artifact@v4
         continue-on-error: true
         with:
-          path: all-blob-reports
-          pattern: blob-report-*
+          path: blob-report
+          pattern: report-*
           merge-multiple: true
 
       - name: Merge into HTML Report
         continue-on-error: true
-        run: npx playwright merge-reports --reporter html ./all-blob-reports
+        run: npx playwright merge-reports --reporter html ./blob-report
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
