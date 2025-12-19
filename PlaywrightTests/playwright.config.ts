@@ -31,7 +31,6 @@ export default defineConfig({
       open: IS_CI ? "never" : "on-failure",
     },
   ],
-    ["blob"],
     ["github"],
     ["list"],
   ],
