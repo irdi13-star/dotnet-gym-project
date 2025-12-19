@@ -26,28 +26,28 @@ jobs:
     - name: Restore .NET dependencies
       run: dotnet restore
 
-    - name: Build .NET application (CI only)
+    - name: Build .NET application (local)
       run: |
-        if [ "$ACT" != "true" ]; then
-          dotnet build --configuration Release --no-restore
+        if [ "$ACT" = "true" ]; then
+          dotnet build --configuration Debug
         else
-          echo "Skipping dotnet build (local run)"
+          echo "Skipping local build"
         fi
 
     - name: Start .NET application
       working-directory: WebsiteGym.Web
       run: |
-        dotnet run &
+        ASPNETCORE_URLS=http://0.0.0.0:5000 dotnet run &
         echo $! > app.pid
 
-    - name: Wait for application to be ready
+    - name: Wait for application
       run: |
-        for i in {1..20}; do
+        for i in {1..30}; do
           if curl -s http://localhost:5000 > /dev/null; then
             echo "Application is ready!"
             exit 0
           fi
-          echo "Waiting for application..."
+          echo "Waiting for application... ($i/30)"
           sleep 1
         done
         echo "Application failed to start"
@@ -69,7 +69,7 @@ jobs:
       run: |
         if [ "$ACT" = "true" ]; then
           echo "Running LOCAL Playwright tests"
-          npx playwright test --workers=1 --grep @smoke
+          npx playwright test --workers=1 --grep @@home
         else
           echo "Running CI Playwright tests"
           npx playwright test
