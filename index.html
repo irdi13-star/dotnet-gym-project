@@ -1,249 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MADGYM Test Reports Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      padding: 20px;
-    }
-    
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    
-    .header {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-    }
-    
-    .header h1 {
-      font-size: 2.5em;
-      color: #667eea;
-      margin-bottom: 10px;
-    }
-    
-    .header p {
-      color: #6c757d;
-      font-size: 1.1em;
-    }
-    
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    
-    .stat-card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    
-    .stat-card .number {
-      font-size: 3em;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-    
-    .stat-card .label {
-      color: #6c757d;
-      text-transform: uppercase;
-      font-size: 0.85em;
-      letter-spacing: 1px;
-    }
-    
-    .stat-card.total .number { color: #007bff; }
-    .stat-card.passed .number { color: #28a745; }
-    .stat-card.failed .number { color: #dc3545; }
-    .stat-card.rate .number { color: #667eea; }
-    
-    .chart-container {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-    }
-    
-    .chart-container h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
-    
-    .reports-container {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    
-    .reports-container h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
-    
-    .report-item {
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    
-    .report-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    
-    .report-info {
-      flex: 1;
-    }
-    
-    .report-title {
-      font-size: 1.2em;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #333;
-    }
-    
-    .report-meta {
-      color: #6c757d;
-      font-size: 0.9em;
-    }
-    
-    .report-stats {
-      display: flex;
-      gap: 15px;
-      margin-right: 20px;
-    }
-    
-    .report-stat {
-      text-align: center;
-    }
-    
-    .report-stat .value {
-      font-size: 1.5em;
-      font-weight: bold;
-    }
-    
-    .report-stat .label {
-      font-size: 0.75em;
-      color: #6c757d;
-      text-transform: uppercase;
-    }
-    
-    .report-stat.passed .value { color: #28a745; }
-    .report-stat.failed .value { color: #dc3545; }
-    .report-stat.rate .value { color: #667eea; }
-    
-    .view-btn {
-      background: #667eea;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    .view-btn:hover {
-      background: #5568d3;
-      transform: scale(1.05);
-    }
-    
-    .loading {
-      text-align: center;
-      padding: 40px;
-      color: #6c757d;
-    }
-    
-    .empty-state {
-      text-align: center;
-      padding: 60px;
-      color: #6c757d;
-    }
-    
-    .empty-state svg {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 20px;
-      opacity: 0.5;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1>🎭 MADGYM Test Reports Dashboard</h1>
-      <p>Playwright C# Automation Test Results</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MADGYM Test Reports Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .header {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        color: #667eea;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #6c757d;
+        font-size: 1.1em;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .stat-card .number {
+        font-size: 3em;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+
+      .stat-card .label {
+        color: #6c757d;
+        text-transform: uppercase;
+        font-size: 0.85em;
+        letter-spacing: 1px;
+      }
+
+      .stat-card.total .number {
+        color: #007bff;
+      }
+      .stat-card.passed .number {
+        color: #28a745;
+      }
+      .stat-card.failed .number {
+        color: #dc3545;
+      }
+      .stat-card.rate .number {
+        color: #667eea;
+      }
+
+      .chart-container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .chart-container h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .reports-container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .reports-container h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .report-item {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .report-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .report-info {
+        flex: 1;
+      }
+
+      .report-title {
+        font-size: 1.2em;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .report-meta {
+        color: #6c757d;
+        font-size: 0.9em;
+      }
+
+      .report-stats {
+        display: flex;
+        gap: 15px;
+        margin-right: 20px;
+      }
+
+      .report-stat {
+        text-align: center;
+      }
+
+      .report-stat .value {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+
+      .report-stat .label {
+        font-size: 0.75em;
+        color: #6c757d;
+        text-transform: uppercase;
+      }
+
+      .report-stat.passed .value {
+        color: #28a745;
+      }
+      .report-stat.failed .value {
+        color: #dc3545;
+      }
+      .report-stat.rate .value {
+        color: #667eea;
+      }
+
+      .view-btn {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .view-btn:hover {
+        background: #5568d3;
+        transform: scale(1.05);
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #6c757d;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 60px;
+        color: #6c757d;
+      }
+
+      .empty-state svg {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎭 MADGYM Test Reports Dashboard</h1>
+        <p>Playwright C# Automation Test Results</p>
+      </div>
+
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card total">
+          <div class="label">Total Reports</div>
+          <div class="number" id="totalReports">-</div>
+        </div>
+        <div class="stat-card passed">
+          <div class="label">Avg Passed</div>
+          <div class="number" id="avgPassed">-</div>
+        </div>
+        <div class="stat-card failed">
+          <div class="label">Avg Failed</div>
+          <div class="number" id="avgFailed">-</div>
+        </div>
+        <div class="stat-card rate">
+          <div class="label">Avg Pass Rate</div>
+          <div class="number" id="avgPassRate">-%</div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <h2>📈 Pass Rate Trend (Last 2 Weeks)</h2>
+        <canvas id="trendChart"></canvas>
+      </div>
+
+      <div class="reports-container">
+        <h2>📋 Recent Test Reports</h2>
+        <div id="reportsList">
+          <div class="loading">Loading reports...</div>
+        </div>
+      </div>
     </div>
-    
-    <div class="stats-grid" id="statsGrid">
-      <div class="stat-card total">
-        <div class="label">Total Reports</div>
-        <div class="number" id="totalReports">-</div>
-      </div>
-      <div class="stat-card passed">
-        <div class="label">Avg Passed</div>
-        <div class="number" id="avgPassed">-</div>
-      </div>
-      <div class="stat-card failed">
-        <div class="label">Avg Failed</div>
-        <div class="number" id="avgFailed">-</div>
-      </div>
-      <div class="stat-card rate">
-        <div class="label">Avg Pass Rate</div>
-        <div class="number" id="avgPassRate">-%</div>
-      </div>
-    </div>
-    
-    <div class="chart-container">
-      <h2>📈 Pass Rate Trend (Last 2 Weeks)</h2>
-      <canvas id="trendChart"></canvas>
-    </div>
-    
-    <div class="reports-container">
-      <h2>📋 Recent Test Reports</h2>
-      <div id="reportsList">
-        <div class="loading">Loading reports...</div>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-    let chart = null;
-    
-    async function loadReports() {
-      try {
-        const response = await fetch('reports/index.json');
-        const reports = await response.json();
-        
-        if (reports.length === 0) {
-          document.getElementById('reportsList').innerHTML = `
+
+    <script>
+      let chart = null;
+
+      async function loadReports() {
+        try {
+          const response = await fetch("reports/index.json");
+          const reports = await response.json();
+
+          if (reports.length === 0) {
+            document.getElementById("reportsList").innerHTML = `
             <div class="empty-state">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -253,23 +268,33 @@
               <p>Run some tests to see reports here</p>
             </div>
           `;
-          return;
-        }
-        
-        // Calculate statistics
-        const totalReports = reports.length;
-        const avgPassed = Math.round(reports.reduce((sum, r) => sum + r.passed, 0) / totalReports);
-        const avgFailed = Math.round(reports.reduce((sum, r) => sum + r.failed, 0) / totalReports);
-        const avgPassRate = (reports.reduce((sum, r) => sum + r.passRate, 0) / totalReports).toFixed(1);
-        
-        document.getElementById('totalReports').textContent = totalReports;
-        document.getElementById('avgPassed').textContent = avgPassed;
-        document.getElementById('avgFailed').textContent = avgFailed;
-        document.getElementById('avgPassRate').textContent = `${avgPassRate}%`;
-        
-        // Render reports list
-        const reportsList = document.getElementById('reportsList');
-        reportsList.innerHTML = reports.map(report => `
+            return;
+          }
+
+          // Calculate statistics
+          const totalReports = reports.length;
+          const avgPassed = Math.round(
+            reports.reduce((sum, r) => sum + r.passed, 0) / totalReports
+          );
+          const avgFailed = Math.round(
+            reports.reduce((sum, r) => sum + r.failed, 0) / totalReports
+          );
+          const avgPassRate = (
+            reports.reduce((sum, r) => sum + r.passRate, 0) / totalReports
+          ).toFixed(1);
+
+          document.getElementById("totalReports").textContent = totalReports;
+          document.getElementById("avgPassed").textContent = avgPassed;
+          document.getElementById("avgFailed").textContent = avgFailed;
+          document.getElementById(
+            "avgPassRate"
+          ).textContent = `${avgPassRate}%`;
+
+          // Render reports list
+          const reportsList = document.getElementById("reportsList");
+          reportsList.innerHTML = reports
+            .map(
+              (report) => `
           <div class="report-item" onclick="openReport('${report.path}')">
             <div class="report-info">
               <div class="report-title">
@@ -298,94 +323,108 @@
             </div>
             <button class="view-btn">View Report →</button>
           </div>
-        `).join('');
-        
-        // Render chart
-        renderChart(reports);
-        
-      } catch (error) {
-        console.error('Error loading reports:', error);
-        document.getElementById('reportsList').innerHTML = `
+        `
+            )
+            .join("");
+
+          // Render chart
+          renderChart(reports);
+        } catch (error) {
+          console.error("Error loading reports:", error);
+          document.getElementById("reportsList").innerHTML = `
           <div class="empty-state">
             <p>Error loading reports. Please try again later.</p>
           </div>
         `;
-      }
-    }
-    
-    function renderChart(reports) {
-      const ctx = document.getElementById('trendChart').getContext('2d');
-      
-      // Take last 10 reports for chart
-      const chartData = reports.slice(0, 10).reverse();
-      
-      if (chart) {
-        chart.destroy();
-      }
-      
-      chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: chartData.map(r => formatDateShort(r.timestamp)),
-          datasets: [{
-            label: 'Pass Rate %',
-            data: chartData.map(r => r.passRate),
-            borderColor: '#667eea',
-            backgroundColor: 'rgba(102, 126, 234, 0.1)',
-            tension: 0.4,
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              display: true,
-              position: 'top'
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 100,
-              ticks: {
-                callback: function(value) {
-                  return value + '%';
-                }
-              }
-            }
-          }
         }
-      });
-    }
-    
-    function openReport(path) {
-      window.open(`reports/${path}/index.html`, '_blank');
-    }
-    
-    function formatDate(timestamp) {
-      const date = new Date(timestamp.replace('_', 'T').replace(/-/g, ':'));
-      return date.toLocaleString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    }
-    
-    function formatDateShort(timestamp) {
-      const date = new Date(timestamp.replace('_', 'T').replace(/-/g, ':'));
-      return date.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric'
-      });
-    }
-    
-    // Load reports on page load
-    loadReports();
-    
-    // Refresh every 5 minutes
-    setInterval(loadReports, 5 * 60 * 1000);
-  </script>
-</body>
+      }
+
+      function renderChart(reports) {
+        const ctx = document.getElementById("trendChart").getContext("2d");
+
+        // Take last 10 reports for chart
+        const chartData = reports.slice(0, 10).reverse();
+
+        if (chart) {
+          chart.destroy();
+        }
+
+        chart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: chartData.map((r) => formatDateShort(r.timestamp)),
+            datasets: [
+              {
+                label: "Pass Rate %",
+                data: chartData.map((r) => r.passRate),
+                borderColor: "#667eea",
+                backgroundColor: "rgba(102, 126, 234, 0.1)",
+                tension: 0.4,
+                fill: true,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true,
+                position: "top",
+              },
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  callback: function (value) {
+                    return value + "%";
+                  },
+                },
+              },
+            },
+          },
+        });
+      }
+
+      function openReport(path) {
+        window.open(`reports/${path}/index.html`, "_blank");
+      }
+
+      function parseTimestamp(timestamp) {
+        // ex: 2024-01-03_14-25-10
+        const [datePart, timePart] = timestamp.split("_"); // 2024-01-03 | 14-25-10
+        const isoString = `${datePart}T${timePart.replace(/-/g, ":")}`;
+        return new Date(isoString);
+      }
+
+      function formatDate(timestamp) {
+        const date = parseTimestamp(timestamp);
+        if (isNaN(date)) return "Invalid Date";
+
+        return date.toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function formatDateShort(timestamp) {
+        const date = parseTimestamp(timestamp);
+        if (isNaN(date)) return "-";
+
+        return date.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        });
+      }
+
+      // Load reports on page load
+      loadReports();
+
+      // Refresh every 5 minutes
+      setInterval(loadReports, 5 * 60 * 1000);
+    </script>
+  </body>
 </html>
