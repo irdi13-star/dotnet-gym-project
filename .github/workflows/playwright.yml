@@ -3,6 +3,7 @@ name: Playwright Tests
 on:
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   runTestsOnCI:
@@ -26,72 +27,132 @@ jobs:
     - name: Restore .NET dependencies
       run: dotnet restore
 
-    - name: Build .NET application (local)
+    - name: Build .NET application
+      run: dotnet build --configuration Release WebsiteGym.Web/WebsiteGym.Web.csproj
+
+    - name: Debug - Check build output
       run: |
-        if [ "$ACT" = "true" ]; then
-          dotnet build --configuration Debug
-        else
-          echo "Skipping local build"
-        fi
+        echo "📦 Checking build artifacts..."
+        ls -la WebsiteGym.Web/bin/Release/net*/
+        
+        echo "📄 Checking for database..."
+        find . -name "*.db" -type f
 
     - name: Start .NET application
-      working-directory: WebsiteGym.Web
       run: |
-        ASPNETCORE_URLS=http://0.0.0.0:5000 dotnet run &
-        echo $! > app.pid
+        cd WebsiteGym.Web
+        
+        # Set environment variables
+        export ASPNETCORE_URLS=http://0.0.0.0:5000
+        export ASPNETCORE_ENVIRONMENT=Development
+        
+        # Start application in background
+        dotnet run --no-build --configuration Release > app.log 2>&1 &
+        APP_PID=$!
+        echo $APP_PID > app.pid
+        
+        echo "🚀 Started application with PID: $APP_PID"
+        
+        # Give it a moment to start
+        sleep 3
+        
+        # Check if process is still running
+        if ps -p $APP_PID > /dev/null; then
+          echo "✅ Application process is running"
+        else
+          echo "❌ Application process died immediately"
+          echo "📄 Application logs:"
+          cat app.log
+          exit 1
+        fi
 
-    - name: Wait for application
+    - name: Wait for application with detailed logging
       run: |
+        echo "⏳ Waiting for application to be ready..."
+        
         for i in {1..30}; do
-          if curl -s http://localhost:5000 > /dev/null; then
-            echo "Application is ready!"
+          # Try to curl
+          if curl -s -f http://localhost:5000 > /dev/null 2>&1; then
+            echo "✅ Application is ready!"
+            echo "📊 Application info:"
+            curl -s http://localhost:5000 | head -n 5
             exit 0
           fi
-          echo "Waiting for application... ($i/30)"
+          
+          # Check if process is still running
+          if [ -f WebsiteGym.Web/app.pid ]; then
+            APP_PID=$(cat WebsiteGym.Web/app.pid)
+            if ! ps -p $APP_PID > /dev/null 2>&1; then
+              echo "❌ Application process died!"
+              echo "📄 Application logs:"
+              cat WebsiteGym.Web/app.log
+              exit 1
+            fi
+          fi
+          
+          echo "⏱️  Waiting for application... ($i/30)"
           sleep 1
         done
-        echo "Application failed to start"
+        
+        echo "❌ Application failed to start within 30 seconds"
+        echo "📄 Application logs:"
+        cat WebsiteGym.Web/app.log
+        
+        # Check what's listening on port 5000
+        echo "📡 Checking port 5000:"
+        netstat -tulpn | grep 5000 || echo "Nothing listening on 5000"
+        
         exit 1
 
     - name: Install Playwright dependencies
       working-directory: PlaywrightTests
       run: |
-        npm install
-
-        if [ "$ACT" != "true" ]; then
-          npx playwright install --with-deps
+        npm ci
+        
+        if [ "$ACT" = "true" ]; then
+          echo "🐳 Running in act - installing only Chromium"
+          npx playwright install chromium --with-deps
         else
-          echo "Skipping playwright install (local run)"
+          echo "☁️ Running in GitHub Actions - installing all browsers"
+          npx playwright install --with-deps
         fi
 
     - name: Run Playwright tests
       working-directory: PlaywrightTests
       run: |
         if [ "$ACT" = "true" ]; then
-          echo "Running LOCAL Playwright tests"
-          npx playwright test --workers=1 --grep @@home
+          echo "🐳 Running LOCAL Playwright tests (limited)"
+          npx playwright test --workers=1 --project=chromium --grep @home
         else
-          echo "Running CI Playwright tests"
+          echo "☁️ Running FULL Playwright tests"
           npx playwright test
         fi
       env:
         BASE_URL: http://localhost:5000
 
-    - name: Ensure playwright-report directory exists
-      run: mkdir -p PlaywrightTests/playwright-report/
-
-    - name: Upload HTML report as artifact
-      if: ${{ env.ACT != 'true' }}
+    - name: Upload test results
+      if: always() && env.ACT != 'true'
       uses: actions/upload-artifact@v4
       with:
        name: playwright-report
-       path: ./PlaywrightTests/playwright-report/
+       path: PlaywrightTests/playwright-report/
        retention-days: 30
 
     - name: Stop .NET application
       if: always()
-      working-directory: WebsiteGym.Web
       run: |
-        if [ -f app.pid ]; then
-          kill $(cat app.pid) || true
+        if [ -f WebsiteGym.Web/app.pid ]; then
+          APP_PID=$(cat WebsiteGym.Web/app.pid)
+          echo "🛑 Stopping application (PID: $APP_PID)"
+          kill $APP_PID || true
+          
+          # Wait a bit and force kill if needed
+          sleep 2
+          if ps -p $APP_PID > /dev/null 2>&1; then
+            echo "⚠️  Force killing application"
+            kill -9 $APP_PID || true
+          fi
         fi
+        
+        # Also kill by name just in case
+        pkill -f "dotnet.*WebsiteGym.Web" || true
