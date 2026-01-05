@@ -3,7 +3,9 @@ name: Playwright C# with Dashboard
 on:
   pull_request:
     branches: [main]
-  workflow_dispatch:
+  schedule:
+    - cron: '0 8,14 * 1-12 1-5'
+  workflow_dispatch: {}
 
 permissions:
   contents: write
@@ -16,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -99,6 +102,20 @@ jobs:
             cp -r PlaywrightTests.CSharp/bin/Debug/net9.0/test-results/traces/* \
                "${REPORT_DIR}/traces/" 2>/dev/null || true
             echo "✅ Traces copied"
+          fi
+
+      - name: Rewrite screenshot paths in Extent report
+        if: always()
+        run: |
+          REPORT_HTML="${REPORT_DIR}/index.html"
+
+          if [ -f "$REPORT_HTML" ]; then
+            echo "🔧 Rewriting screenshot paths..."
+
+            sed -i 's#file:///home/runner/work/[^"]*/test-results/screenshots/#screenshots/#g' "$REPORT_HTML"
+            sed -i 's#/home/runner/work/[^"]*/test-results/screenshots/#screenshots/#g' "$REPORT_HTML"
+
+            echo "✅ Screenshot paths rewritten"
           fi
 
       - name: Extract test statistics

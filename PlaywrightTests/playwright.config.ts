@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const IS_CI = !!process.env["CI"];
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -18,17 +20,30 @@ export default defineConfig({
   // /* Fail the build on CI if you accidentally left test.only in the source code. */
   // forbidOnly: !!process.env.CI,
   // /* Retry on CI only */
-  // retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 0,
   // /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [[
+    "html",
+    {
+      outputFolder: "./playwright-report/index.html",
+      open: IS_CI ? "never" : "on-failure",
+    },
+  ],
+    ["github"],
+    ["list"],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.BASE_URL || 'http://localhost:5000',
     trace: "on-first-retry",
     ignoreHTTPSErrors: true,
+    screenshot: {
+      mode: "on",
+      fullPage: true,
+    },
   },
 
   /* Configure projects for major browsers */
