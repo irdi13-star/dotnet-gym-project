@@ -104,6 +104,20 @@ jobs:
             echo "✅ Traces copied"
           fi
 
+      - name: Rewrite screenshot paths in Extent report
+        if: always()
+        run: |
+          REPORT_HTML="${REPORT_DIR}/index.html"
+
+          if [ -f "$REPORT_HTML" ]; then
+            echo "🔧 Rewriting screenshot paths..."
+
+            sed -i 's#file:///home/runner/work/[^"]*/test-results/screenshots/#screenshots/#g' "$REPORT_HTML"
+            sed -i 's#/home/runner/work/[^"]*/test-results/screenshots/#screenshots/#g' "$REPORT_HTML"
+
+            echo "✅ Screenshot paths rewritten"
+          fi
+
       - name: Extract test statistics
         if: always()
         run: |
