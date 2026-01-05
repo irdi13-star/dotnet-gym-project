@@ -44,37 +44,39 @@ public class BaseTest : PageTest
         var testName = TestContext.CurrentContext.Test.MethodName;
         var testStatus = TestContext.CurrentContext.Result.Outcome.Status;
 
-        var tracePath = Path.Combine(
-            TestContext.CurrentContext.WorkDirectory,
-            "test-results",
-            "traces",
-            $"{testName}.zip"
-        );
+        var workDir = TestContext.CurrentContext.WorkDirectory;
 
-        Directory.CreateDirectory(Path.GetDirectoryName(tracePath)!);
+        var screenshotsDir = Path.Combine(workDir, "test-results", "screenshots");
+        var tracesDir = Path.Combine(workDir, "test-results", "traces");
+
+        Directory.CreateDirectory(screenshotsDir);
+        Directory.CreateDirectory(tracesDir);
+
+        var screenshotFileName = $"{testName}.png";
+        var screenshotFullPath = Path.Combine(screenshotsDir, screenshotFileName);
+
+        var tracePath = Path.Combine(tracesDir, $"{testName}.zip");
 
         await Context.Tracing.StopAsync(new() { Path = tracePath });
 
-        var screenshotPath = Path.Combine(
-            TestContext.CurrentContext.WorkDirectory,
-            "test-results",
-            "screenshots",
-            $"{testName}.png"
-        );
+        await Page.ScreenshotAsync(new()
+        {
+            Path = screenshotFullPath,
+            FullPage = true
+        });
 
-        Directory.CreateDirectory(Path.GetDirectoryName(screenshotPath)!);
-        await Page.ScreenshotAsync(new() { Path = screenshotPath, FullPage = true });
+        var screenshotRelativePath = Path.Combine("screenshots", screenshotFileName);
 
         if (testStatus == TestStatus.Failed)
         {
             var errorMessage = TestContext.CurrentContext.Result.Message;
             Test.Fail($"Test failed: {errorMessage}");
-            Test.AddScreenCaptureFromPath(screenshotPath, "Failure Screenshot");
+            Test.AddScreenCaptureFromPath(screenshotRelativePath, "Failure Screenshot");
         }
         else if (testStatus == TestStatus.Passed)
         {
             Test.Pass("Test passed successfully");
-            Test.AddScreenCaptureFromPath(screenshotPath, "Final Screenshot");
+            Test.AddScreenCaptureFromPath(screenshotRelativePath, "Final Screenshot");
         }
         else if (testStatus == TestStatus.Skipped)
         {
