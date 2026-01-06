@@ -2,16 +2,10 @@ namespace PlaywrightTests.CSharp.Actions;
 
 using PlaywrightTests.CSharp.Pages;
 
-public class HomeActions
+public class HomeActions(IPage page)
 {
-    private readonly IPage _page;
-    public readonly HomePage _homePage;
-
-    public HomeActions(IPage page, IBrowserContext context)
-    {
-        _page = page;
-        _homePage = new HomePage(page);
-    }
+    private readonly IPage _page = page;
+    public readonly HomePage _homePage = new HomePage(page);
 
     public async Task VerifyHeroCarousel()
     {

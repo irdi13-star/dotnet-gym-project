@@ -18,10 +18,10 @@ public class App
         Base = new BaseActions(page, context);
         Navigation = new NavigationActions(page, context);
         Common = new CommonActions(page);
-        Home = new HomeActions(page, context);
-        NavbarFooter = new NavbarFooterActions(page, context);
+        Home = new HomeActions(page);
+        NavbarFooter = new NavbarFooterActions(page);
         About = new AboutActions(page, context);
         Services = new ServicesActions(page, context);
-        Auth = new AuthActions(page, context);
+        Auth = new AuthActions(page);
     }
 }

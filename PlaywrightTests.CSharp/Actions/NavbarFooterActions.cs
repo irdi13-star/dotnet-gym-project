@@ -2,7 +2,7 @@ namespace PlaywrightTests.CSharp.Actions;
 
 using PlaywrightTests.CSharp.Pages;
 
-public class NavbarFooterActions(IPage page, IBrowserContext context)
+public class NavbarFooterActions(IPage page)
 {
     private readonly IPage _page = page;
     private readonly NavbarFooterPage _navbarFooterPage = new NavbarFooterPage(page);

@@ -2,7 +2,7 @@ namespace PlaywrightTests.CSharp.Actions;
 
 using PlaywrightTests.CSharp.Pages;
 
-public class AuthActions(IPage page, IBrowserContext context)
+public class AuthActions(IPage page)
 {
     private readonly AuthPage _authPage = new AuthPage(page);
 
