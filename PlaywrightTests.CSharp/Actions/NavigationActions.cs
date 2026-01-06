@@ -1,13 +1,8 @@
 namespace PlaywrightTests.CSharp.Actions;
 
-public class NavigationActions
+public class NavigationActions(IPage page)
 {
-    private readonly IPage _page;
-
-    public NavigationActions(IPage page, IBrowserContext context)
-    {
-        _page = page;
-    }
+    private readonly IPage _page = page;
 
     public async Task PageUrlAsExpected(string expectedUrl)
     {

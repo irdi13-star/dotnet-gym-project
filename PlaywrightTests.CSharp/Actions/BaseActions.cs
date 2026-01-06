@@ -1,5 +1,7 @@
 namespace PlaywrightTests.CSharp.Actions;
 
+using Microsoft.Playwright;
+
 public class BaseActions
 {
     protected readonly IPage Page;
@@ -13,10 +15,7 @@ public class BaseActions
 
     public async Task NavigateTo(string url)
     {
-        await Page.GotoAsync(url, new()
-        {
-            WaitUntil = WaitUntilState.NetworkIdle
-        });
+        await Page.GotoAsync(url, new() { WaitUntil = WaitUntilState.NetworkIdle });
     }
 
     public async Task WaitForTimeout(int milliseconds)

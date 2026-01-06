@@ -1,13 +1,8 @@
 namespace PlaywrightTests.CSharp.Actions;
 
-public class AboutActions
+public class AboutActions(IPage page)
 {
-    private readonly IPage _page;
-
-    public AboutActions(IPage page, IBrowserContext context)
-    {
-        _page = page;
-    }
+    private readonly IPage _page = page;
 
     public async Task VerifyAboutPageLoaded()
     {

@@ -2,26 +2,14 @@ namespace PlaywrightTests.CSharp.Actions;
 
 using Microsoft.Playwright;
 
-public class App
+public class App(IPage page, IBrowserContext context)
 {
-    public BaseActions Base { get; }
-    public NavigationActions Navigation { get; }
-    public CommonActions Common { get; }
-    public HomeActions Home { get; }
-    public NavbarFooterActions NavbarFooter { get; }
-    public AboutActions About { get; }
-    public ServicesActions Services { get; }
-    public AuthActions Auth { get; }
-
-    public App(IPage page, IBrowserContext context)
-    {
-        Base = new BaseActions(page, context);
-        Navigation = new NavigationActions(page, context);
-        Common = new CommonActions(page);
-        Home = new HomeActions(page);
-        NavbarFooter = new NavbarFooterActions(page);
-        About = new AboutActions(page, context);
-        Services = new ServicesActions(page, context);
-        Auth = new AuthActions(page);
-    }
+    public BaseActions Base { get; } = new BaseActions(page, context);
+    public NavigationActions Navigation { get; } = new NavigationActions(page);
+    public CommonActions Common { get; } = new CommonActions(page);
+    public HomeActions Home { get; } = new HomeActions(page);
+    public NavbarFooterActions NavbarFooter { get; } = new NavbarFooterActions(page);
+    public AboutActions About { get; } = new AboutActions(page);
+    public ServicesActions Services { get; } = new ServicesActions(page);
+    public AuthActions Auth { get; } = new AuthActions(page);
 }
