@@ -1,5 +1,7 @@
 namespace PlaywrightTests.CSharp.Actions;
-/// 
+
+using Microsoft.Playwright;
+
 public class App
 {
     public BaseActions Base { get; }
@@ -15,8 +17,7 @@ public class App
     {
         Base = new BaseActions(page, context);
         Navigation = new NavigationActions(page, context);
-        var commonPage = new CommonPage(page);
-        Common = new CommonActions(commonPage);
+        Common = new CommonActions(page);
         Home = new HomeActions(page, context);
         NavbarFooter = new NavbarFooterActions(page, context);
         About = new AboutActions(page, context);

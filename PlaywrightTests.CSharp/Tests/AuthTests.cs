@@ -10,14 +10,18 @@ using AventStack.ExtentReports;
 [Category("auth")]
 public class AuthTests : BaseTest
 {
-    [Test]
-    public async Task UserCanARegister()
+    [SetUp]
+    public async Task BeforeEach()
     {
-        var (username, email, password) = TestDataGenerator.GenerateUserCredentials();
-
         LogInfo("Navigate to home page");
         await App.Base.NavigateTo(Routes.AuthLinks.Login);
         LogPass("Navigation to home succeeded");
+    }
+
+    [Test]
+    public async Task UserCanRegister()
+    {
+        var (username, email, password) = TestDataGenerator.GenerateUserCredentials();
 
         LogInfo($"Register with username: {username}");
         await App.Auth.Register(username, email, password);
