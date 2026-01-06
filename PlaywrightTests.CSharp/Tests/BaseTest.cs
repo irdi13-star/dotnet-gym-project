@@ -25,8 +25,8 @@ public class BaseTest : PageTest
     public async Task BaseSetUp()
     {
         Test = ExtentReportManager.GetExtent()
-            .CreateTest(TestContext.CurrentContext.Test.MethodName)
-            .AssignCategory(TestContext.CurrentContext.Test.ClassName!);
+        .CreateTest(TestContext.CurrentContext.Test.MethodName)
+        .AssignCategory(TestContext.CurrentContext.Test.ClassName!);
 
         App = new App(Page, Context);
 

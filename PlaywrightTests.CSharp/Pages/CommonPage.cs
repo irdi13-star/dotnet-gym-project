@@ -2,14 +2,9 @@ namespace PlaywrightTests.CSharp.Pages;
 
 using Microsoft.Playwright;
 
-public class CommonPage
+public class CommonPage(IPage page)
 {
-    private readonly IPage _page;
-
-    public CommonPage(IPage page)
-    {
-        _page = page;
-    }
+    private readonly IPage _page = page;
 
     public IPage Page => _page;
 

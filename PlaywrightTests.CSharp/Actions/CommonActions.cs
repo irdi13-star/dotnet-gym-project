@@ -1,16 +1,11 @@
 namespace PlaywrightTests.CSharp.Actions;
 
-// using Microsoft.Playwright.Assertions;
 using PlaywrightTests.CSharp.Pages;
 
-public class CommonActions
+public class CommonActions(IPage page)
 {
-    private readonly CommonPage _commonPage;
-
-    public CommonActions(CommonPage commonPage)
-    {
-        _commonPage = commonPage;
-    }
+    private readonly IPage _page = page;
+    private readonly CommonPage _commonPage = new CommonPage(page);
 
     public async Task BrowserTabTitleAsExpected(string expectedTitle)
     {
