@@ -1,5 +1,18 @@
 [
   {
+    "timestamp": "2026-01-07_08-33-28",
+    "runNumber": 41,
+    "commit": "4dc4e768683cb328ae5fe3b2c07a7e867e1612d6",
+    "branch": "main",
+    "actor": "irdi13-star",
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "passRate": 0.0,
+    "path": "2026-01-07_08-33-28_run-41"
+  },
+  {
     "timestamp": "2026-01-06_14-26-08",
     "runNumber": 40,
     "commit": "4dc4e768683cb328ae5fe3b2c07a7e867e1612d6",
