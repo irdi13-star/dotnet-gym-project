@@ -2,14 +2,9 @@ namespace PlaywrightTests.CSharp.Actions;
 
 using PlaywrightTests.CSharp.Pages;
 
-public class CommonActions : BaseActions
+public class CommonActions(IPage page, IBrowserContext context) : BaseActions(page, context)
 {
-    private readonly CommonPage _commonPage;
-
-    public CommonActions(IPage page, IBrowserContext context) : base(page, context)
-    {
-        _commonPage = new CommonPage(page);
-    }
+    private readonly CommonPage _commonPage = new(page);
 
     // public async Task BrowserTabTitleAsExpected(string expectedTitle)
     // {

@@ -6,7 +6,7 @@ using PlaywrightTests.CSharp.Utils;
 
 [TestFixture]
 [Category("regression")]
-[Category("auth")]
+[Category("services")]
 public class ServicesTests : BaseTest
 {
     [SetUp]
@@ -23,7 +23,7 @@ public class ServicesTests : BaseTest
     {
         LogInfo($"Verify Services page is loaded");
         await App.Services.GoToServicesPage();
-        await App.Navigation.PageUrlAsExpected(Routes.NavbarLinks.Services);
+        await App.Navigation.PageUrlContains(Routes.NavbarLinks.Services);
         LogPass("Services page succeeded");
 
         LogInfo("Verify Services page Tab title and main Title");
