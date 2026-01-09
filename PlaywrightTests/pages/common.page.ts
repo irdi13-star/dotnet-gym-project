@@ -40,19 +40,8 @@ export default class CommonPage extends BasePage {
   }
 
   getImageBySrc(src: string) {
-  return this.page.locator(`img[src="${src}"]`);
-}
-
-
-
-
-
-
-
-
-
-
-
+    return this.page.locator(`img[src="${src}"]`);
+  }
 
 
   //-------- User Dashboard

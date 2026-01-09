@@ -3,7 +3,6 @@ namespace PlaywrightTests.CSharp.Tests;
 using PlaywrightTests.CSharp.Resources;
 using PlaywrightTests.CSharp.Helpers;
 using PlaywrightTests.CSharp.Utils;
-using AventStack.ExtentReports;
 
 [TestFixture]
 [Category("regression")]
@@ -35,9 +34,9 @@ public class AuthTests : BaseTest
     [Test]
     public async Task UserCanLogin()
     {
-        LogInfo($"Login with username: {Strings.Auth.ValidUsername}");
+        LogInfo($"Login with username: {Strings.LoginCredentials.Username}");
         await App.Base.NavigateTo(Routes.HomeLinks.Home);
-        await App.Auth.Login(Strings.Auth.ValidUsername, Strings.Auth.ValidPassword);
+        await App.Auth.Login(Strings.LoginCredentials.Username, Strings.LoginCredentials.Password);
         LogPass("Login succeeded");
 
         LogInfo("Verify successful login");

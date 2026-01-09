@@ -14,7 +14,7 @@ public class HomeTestsWithReporting : BaseTest
         LogInfo("Navigating to MADGYM Home page");
         await App.Base.NavigateTo(Routes.HomeLinks.Home);
         await App.Navigation.PageUrlAsExpected(Routes.HomeLinks.Home);
-        await App.Common.BrowserTabTitleAsExpected(Strings.Home.HomeBrowserTitle);
+        await App.Common.BrowserTabTitleAsExpected(Strings.Home.HomeTitle);
         LogPass("Successfully navigated to home page");
     }
 
