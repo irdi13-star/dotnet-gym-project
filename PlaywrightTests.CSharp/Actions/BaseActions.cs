@@ -2,16 +2,10 @@ namespace PlaywrightTests.CSharp.Actions;
 
 using Microsoft.Playwright;
 
-public class BaseActions
+public class BaseActions(IPage page, IBrowserContext context)
 {
-    protected readonly IPage Page;
-    protected readonly IBrowserContext Context;
-
-    public BaseActions(IPage page, IBrowserContext context)
-    {
-        Page = page;
-        Context = context;
-    }
+    protected readonly IPage Page = page;
+    protected readonly IBrowserContext Context = context;
 
     public async Task NavigateTo(string url)
     {
