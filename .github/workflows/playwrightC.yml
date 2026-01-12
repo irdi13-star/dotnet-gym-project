@@ -33,7 +33,7 @@ jobs:
         run: |
           cd WebsiteGym.Web
           dotnet run &
-          sleep 10
+          sleep 30
           curl http://localhost:5000
 
       - name: Restore PlaywrightTests.CSharp
