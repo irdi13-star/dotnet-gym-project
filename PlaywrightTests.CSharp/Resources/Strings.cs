@@ -195,14 +195,14 @@ public static class Strings
             public const string WhatIsTitle = "What is Personal Training?";
             public const string WhatIsText = "Our personal training service is designed to give you tailored workouts and one-on-one guidance. Whether you're new to fitness or looking to push yourself further, our trainers will work with you to create a personalized program that helps you reach your goals faster and more effectively.";
             public const string BenefitsTitle = "Benefits of Personal Training";
-            public static readonly string[] BenefitsList = new[]
-            {
+            public static readonly string[] BenefitsList =
+            [
                 "Customized workout plans",
                 "Expert trainers for motivation and support",
                 "Faster results with tailored guidance",
                 "Flexible scheduling to fit your needs",
                 "Ongoing assessments and progress tracking"
-            };
+            ];
             public const string ContactText = "Ready to start your fitness transformation?";
             public const string ContactButton = "Contact Us to Book Your Session";
         }
@@ -231,7 +231,7 @@ public static class Strings
         {
             public const string PageTitle = "Services - Nutrition Coaching";
             public const string HeaderTitle = "Personalized Nutrition Coaching";
-            public const string HeaderSubtitle = "Get expert advice and a customized meal plan to fuel your fitness fitness journey!";
+            public const string HeaderSubtitle = "Get expert advice and a customized meal plan to fuel your fitness journey!";
             public const string WhatIsTitle = "What is Nutrition Coaching?";
             public const string WhatIsText = "Our nutrition coaching program is designed to help you build a healthy relationship with food. Whether your goal is weight loss, muscle gain, or overall wellness, our certified nutritionists will create a personalized meal plan and provide ongoing support to ensure you achieve sustainable results.";
             public const string BenefitsTitle = "Benefits of Nutrition Coaching";

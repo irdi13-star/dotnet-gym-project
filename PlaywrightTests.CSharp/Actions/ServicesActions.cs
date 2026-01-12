@@ -153,7 +153,7 @@ namespace PlaywrightTests.CSharp.Actions
             await VerifyImageSrc(expectedImageSrc);
         }
 
-        public async Task CheckBenefitsSection(
+        public static async Task CheckBenefitsSection(
             ILocator section,
             ILocator title,
             string expectedTitle,
@@ -164,7 +164,7 @@ namespace PlaywrightTests.CSharp.Actions
             await Assertions.Expect(title).ToHaveTextAsync(expectedTitle);
 
             var count = await items.CountAsync();
-            Assert.Equals(expectedItems.Length, count);
+            Assertions.Equals(expectedItems.Length, count);
 
             for (int i = 0; i < expectedItems.Length; i++)
             {

@@ -26,7 +26,7 @@ public class ServicesPage(IPage page)
     public ILocator PersonalTrainingWhatText => _page.Locator("#personalTrainingWhatText");
     public ILocator PersonalTrainingBenefits => _page.Locator("#personalTrainingBenefits");
     public ILocator PersonalTrainingBenefitsTitle => _page.Locator("#personalTrainingBenefitsTitle");
-    public ILocator PersonalTrainingBenefitsList => _page.Locator("#personalTrainingBenefitsList");
+    public ILocator PersonalTrainingBenefitsList => _page.Locator("#personalTrainingBenefitsList li");
     public ILocator PersonalTrainingContact => _page.Locator("#personalTrainingContact");
     public ILocator PersonalTrainingContactText => _page.Locator("#personalTrainingContactText");
     public ILocator PersonalTrainingContactButton => _page.Locator("#personalTrainingContactButton");
