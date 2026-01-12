@@ -11,5 +11,5 @@ public class App(IPage page, IBrowserContext context)
     public NavbarFooterActions NavbarFooter { get; } = new NavbarFooterActions(page);
     public AboutActions About { get; } = new AboutActions(page);
     public ServicesActions Services { get; } = new ServicesActions(page, context);
-    public AuthActions Auth { get; } = new AuthActions(page);
+    public AuthActions Auth { get; } = new AuthActions(page, context);
 }

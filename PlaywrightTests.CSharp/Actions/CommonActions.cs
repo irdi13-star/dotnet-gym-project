@@ -4,7 +4,7 @@ using PlaywrightTests.CSharp.Pages;
 
 public class CommonActions(IPage page, IBrowserContext context) : BaseActions(page, context)
 {
-    private readonly CommonPage _commonPage = new(page);
+    public readonly CommonPage _commonPage = new(page);
 
     public async Task HeaderIsVisible(string headerText)
     {

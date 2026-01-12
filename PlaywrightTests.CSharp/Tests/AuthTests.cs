@@ -12,8 +12,9 @@ public class AuthTests : BaseTest
     [SetUp]
     public async Task BeforeEach()
     {
-        LogInfo("Navigate to home page");
+        LogInfo("Navigate to login page");
         await App.Base.NavigateTo(Routes.AuthLinks.Login);
+        await App.Navigation.PageUrlAsExpected(Routes.AuthLinks.Login);
         LogPass("Navigation to home succeeded");
     }
 
@@ -32,8 +33,7 @@ public class AuthTests : BaseTest
     [Test]
     public async Task UserCanLogin()
     {
-        LogInfo($"Login with username: {Strings.LoginCredentials.Username}");
-        await App.Base.NavigateTo(Routes.HomeLinks.Home);
+        LogInfo("Login with valid user");
         await App.Auth.LoginAsUser();
         LogPass("Login succeeded");
 

@@ -5,14 +5,9 @@ using PlaywrightTests.CSharp.Pages;
 using PlaywrightTests.CSharp.Helpers;
 using PlaywrightTests.CSharp.Resources;
 
-public class AuthActions : CommonActions
+public class AuthActions(IPage page, IBrowserContext context) : CommonActions(page, context)
 {
-    private readonly AuthPage _authPage;
-
-    public AuthActions(IPage page, IBrowserContext context) : base(page, context)
-    {
-        _authPage = new AuthPage(page);
-    }
+    private readonly AuthPage _authPage = new(page);
 
     // Verify methods for Mad Gym section
     public async Task VerifyMadGymImageContainer()
@@ -192,7 +187,7 @@ public class AuthActions : CommonActions
         await _authPage.LoginPasswordInput.FillAsync(password);
         await _authPage.LoginSubmitButton.ClickAsync();
         await Page.WaitForLoadStateAsync(LoadState.Load, new() { Timeout = 10000 });
-        await Assertions.Expect(CommonPage.UserDashButtonDesktop)
+        await Assertions.Expect(_commonPage.UserDashButtonDesktop)
             .ToBeVisibleAsync(new() { Timeout = 10000 });
     }
 
@@ -202,7 +197,7 @@ public class AuthActions : CommonActions
         await _authPage.LoginPasswordInput.FillAsync(password);
         await _authPage.LoginSubmitButton.ClickAsync();
         await Page.WaitForLoadStateAsync(LoadState.Load, new() { Timeout = 10000 });
-        await Assertions.Expect(CommonPage.AdminDashboardButtonDesktop)
+        await Assertions.Expect(_commonPage.UserDashButtonDesktop)
             .ToBeVisibleAsync(new() { Timeout = 10000 });
     }
 
@@ -237,14 +232,15 @@ public class AuthActions : CommonActions
 
     public async Task RegisterWithValidUser()
     {
+        await _authPage.RegisterLink.ClickAsync();
         await _authPage.RegisterUsernameInput.FillAsync(TestDataGenerator.GenerateUsername());
-        await _authPage.RegisterEmailInput.FillAsync(TestDataGenerator.GeneratePassword());
+        await _authPage.RegisterEmailInput.FillAsync(TestDataGenerator.GenerateEmail());
         await _authPage.RegisterPasswordInput.FillAsync(Strings.RegisterCredentials.RegisterPassword);
         await _authPage.RegisterButton.ClickAsync();
         await Page.WaitForLoadStateAsync(LoadState.Load);
 
         await Assertions.Expect(_authPage.LoginFormContainer).ToBeVisibleAsync();
-        await Assertions.Expect(_authPage.RegisterUsernameError).Not.ToBeVisibleAsync();
+        await Assertions.Expect(_authPage.RegisterUsernameError).ToBeHiddenAsync();
     }
 
     public async Task RegisterWithWrongUser()
