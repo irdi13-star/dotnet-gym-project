@@ -91,6 +91,12 @@ public class AuthActions(IPage page, IBrowserContext context) : CommonActions(pa
         await Assertions.Expect(_authPage.LoginLink).ToHaveTextAsync(Strings.Auth.LoginLinkText);
     }
 
+    public async Task ClickLoginLink()
+    {
+        await _authPage.LoginLink.ClickAsync();
+        await Assertions.Expect(_authPage.LoginSubtext).ToBeVisibleAsync();
+    }
+
     // Verify Login Form
     public async Task VerifyLoginFormContainer()
     {

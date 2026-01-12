@@ -12,10 +12,16 @@ public class AuthTests : BaseTest
     [SetUp]
     public async Task BeforeEach()
     {
-        LogInfo("Navigate to login page");
-        await App.Base.NavigateTo(Routes.AuthLinks.Login);
-        await App.Navigation.PageUrlAsExpected(Routes.AuthLinks.Login);
+        LogInfo("Navigate to home page");
+        await App.Base.NavigateTo(Routes.HomeLinks.Home);
+        await App.Navigation.PageUrlAsExpected(Routes.HomeLinks.Home);
         LogPass("Navigation to home succeeded");
+
+        LogInfo("Navigate to login page");
+        await App.Auth.ClickLoginLink();
+        await App.Navigation.PageUrlAsExpected(Routes.AuthLinks.Login);
+        await App.Common.BrowserTabTitleAsExpected(Strings.Auth.AuthTabTitle);
+        LogPass("Navigation to authentication succeeded");
     }
 
     [Test]
