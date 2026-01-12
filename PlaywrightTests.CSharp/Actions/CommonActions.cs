@@ -6,12 +6,6 @@ public class CommonActions(IPage page, IBrowserContext context) : BaseActions(pa
 {
     private readonly CommonPage _commonPage = new(page);
 
-    // public async Task BrowserTabTitleAsExpected(string expectedTitle)
-    // {
-    //     await Assertions.Expect(_commonPage.Page)
-    //         .ToHaveTitleAsync(expectedTitle);
-    // }
-
     public async Task HeaderIsVisible(string headerText)
     {
         await Assertions.Expect(
@@ -37,13 +31,6 @@ public class CommonActions(IPage page, IBrowserContext context) : BaseActions(pa
     {
         await _commonPage.ButtonByName(buttonTitle).ClickAsync();
     }
-
-    // public async Task CheckH1(string header)
-    // {
-    //     var locator = _commonPage.HeaderByName(header);
-    //     await Assertions.Expect(locator).ToBeVisibleAsync();
-    //     await Assertions.Expect(locator).ToHaveTextAsync(header);
-    // }
 
     public async Task BrowserTabTitleAsExpected(string browserTitle)
     {

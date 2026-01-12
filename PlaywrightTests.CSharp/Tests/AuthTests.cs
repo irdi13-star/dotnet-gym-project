@@ -20,10 +20,8 @@ public class AuthTests : BaseTest
     [Test]
     public async Task UserCanRegister()
     {
-        var (username, email, password) = TestDataGenerator.GenerateUserCredentials();
-
-        LogInfo($"Register with username: {username}");
-        await App.Auth.Register(username, email, password);
+        LogInfo("Register a new user");
+        await App.Auth.RegisterWithValidUser();
         LogPass("Registration succeeded");
 
         LogInfo("Verify redirect to login page");
@@ -36,7 +34,7 @@ public class AuthTests : BaseTest
     {
         LogInfo($"Login with username: {Strings.LoginCredentials.Username}");
         await App.Base.NavigateTo(Routes.HomeLinks.Home);
-        await App.Auth.Login(Strings.LoginCredentials.Username, Strings.LoginCredentials.Password);
+        await App.Auth.LoginAsUser();
         LogPass("Login succeeded");
 
         LogInfo("Verify successful login");
