@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { lstat } from 'fs';
 
-// Types pentru booking
 interface BookingDates {
     checkin: string;
     checkout: string;
