@@ -7,7 +7,7 @@ using PlaywrightTests.CSharp.Resources;
 
 public class AuthActions(IPage page, IBrowserContext context) : CommonActions(page, context)
 {
-    private readonly AuthPage _authPage = new(page);
+    private readonly AuthPage _authPage = new(page, context);
 
     // Verify methods for Mad Gym section
     public async Task VerifyMadGymImageContainer()
@@ -28,10 +28,32 @@ public class AuthActions(IPage page, IBrowserContext context) : CommonActions(pa
     }
 
     // Verify Register Form
-    public async Task VerifyRegisterFormContainer()
+    public async Task Register(string username, string email, string password)
     {
         await _authPage.RegisterLink.ClickAsync();
-        await Assertions.Expect(_authPage.RegisterFormContainer).ToBeVisibleAsync();
+        await _authPage.RegisterUsernameInput.FillAsync(username);
+        await _authPage.RegisterEmailInput.FillAsync(email);
+        await _authPage.RegisterPasswordInput.FillAsync(password);
+        await _authPage.RegisterButton.ClickAsync();
+
+        await Assertions.Expect(_authPage.LoginFormContainer).ToBeVisibleAsync();
+        await Assertions.Expect(_authPage.RegisterUsernameError).ToBeHiddenAsync();
+    }
+
+    public async Task VerifyRegisterFormContainer()
+    {
+        // await Assertions.Expect(_authPage.RegisterLink).ToBeVisibleAsync();
+        await _authPage.RegisterLink.ClickAsync();
+
+        // În loc de WaitForTimeout (bad practice), așteaptă un element specific
+        await Assertions.Expect(_authPage.RegisterFormContainer)
+            .ToBeVisibleAsync(new() { Timeout = 10000 });
+
+        // // Verifică că inputurile sunt enabled
+        // await Assertions.Expect(_authPage.RegisterUsernameInput).ToBeEnabledAsync();
+        // await Assertions.Expect(_authPage.RegisterEmailInput).ToBeEnabledAsync();
+        // await Assertions.Expect(_authPage.RegisterPasswordInput).ToBeEnabledAsync();
+
     }
 
     public async Task VerifyJoinUsText()
@@ -87,14 +109,8 @@ public class AuthActions(IPage page, IBrowserContext context) : CommonActions(pa
 
     public async Task VerifyLoginLink()
     {
-        await Assertions.Expect(_authPage.LoginLink).ToBeVisibleAsync();
-        await Assertions.Expect(_authPage.LoginLink).ToHaveTextAsync(Strings.Auth.LoginLinkText);
-    }
-
-    public async Task ClickLoginLink()
-    {
-        await _authPage.LoginLink.ClickAsync();
-        await Assertions.Expect(_authPage.LoginSubtext).ToBeVisibleAsync();
+        await Assertions.Expect(_authPage.LoginHref).ToBeVisibleAsync();
+        await Assertions.Expect(_authPage.LoginHref).ToHaveTextAsync(Strings.Auth.LoginLinkText);
     }
 
     // Verify Login Form
@@ -238,7 +254,7 @@ public class AuthActions(IPage page, IBrowserContext context) : CommonActions(pa
 
     public async Task RegisterWithValidUser()
     {
-        await _authPage.RegisterLink.ClickAsync();
+        // await _authPage.RegisterLink.ClickAsync();
         await _authPage.RegisterUsernameInput.FillAsync(TestDataGenerator.GenerateUsername());
         await _authPage.RegisterEmailInput.FillAsync(TestDataGenerator.GenerateEmail());
         await _authPage.RegisterPasswordInput.FillAsync(Strings.RegisterCredentials.RegisterPassword);

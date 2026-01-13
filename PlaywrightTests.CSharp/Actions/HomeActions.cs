@@ -2,10 +2,10 @@ namespace PlaywrightTests.CSharp.Actions;
 
 using PlaywrightTests.CSharp.Pages;
 
-public class HomeActions(IPage page)
+public class HomeActions(IPage page, IBrowserContext context)
 {
     private readonly IPage _page = page;
-    public readonly HomePage _homePage = new HomePage(page);
+    public readonly HomePage _homePage = new(page, context);
 
     public async Task VerifyHeroCarousel()
     {
@@ -35,5 +35,10 @@ public class HomeActions(IPage page)
     public async Task ClickJoinNowButton()
     {
         await _homePage.JoinNowButton.ClickAsync();
+    }
+
+    public async Task ClickLoginButton()
+    {
+        await _homePage.LoginButton.ClickAsync();
     }
 }
