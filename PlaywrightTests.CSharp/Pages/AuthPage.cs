@@ -25,7 +25,6 @@ public class AuthPage(IPage page, IBrowserContext context)
     public ILocator LoginPasswordError => _page.Locator("#loginPasswordError");
     public ILocator LoginErrorMessage => _page.Locator("#loginErrorMessage");
 
-
     public ILocator MadGymImageContainer => _page.Locator("#madGymImageContainter");
     public ILocator MadGymText => _page.Locator("#madGymText");
     public ILocator RegisterFormContainer => _page.Locator("#registerFormContainer");
@@ -42,10 +41,7 @@ public class AuthPage(IPage page, IBrowserContext context)
     public ILocator GoogleBtn => _page.Locator("#googleBtn");
     public ILocator FacebookBtn => _page.Locator("#facebookBtn");
     public ILocator AppleBtn => _page.Locator("#appleBtn");
-    
     public ILocator ForgotPasswordSubtext => _page.Locator("#forgotPasswordSubtext");
     public ILocator ForgotPasswordLink => _page.Locator("#forgotPasswordLink");
     public ILocator UnlockSubtext => _page.Locator("#unlockSubtext");
-
-    
 }

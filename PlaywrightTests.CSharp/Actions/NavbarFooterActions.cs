@@ -28,4 +28,17 @@ public class NavbarFooterActions(IPage page)
         await Assertions.Expect(_navbarFooterPage.Footer)
             .ToBeVisibleAsync();
     }
+
+    public async Task NavigateToPageByLinkText(string linkText, string expectedUrl)
+    {
+        var link = _page.Locator($"text={linkText}");
+        await Assertions.Expect(link).ToBeVisibleAsync();
+
+        await link.ClickAsync();
+
+        await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+
+        await _page.WaitForLoadStateAsync(LoadState.NetworkIdle, new() { Timeout = 10000 });
+        await Assertions.Expect(_page).ToHaveURLAsync(expectedUrl);
+    }
 }

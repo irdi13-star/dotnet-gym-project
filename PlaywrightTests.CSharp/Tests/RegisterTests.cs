@@ -21,7 +21,7 @@ public class RegisterTests : BaseTest
     [Test]
     public async Task Should_Register_With_Valid_Credentials()
     {
-    
+
         LogInfo("Navigate to register form");
         await App.Auth.VerifyRegisterFormContainer();
         LogPass("Register form displayed");

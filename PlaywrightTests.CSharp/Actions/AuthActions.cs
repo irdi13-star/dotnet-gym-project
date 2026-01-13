@@ -42,17 +42,12 @@ public class AuthActions(IPage page, IBrowserContext context) : CommonActions(pa
 
     public async Task VerifyRegisterFormContainer()
     {
-        // await Assertions.Expect(_authPage.RegisterLink).ToBeVisibleAsync();
+        await Assertions.Expect(_authPage.RegisterLink).ToBeVisibleAsync();
         await _authPage.RegisterLink.ClickAsync();
 
-        // În loc de WaitForTimeout (bad practice), așteaptă un element specific
-        await Assertions.Expect(_authPage.RegisterFormContainer)
-            .ToBeVisibleAsync(new() { Timeout = 10000 });
-
-        // // Verifică că inputurile sunt enabled
-        // await Assertions.Expect(_authPage.RegisterUsernameInput).ToBeEnabledAsync();
-        // await Assertions.Expect(_authPage.RegisterEmailInput).ToBeEnabledAsync();
-        // await Assertions.Expect(_authPage.RegisterPasswordInput).ToBeEnabledAsync();
+        await Assertions.Expect(_authPage.RegisterUsernameInput).ToBeEnabledAsync();
+        await Assertions.Expect(_authPage.RegisterEmailInput).ToBeEnabledAsync();
+        await Assertions.Expect(_authPage.RegisterPasswordInput).ToBeEnabledAsync();
 
     }
 
