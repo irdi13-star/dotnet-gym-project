@@ -243,6 +243,7 @@ test.describe('Restful-booker API Tests', { tag: ["@regression", "@api"] }, () =
         );
 
         expect(response.status()).toBe(403);
+        console.log('REPSONSE api is: \n', JSON.stringify(response, null, 2))
     });
 
     test('09 - Negative test - invalid authentication credentials', async ({ request }) => {
@@ -256,6 +257,8 @@ test.describe('Restful-booker API Tests', { tag: ["@regression", "@api"] }, () =
         expect(response.status()).toBe(200);
         const body = await response.json();
         expect(body.reason).toBe('Bad credentials');
+
+        console.log('REPSONSE api is: \n', JSON.stringify(body, null, 2))
     });
 })
 
