@@ -1,0 +1,2435 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <title>Playwright Test Report</title>
+ <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c439bdbc7bade3d85af3b90e9e69c30ebc87445f/commons/img/logo.png">
+ <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c439bdbc7bade3d85af3b90e9e69c30ebc87445f/commons/img/logo.png">
+ <link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c439bdbc7bade3d85af3b90e9e69c30ebc87445f/spark/css/spark-style.css" rel="stylesheet" />
+ <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+ <script src="https://cdn.rawgit.com/extent-framework/extent-github-cdn/7cc78ce/spark/js/jsontree.js"></script>
+ <style></style>
+</head>
+<body class="spa  standard">
+ <div class="app">
+  <div class="layout">
+   <div class="header navbar">
+ <div class="vheader">
+  <div class="nav-logo">
+   <a href="#">
+	 <div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c43b89d03a7c43dae8bb8f0f078bad1997af6b3b/commons/img/logo.png')"></div>
+   </a>
+  </div>
+  <ul class="nav-left">
+   <li class="search-box">
+	<a class="search-toggle" href="#"><i class="search-icon fa fa-search"></i><i class="search-icon-close fa fa-close"></i></a>
+   </li>
+   <li class="search-input">
+    <input id="search-tests" class="form-control" type="text" placeholder="Search...">
+   </li>
+  </ul>
+  <ul class="nav-right">
+   <li class="m-r-10"><a href="#"><span class="badge badge-primary">MADGYM Automation Tests</span></a></li>
+   <li class="m-r-10">
+    <a href="#"><span class="badge badge-primary">01/22/2026 14:33:14</span></a>
+   </li>
+  </ul>
+ </div>
+</div>
+   <div class="side-nav">
+ <div class="side-nav-inner">
+  <ul class="side-nav-menu">
+   <li class="nav-item dropdown" onclick="toggleView('test-view')">
+    <a id="nav-test" class="dropdown-toggle" href="#">
+     <span class="ico"><i class="fa fa-list"></i></span>
+    </a>
+   </li>
+    <li class="nav-item dropdown" onclick="toggleView('category-view')">
+     <a id="nav-category" class="dropdown-toggle" href="#">
+      <span class="ico"><i class="fa fa-tag"></i></span>
+     </a>
+    </li>
+   <li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+    <a id="nav-dashboard" class="dropdown-toggle" href="#">
+     <span class="ico"><i class="fa fa-bar-chart"></i></span>
+    </a>
+   </li>
+  </ul>
+ </div>
+</div>
+
+   <div class="vcontainer">
+    <div class="main-content">
+     
+
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+      <ul class="tools pull-left">
+        <li><a href="#"><span class="font-size-14">Tests</span></a></li>
+      </ul>
+      <ul class="tools text-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+          <ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+ <a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>             <div class="dropdown-divider"></div>
+            <a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tag"></i></a>
+          <ul id="tag-toggle" class="dropdown-menu dropdown-md p-v-0">
+ <a class="dropdown-item" href="#">PlaywrightTests.CSharp.Tests.HomeTestsWithReporting</a>  <a class="dropdown-item" href="#">PlaywrightTests.CSharp.Tests.ServicesTests</a>  <a class="dropdown-item" href="#">PlaywrightTests.CSharp.Tests.RegisterTests</a>  <a class="dropdown-item" href="#">PlaywrightTests.CSharp.Tests.LoginTests</a>           </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item" status="pass" test-id="1"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.HomeTestsWithReporting "
+          device="">
+          <div class="test-detail">
+            <p class="name">HeroSection_ShouldDisplayCorrectly</p>
+            <p class="text-sm">
+              <span>14:33:15</span> / <span>1281.65 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">HeroSection_ShouldDisplayCorrectly</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:15</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:16</span>
+                  <span class='badge badge-default'>1281.65 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.HomeTestsWithReporting</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/HeroSection_ShouldDisplayCorrectly.png' src="screenshots/HeroSection_ShouldDisplayCorrectly.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigating to MADGYM Home page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Successfully navigated to home page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verifying hero carousel        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Hero carousel is visible        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verifying hero title        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Hero title is visible        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verifying hero description        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Hero description is visible        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verifying Join Now button        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Join Now button is visible and enabled        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: HeroSection_ShouldDisplayCorrectly.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="2"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.LoginTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Display_All_Login_Form_Elements</p>
+            <p class="text-sm">
+              <span>14:33:19</span> / <span>893.37 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Display_All_Login_Form_Elements</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:19</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:20</span>
+                  <span class='badge badge-default'>893.37 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.LoginTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Display_All_Login_Form_Elements.png' src="screenshots/Should_Display_All_Login_Form_Elements.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify MAD GYM image container is visible        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+MAD GYM image container verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify MAD GYM title is correct        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+MAD GYM title verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify unlock subtext is correct        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Unlock subtext verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify login form container is visible        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Login form container verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify welcome title is correct        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Welcome title verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify login subtext is correct        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Login subtext verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify login username input        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Username input verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify login password input        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Password input verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify login submit button        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Login submit button verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Display_All_Login_Form_Elements.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="3"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.LoginTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Display_All_Social_Login_Buttons</p>
+            <p class="text-sm">
+              <span>14:33:20</span> / <span>841.41 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Display_All_Social_Login_Buttons</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:20</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:21</span>
+                  <span class='badge badge-default'>841.41 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.LoginTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Display_All_Social_Login_Buttons.png' src="screenshots/Should_Display_All_Social_Login_Buttons.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify OR subtext        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+OR subtext verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Google login button        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Google button verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Facebook login button        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Facebook button verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Apple login button        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Apple button verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Display_All_Social_Login_Buttons.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="4"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.LoginTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Display_Register_And_ForgotPassword_Links</p>
+            <p class="text-sm">
+              <span>14:33:21</span> / <span>821.94 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Display_Register_And_ForgotPassword_Links</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:21</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:22</span>
+                  <span class='badge badge-default'>821.94 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.LoginTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Display_Register_And_ForgotPassword_Links.png' src="screenshots/Should_Display_Register_And_ForgotPassword_Links.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify register now subtext        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Register now subtext verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify register link and navigation        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Register link verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify forgot password subtext        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Forgot password subtext verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify forgot password link and navigation        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Forgot password link verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Display_Register_And_ForgotPassword_Links.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="5"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.LoginTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Login_With_Valid_Credentials</p>
+            <p class="text-sm">
+              <span>14:33:22</span> / <span>1601.11 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Login_With_Valid_Credentials</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:22</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:23</span>
+                  <span class='badge badge-default'>1601.11 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.LoginTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Login_With_Valid_Credentials.png' src="screenshots/Should_Login_With_Valid_Credentials.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Fill username and password fields        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Login with valid credentials succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify successful login redirect        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Redirect to home page verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Login_With_Valid_Credentials.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="6"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.LoginTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Show_Error_For_Wrong_Credentials</p>
+            <p class="text-sm">
+              <span>14:33:23</span> / <span>933.51 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Show_Error_For_Wrong_Credentials</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:23</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:24</span>
+                  <span class='badge badge-default'>933.51 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.LoginTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Show_Error_For_Wrong_Credentials.png' src="screenshots/Should_Show_Error_For_Wrong_Credentials.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Fill login fields with wrong username        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Error message displayed for wrong credentials        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Show_Error_For_Wrong_Credentials.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="7"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.LoginTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Show_Errors_For_Blank_Fields</p>
+            <p class="text-sm">
+              <span>14:33:24</span> / <span>904.58 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Show_Errors_For_Blank_Fields</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:24</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:25</span>
+                  <span class='badge badge-default'>904.58 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.LoginTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Show_Errors_For_Blank_Fields.png' src="screenshots/Should_Show_Errors_For_Blank_Fields.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Submit empty login form and check errors        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Error messages displayed for blank fields        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Show_Errors_For_Blank_Fields.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="8"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.RegisterTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Display_All_Register_Form_Elements</p>
+            <p class="text-sm">
+              <span>14:33:25</span> / <span>872.34 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Display_All_Register_Form_Elements</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:25</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:26</span>
+                  <span class='badge badge-default'>872.34 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.RegisterTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Display_All_Register_Form_Elements.png' src="screenshots/Should_Display_All_Register_Form_Elements.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify register form container is visible        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Register form container verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Join Us title is correct        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Join Us title verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Create Account text is correct        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Create Account text verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify register username input        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Username input verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify register email input        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Email input verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify register password input        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Password input verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify register submit button        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Register submit button verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Display_All_Register_Form_Elements.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="9"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.RegisterTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Display_Login_Link_In_Register_Form</p>
+            <p class="text-sm">
+              <span>14:33:26</span> / <span>850.64 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Display_Login_Link_In_Register_Form</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:26</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:27</span>
+                  <span class='badge badge-default'>850.64 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.RegisterTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Display_Login_Link_In_Register_Form.png' src="screenshots/Should_Display_Login_Link_In_Register_Form.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify register form container is visible        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Register form container verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify have account subtext        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Have account subtext verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify login link and navigation        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Login link verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Display_Login_Link_In_Register_Form.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="10"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.RegisterTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Register_With_Valid_Credentials</p>
+            <p class="text-sm">
+              <span>14:33:27</span> / <span>2023.81 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Register_With_Valid_Credentials</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:27</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:29</span>
+                  <span class='badge badge-default'>2023.81 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.RegisterTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Register_With_Valid_Credentials.png' src="screenshots/Should_Register_With_Valid_Credentials.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to register form        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Register form displayed        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Fill registration form with valid data        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Registration succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify redirect to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Redirect to login page verified        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Register_With_Valid_Credentials.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="11"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.RegisterTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Show_Errors_For_Blank_Fields</p>
+            <p class="text-sm">
+              <span>14:33:29</span> / <span>1828.1 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Show_Errors_For_Blank_Fields</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:29</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:31</span>
+                  <span class='badge badge-default'>1828.1 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.RegisterTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Show_Errors_For_Blank_Fields.png' src="screenshots/Should_Show_Errors_For_Blank_Fields.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to register form        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Register form displayed        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Submit empty registration form and check errors        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Error messages displayed for blank fields        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Show_Errors_For_Blank_Fields.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="12"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.RegisterTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">Should_Show_Errors_For_Invalid_Credentials</p>
+            <p class="text-sm">
+              <span>14:33:31</span> / <span>1816.68 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Should_Show_Errors_For_Invalid_Credentials</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:31</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:33</span>
+                  <span class='badge badge-default'>1816.68 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.RegisterTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/Should_Show_Errors_For_Invalid_Credentials.png' src="screenshots/Should_Show_Errors_For_Invalid_Credentials.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to login page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to Auth page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to register form        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Register form displayed        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Fill registration form with invalid credentials        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Error messages displayed for invalid credentials        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: Should_Show_Errors_For_Invalid_Credentials.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="13"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.ServicesTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">GroupProgramsVerifications</p>
+            <p class="text-sm">
+              <span>14:33:33</span> / <span>4382.12 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">GroupProgramsVerifications</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:33</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:37</span>
+                  <span class='badge badge-default'>4382.12 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=13</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.ServicesTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/GroupProgramsVerifications.png' src="screenshots/GroupProgramsVerifications.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to MADGYM Home page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to home succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Services page is loaded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Services page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Group Programs page is loaded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Group Programs page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Group Programs Tab Title        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Group Programs page Tab as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Group Programs header section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Group Programs header as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Group Programs info section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Group Programs info as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Group Programs benefits section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Group Programs benefits as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Group Programs contact section and button        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Group Programs contact as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: GroupProgramsVerifications.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="14"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.ServicesTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">NutritionCoachingVerifications</p>
+            <p class="text-sm">
+              <span>14:33:37</span> / <span>4328.92 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">NutritionCoachingVerifications</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:37</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:42</span>
+                  <span class='badge badge-default'>4328.92 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=14</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.ServicesTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/NutritionCoachingVerifications.png' src="screenshots/NutritionCoachingVerifications.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to MADGYM Home page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to home succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Services page is loaded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Services page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Nutrition Coaching page is loaded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Nutrition Coaching page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Nutrition Coaching Tab Title        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Nutrition Coaching page Tab as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Nutrition Coaching header section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Nutrition Coaching header as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Nutrition Coaching info section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Nutrition Coaching info as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Nutrition Coaching benefits section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Nutrition Coaching benefits as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Nutrition Coaching contact section and button        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Nutrition Coaching contact as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: NutritionCoachingVerifications.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="15"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.ServicesTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">OurServicesVerifications</p>
+            <p class="text-sm">
+              <span>14:33:42</span> / <span>5401.02 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">OurServicesVerifications</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:42</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:47</span>
+                  <span class='badge badge-default'>5401.02 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=15</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.ServicesTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/OurServicesVerifications.png' src="screenshots/OurServicesVerifications.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to MADGYM Home page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to home succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Services page is loaded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Services page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Services page Tab title and main Title        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Tab title and main Title are good        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify all service titles are visible        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Service titles are good        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify all service images are loaded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Service images are good        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify overlays appear on hover        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Service overlays are good        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Click each service card and go back        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Service cards are good        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: OurServicesVerifications.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="16"
+          author=""
+          tag="PlaywrightTests.CSharp.Tests.ServicesTests "
+          device="">
+          <div class="test-detail">
+            <p class="name">PersonalTrainingVerifications</p>
+            <p class="text-sm">
+              <span>14:33:47</span> / <span>4353.34 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">PersonalTrainingVerifications</h5>
+                  <span class='badge badge-success'>01/22/2026 14:33:47</span>
+                  <span class='badge badge-danger'>01/22/2026 14:33:52</span>
+                  <span class='badge badge-default'>4353.34 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=16</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+ <div class="m-t-15"> <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> PlaywrightTests.CSharp.Tests.ServicesTests</span> </div>               </div>
+            </div>
+
+
+  <div class="row mb-3">
+   <div class="col-md-3">
+     <img data-featherlight='screenshots/PersonalTrainingVerifications.png' src="screenshots/PersonalTrainingVerifications.png">
+     <div class='title'>Final Screenshot</div>
+  </div>
+ </div>
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Navigate to MADGYM Home page        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Navigation to home succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Services page is loaded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Services page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Personal Training page is loaded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Personal Training page succeeded        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Services page Tab title and main Title        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Services page Tab as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Personal Training header section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Personal Training header as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Personal Training info section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Personal Training info as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Personal Training benefits section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Personal Training benefits as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Verify Personal Training contact section        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Personal Training contact as expected        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>14:33</td>
+        <td>
+Test passed successfully        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>14:33</td>
+        <td>
+Trace file: PersonalTrainingVerifications.zip        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="test-content scrollable">
+    <div class="test-content-tools">
+      <ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+    </div>
+    <div class="test-content-detail"><div class="detail-body"></div></div>
+  </div>
+</div>
+
+
+<div class="test-wrapper row view category-view attributes-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+      <ul class="tools pull-left"><li><a href=""><span class="font-size-14">Category</span></a></li></ul>
+      <ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">4</span></a></li></ul>
+    </div>
+    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item">
+          <div class="test-detail">
+            <span class="meta">
+ <span class='badge log pass-bg'>1</span>             </span>
+            <p class="name">PlaywrightTests.CSharp.Tests.HomeTestsWithReporting</p>
+            <p class="duration text-sm">1 tests</p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="info">
+              <h4>PlaywrightTests.CSharp.Tests.HomeTestsWithReporting</h4>
+ <span status="pass" class='badge log pass-bg'>1 passed</span>             </div>
+            <table class='table table-sm mt-4'>
+              <thead>
+                <tr>
+                  <th class="status-col">Status</th>
+                  <th class="timestamp-col">Timestamp</th>
+                  <th>TestName</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:15</td>
+                  <td>
+                    <a href="#" class="linked" test-id='1' id='1'>HeroSection_ShouldDisplayCorrectly</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+        <li class="test-item">
+          <div class="test-detail">
+            <span class="meta">
+ <span class='badge log pass-bg'>4</span>             </span>
+            <p class="name">PlaywrightTests.CSharp.Tests.ServicesTests</p>
+            <p class="duration text-sm">4 tests</p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="info">
+              <h4>PlaywrightTests.CSharp.Tests.ServicesTests</h4>
+ <span status="pass" class='badge log pass-bg'>4 passed</span>             </div>
+            <table class='table table-sm mt-4'>
+              <thead>
+                <tr>
+                  <th class="status-col">Status</th>
+                  <th class="timestamp-col">Timestamp</th>
+                  <th>TestName</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:33</td>
+                  <td>
+                    <a href="#" class="linked" test-id='13' id='13'>GroupProgramsVerifications</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:37</td>
+                  <td>
+                    <a href="#" class="linked" test-id='14' id='14'>NutritionCoachingVerifications</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:42</td>
+                  <td>
+                    <a href="#" class="linked" test-id='15' id='15'>OurServicesVerifications</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:47</td>
+                  <td>
+                    <a href="#" class="linked" test-id='16' id='16'>PersonalTrainingVerifications</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+        <li class="test-item">
+          <div class="test-detail">
+            <span class="meta">
+ <span class='badge log pass-bg'>5</span>             </span>
+            <p class="name">PlaywrightTests.CSharp.Tests.RegisterTests</p>
+            <p class="duration text-sm">5 tests</p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="info">
+              <h4>PlaywrightTests.CSharp.Tests.RegisterTests</h4>
+ <span status="pass" class='badge log pass-bg'>5 passed</span>             </div>
+            <table class='table table-sm mt-4'>
+              <thead>
+                <tr>
+                  <th class="status-col">Status</th>
+                  <th class="timestamp-col">Timestamp</th>
+                  <th>TestName</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:25</td>
+                  <td>
+                    <a href="#" class="linked" test-id='8' id='8'>Should_Display_All_Register_Form_Elements</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:26</td>
+                  <td>
+                    <a href="#" class="linked" test-id='9' id='9'>Should_Display_Login_Link_In_Register_Form</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:27</td>
+                  <td>
+                    <a href="#" class="linked" test-id='10' id='10'>Should_Register_With_Valid_Credentials</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:29</td>
+                  <td>
+                    <a href="#" class="linked" test-id='11' id='11'>Should_Show_Errors_For_Blank_Fields</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:31</td>
+                  <td>
+                    <a href="#" class="linked" test-id='12' id='12'>Should_Show_Errors_For_Invalid_Credentials</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+        <li class="test-item">
+          <div class="test-detail">
+            <span class="meta">
+ <span class='badge log pass-bg'>6</span>             </span>
+            <p class="name">PlaywrightTests.CSharp.Tests.LoginTests</p>
+            <p class="duration text-sm">6 tests</p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="info">
+              <h4>PlaywrightTests.CSharp.Tests.LoginTests</h4>
+ <span status="pass" class='badge log pass-bg'>6 passed</span>             </div>
+            <table class='table table-sm mt-4'>
+              <thead>
+                <tr>
+                  <th class="status-col">Status</th>
+                  <th class="timestamp-col">Timestamp</th>
+                  <th>TestName</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:19</td>
+                  <td>
+                    <a href="#" class="linked" test-id='2' id='2'>Should_Display_All_Login_Form_Elements</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:20</td>
+                  <td>
+                    <a href="#" class="linked" test-id='3' id='3'>Should_Display_All_Social_Login_Buttons</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:21</td>
+                  <td>
+                    <a href="#" class="linked" test-id='4' id='4'>Should_Display_Register_And_ForgotPassword_Links</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:22</td>
+                  <td>
+                    <a href="#" class="linked" test-id='5' id='5'>Should_Login_With_Valid_Credentials</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:23</td>
+                  <td>
+                    <a href="#" class="linked" test-id='6' id='6'>Should_Show_Error_For_Wrong_Credentials</a>
+                  </td>
+                </tr>
+                <tr class="tag-test-status" status="pass">
+                  <td><span class="badge log pass-bg">Pass</span></td>
+                  <td>14:33:24</td>
+                  <td>
+                    <a href="#" class="linked" test-id='7' id='7'>Should_Show_Errors_For_Blank_Fields</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="test-content scrollable">
+    <div class="test-content-detail">
+      <div class="detail-body"></div>
+    </div>
+  </div>
+</div>
+     
+
+<div class="container-fluid p-4 view dashboard-view">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0">Started</p>
+          <h3>01/22/2026 14:33:14</h3>
+      </div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0">Ended</p>
+          <h3>01/22/2026 14:33:52</h3>
+      </div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0 text-pass">Tests Passed</p>
+          <h3>16</h3>
+      </div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0 text-fail">Tests Failed</p>
+          <h3>0</h3>
+      </div></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">Tests</h6>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <canvas id='parent-analysis' width='115' height='90'></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div><small data-tooltip='1%'>
+            <b>16</b> tests passed
+            </small>
+          </div>
+          <div>
+            <small data-tooltip='0%'><b>0</b> tests failed, 
+            <b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">Log events</h6>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <canvas id='events-analysis' width='115' height='90'></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div><small data-tooltip='0%'><b>101</b> events passed</small></div>
+          <div>
+            <small data-tooltip='0%'><b>0</b> events failed, 
+            <b data-tooltip='%'>101</b> others
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row"><div class="col-md-12">
+    <div class="card"><div class="card-header"><p>Timeline</p></div>
+      <div class="card-body pt-0"><div>
+        <canvas id="timeline" height="120"></canvas>
+      </div></div>
+    </div>
+  </div></div>
+  <script>
+	var timeline = { "HeroSection_ShouldDisplayCorrectly":1281.652,"Should_Display_All_Login_Form_Elements":893.367,"Should_Display_All_Social_Login_Buttons":841.4127,"Should_Display_Register_And_ForgotPassword_Links":821.9356,"Should_Login_With_Valid_Credentials":1601.1145,"Should_Show_Error_For_Wrong_Credentials":933.5139,"Should_Show_Errors_For_Blank_Fields":904.5803,"Should_Display_All_Register_Form_Elements":872.3395,"Should_Display_Login_Link_In_Register_Form":850.6432,"Should_Register_With_Valid_Credentials":2023.8118,"Should_Show_Errors_For_Blank_Fields":1828.0952,"Should_Show_Errors_For_Invalid_Credentials":1816.6793,"GroupProgramsVerifications":4382.1195,"NutritionCoachingVerifications":4328.9202,"OurServicesVerifications":5401.0238,"PersonalTrainingVerifications":4353.3398 };
+  </script>
+  <div class="row">
+    <div class="col-md-4 category-container">
+      <div class="card">
+        <div class="card-header"><p>Tags</p></div>
+        <div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+          <thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead><tbody>
+            <tr>
+              <td>PlaywrightTests.CSharp.Tests.HomeTestsWithReporting</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>100%</td>
+            </tr>
+            <tr>
+              <td>PlaywrightTests.CSharp.Tests.ServicesTests</td>
+              <td>4</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>100%</td>
+            </tr>
+            <tr>
+              <td>PlaywrightTests.CSharp.Tests.RegisterTests</td>
+              <td>5</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>100%</td>
+            </tr>
+            <tr>
+              <td>PlaywrightTests.CSharp.Tests.LoginTests</td>
+              <td>6</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>100%</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+      <div class="col-md-4 sysenv-container">
+      <div class="card">
+        <div class="card-header"><p>System/Environment</p></div>
+        <div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+          <thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Application</td>
+              <td>MADGYM</td>
+            </tr>
+            <tr>
+              <td>Environment</td>
+              <td>Test</td>
+            </tr>
+            <tr>
+              <td>OS</td>
+              <td>Unix 6.11.0.1018</td>
+            </tr>
+            <tr>
+              <td>.NET Version</td>
+              <td>9.0.12</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var statusGroup = {
+    parentCount: 16,
+    childCount: 0,
+    grandChildCount: 0,
+    eventsCount: 202,
+
+passParent:16,failParent:0,warningParent:0,skipParent:0,    
+passChild:0,failChild:0,warningChild:0,skipChild:0,infoChild:0,    
+passGrandChild:0,failGrandChild:0,warningGrandChild:0,skipGrandChild:0,infoGrandChild:0,    
+passEvents:101,failEvents:0,warningEvents:0,skipEvents:0,infoEvents:101,  };
+</script>
+
+    </div>
+   </div>
+  </div>
+ </div>
+ <script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c439bdbc7bade3d85af3b90e9e69c30ebc87445f/spark/js/spark-script.js"></script>
+<script type='text/javascript'></script>
+</body>
+</html>
