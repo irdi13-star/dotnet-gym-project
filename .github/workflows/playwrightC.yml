@@ -3,8 +3,8 @@ name: Playwright C# with Dashboard
 on:
   pull_request:
     branches: [main]
-  schedule:
-    - cron: '0 8,14 * 1-12 1-5'
+  # schedule:
+  #   - cron: '0 8,14 * 1-12 1-5'
   workflow_dispatch: {}
 
 permissions:
